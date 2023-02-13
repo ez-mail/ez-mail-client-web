@@ -1,13 +1,16 @@
 import React from 'react';
-import './App.css';
-import GlobalStyles from './GlobalStyles';
+import MainBottomSection from './components/MainBottomSection';
+import MainMiddleSection from './components/MainMiddleSection';
+import MainNav from './components/MainNav';
+import MainTopSection from './components/MainTopSection';
 
 function App() {
   return (
     <>
-      <GlobalStyles />
-      <div>ez-mail</div>
-      <div>또 오셨군요 반가워요</div>
+      <MainNav />
+      <MainTopSection />
+      <MainMiddleSection />
+      <MainBottomSection />
     </>
   );
 }
