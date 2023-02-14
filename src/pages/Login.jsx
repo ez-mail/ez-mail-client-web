@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from '../assets/login-logo.png';
-import navLogo from '../assets/nav-logo.png';
+import bottomLogo from '../assets/nav-logo.png';
 import LoginInput from '../components/LoginInput';
 
 export default function Login() {
   const [userInput, setUserInput] = useState({ email: '', password: '' });
+  const navigate = useNavigate();
+
   const handleUserInput = e => {
     setUserInput({
       ...userInput,
@@ -16,10 +19,13 @@ export default function Login() {
   const handleLoginClick = () => {
     // 로그인 api 요청
   };
+  const handleLogoClick = () => {
+    navigate('/');
+  };
 
   return (
     <LoginContainer>
-      <Logo src={logo} alt="login-logo" />
+      <Logo src={logo} alt="login-logo" onClick={handleLogoClick} />
       <Hello>또 오셨군요 반가워요!</Hello>
       <LoginInput
         id="email"
@@ -37,7 +43,7 @@ export default function Login() {
       </LoginInput>
       <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
       <NeedSignUp href="/sign-up">계정이 없으신가요?</NeedSignUp>
-      <NavLogo src={navLogo} />
+      <BottomLogo src={bottomLogo} onClick={handleLogoClick} />
     </LoginContainer>
   );
 }
@@ -55,6 +61,7 @@ const Logo = styled.img`
   height: 80px;
   margin-top: 100px;
   margin-bottom: 40px;
+  cursor: pointer;
 `;
 
 const Hello = styled.span`
@@ -77,8 +84,9 @@ const NeedSignUp = styled.a`
   color: #3e81f6;
 `;
 
-const NavLogo = styled.img`
+const BottomLogo = styled.img`
   width: 120px;
   height: 34px;
-  margin-top: 130px;
+  margin-top: 150px;
+  cursor: pointer;
 `;
