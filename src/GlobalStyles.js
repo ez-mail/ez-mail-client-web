@@ -67,6 +67,11 @@ const GlobalStyles = createGlobalStyle`
     color: inherit;
   }
 
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+
   h1 {
     font-size: 42px;
     font-weight: 500;
