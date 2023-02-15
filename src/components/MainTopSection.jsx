@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import mailWoman from '../assets/main-mail-woman.png';
@@ -18,7 +19,9 @@ export default function MainTopSection() {
             <br />
             ez-mail 로 누구나 쉽게 뉴스레터를 발행할 수 있습니다.
           </Description>
-          <StartNow href="/sign-up">지금 시작하기</StartNow>
+          <Link to="/sign-up">
+            <StartNow>지금 시작하기</StartNow>
+          </Link>
         </InnerText>
         <MailWoman src={mailWoman} alt="mail-woman" />
       </Inner>
@@ -51,7 +54,7 @@ const MailWoman = styled.img`
   height: 370px;
 `;
 
-const StartNow = styled.a`
+const StartNow = styled.span`
   padding: 12px 16px;
   border-radius: 5px;
   background-color: #ffdf2b;

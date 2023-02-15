@@ -1,11 +1,14 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function MainBottomSection() {
   return (
     <Section>
       <Title>지금 바로 시작해보세요</Title>
-      <StartNow href="/sign-up">지금 시작하기</StartNow>
+      <Link to="/sign-up">
+        <StartNow>지금 시작하기</StartNow>
+      </Link>
     </Section>
   );
 }
@@ -20,7 +23,7 @@ const Title = styled.h1`
   padding-bottom: 40px;
 `;
 
-const StartNow = styled.a`
+const StartNow = styled.span`
   padding: 12px 16px;
   border-radius: 5px;
   background-color: black;
