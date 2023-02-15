@@ -1,16 +1,11 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import navLogo from '../assets/nav-logo.png';
 
 export default function DashboardNav() {
-  const navigate = useNavigate();
   const location = useLocation();
-
-  const handleLogoClick = () => {
-    navigate('/dashboard');
-  };
 
   const handleLogoutClick = () => {
     console.log('로그아웃 실행');
@@ -18,25 +13,30 @@ export default function DashboardNav() {
   return (
     <Nav>
       <LeftContainer>
-        <NavLogo src={navLogo} onClick={handleLogoClick} />
-        <NavItem
-          inputColor={location.pathname === '/emails' ? 'black' : null}
-          onClick={() => navigate('/emails')}
-        >
-          이메일
-        </NavItem>
-        <NavItem
-          inputColor={location.pathname === '/subscribers' ? 'black' : null}
-          onClick={() => navigate('/subscribers')}
-        >
-          구독자
-        </NavItem>
-        <NavItem
-          inputColor={location.pathname === '/sender' ? 'black' : null}
-          onClick={() => navigate('/sender')}
-        >
-          발신자
-        </NavItem>
+        <Link to="/dashboard">
+          <NavLogo src={navLogo} />
+        </Link>
+        <Link to="/emails">
+          <NavItem
+            inputColor={location.pathname === '/emails' ? 'black' : null}
+          >
+            이메일
+          </NavItem>
+        </Link>
+        <Link to="/subscribers">
+          <NavItem
+            inputColor={location.pathname === '/subscribers' ? 'black' : null}
+          >
+            구독자
+          </NavItem>
+        </Link>
+        <Link to="/sender">
+          <NavItem
+            inputColor={location.pathname === '/sender' ? 'black' : null}
+          >
+            발신자
+          </NavItem>
+        </Link>
       </LeftContainer>
       <Logout onClick={handleLogoutClick}>로그아웃</Logout>
     </Nav>
