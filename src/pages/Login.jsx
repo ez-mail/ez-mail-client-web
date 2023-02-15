@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from '../assets/login-logo.png';
@@ -8,7 +8,6 @@ import LoginInput from '../components/LoginInput';
 
 export default function Login() {
   const [userInput, setUserInput] = useState({ email: '', password: '' });
-  const navigate = useNavigate();
 
   const handleUserInput = e => {
     setUserInput({
@@ -19,13 +18,12 @@ export default function Login() {
   const handleLoginClick = () => {
     // 로그인 api 요청
   };
-  const handleLogoClick = () => {
-    navigate('/');
-  };
 
   return (
     <LoginContainer>
-      <Logo src={logo} alt="login-logo" onClick={handleLogoClick} />
+      <Link to="/">
+        <Logo src={logo} alt="login-logo" />
+      </Link>
       <Hello>또 오셨군요 반가워요!</Hello>
       <LoginInput
         id="email"
@@ -42,8 +40,12 @@ export default function Login() {
         비밀번호
       </LoginInput>
       <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
-      <NeedSignUp href="/sign-up">계정이 없으신가요?</NeedSignUp>
-      <BottomLogo src={bottomLogo} onClick={handleLogoClick} />
+      <Link to="/sign-up">
+        <NeedSignUp>계정이 없으신가요?</NeedSignUp>
+      </Link>
+      <Link to="/">
+        <BottomLogo src={bottomLogo} />
+      </Link>
     </LoginContainer>
   );
 }
@@ -59,13 +61,13 @@ const LoginContainer = styled.div`
 const Logo = styled.img`
   width: 80px;
   height: 80px;
-  margin-top: 100px;
+  margin-top: 60px;
   margin-bottom: 40px;
   cursor: pointer;
 `;
 
 const Hello = styled.span`
-  padding-bottom: 80px;
+  padding-bottom: 60px;
   font-size: 24px;
   font-weight: 500;
 `;
@@ -79,14 +81,16 @@ const LoginButton = styled.button`
   font-weight: 500;
 `;
 
-const NeedSignUp = styled.a`
+const NeedSignUp = styled.span`
+  display: inline-block;
   padding-top: 20px;
   color: #3e81f6;
+  cursor: pointer;
 `;
 
 const BottomLogo = styled.img`
   width: 120px;
   height: 34px;
-  margin-top: 150px;
+  margin-top: 60px;
   cursor: pointer;
 `;

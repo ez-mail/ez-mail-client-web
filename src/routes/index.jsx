@@ -4,13 +4,35 @@ import App from '../App';
 import DashBoard from '../pages/DashBoard';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
+import Sender from '../pages/Sender';
 import SignUp from '../pages/SIgnUp';
+import Emails from '../pages/Emails';
+import Subscribers from '../pages/Subscribers';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     errorElement: <NotFound />,
+    children: [
+      {
+        index: true,
+        path: '/dashboard',
+        element: <DashBoard />,
+      },
+      {
+        path: '/emails',
+        element: <Emails />,
+      },
+      {
+        path: '/subscribers',
+        element: <Subscribers />,
+      },
+      {
+        path: '/sender',
+        element: <Sender />,
+      },
+    ],
   },
   {
     path: '/login',
@@ -19,10 +41,6 @@ const router = createBrowserRouter([
   {
     path: '/sign-up',
     element: <SignUp />,
-  },
-  {
-    path: '/dashboard',
-    element: <DashBoard />,
   },
 ]);
 

@@ -1,19 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import navLogo from '../assets/nav-logo.png';
 
 export default function MainNav() {
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
   return (
     <Nav>
       <div>
-        <a href="/">
-          <Img src={navLogo} alt="nav-logo" />
-        </a>
+        <Img src={navLogo} alt="nav-logo" onClick={handleLogoClick} />
       </div>
       <div>
-        <Login href="/login">로그인</Login>
-        <SignUp href="/sign-up">회원가입</SignUp>
+        <Link to="/login">
+          <Login>로그인</Login>
+        </Link>
+        <Link to="/sign-up">
+          <SignUp>회원가입</SignUp>
+        </Link>
       </div>
     </Nav>
   );
@@ -33,13 +39,14 @@ const Nav = styled.nav`
 const Img = styled.img`
   width: 120px;
   height: 34px;
+  cursor: pointer;
 `;
 
-const Login = styled.a`
+const Login = styled.span`
   padding: 10px 14px;
 `;
 
-const SignUp = styled.a`
+const SignUp = styled.span`
   padding: 10px 14px;
   border-radius: 5px;
   background-color: #ffdf2b;

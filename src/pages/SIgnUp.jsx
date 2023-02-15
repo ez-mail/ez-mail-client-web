@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from '../assets/login-logo.png';
-import bottomLogo from '../assets/nav-logo.png';
 import SignUpInput from '../components/LoginInput';
 
 export default function SignUp() {
@@ -12,7 +11,6 @@ export default function SignUp() {
     name: '',
     password: '',
   });
-  const navigate = useNavigate();
 
   const handleUserInput = e => {
     setUserInput({
@@ -24,13 +22,11 @@ export default function SignUp() {
     // 회원가입 api 요청
   };
 
-  const handleLogoClick = () => {
-    navigate('/');
-  };
-
   return (
     <SignUpContainer>
-      <Logo src={logo} alt="login-logo" onClick={handleLogoClick} />
+      <Link to="/">
+        <Logo src={logo} alt="login-logo" />
+      </Link>
       <Hello>환영해요!</Hello>
       <SignUpInput
         id="email"
@@ -54,8 +50,9 @@ export default function SignUp() {
         비밀번호
       </SignUpInput>
       <LoginButton onClick={handleSignUpClick}>회원가입</LoginButton>
-      <NeedLogin href="/login">이미 가입 하셨나요?</NeedLogin>
-      <BottomLogo src={bottomLogo} onClick={handleLogoClick} />
+      <Link to="/login">
+        <NeedLogin>이미 가입 하셨나요?</NeedLogin>
+      </Link>
     </SignUpContainer>
   );
 }
@@ -71,13 +68,13 @@ const SignUpContainer = styled.div`
 const Logo = styled.img`
   width: 80px;
   height: 80px;
-  margin-top: 100px;
+  margin-top: 60px;
   margin-bottom: 40px;
   cursor: pointer;
 `;
 
 const Hello = styled.span`
-  padding-bottom: 80px;
+  padding-bottom: 60px;
   font-size: 24px;
   font-weight: 500;
 `;
@@ -91,14 +88,9 @@ const LoginButton = styled.button`
   font-weight: 500;
 `;
 
-const NeedLogin = styled.a`
+const NeedLogin = styled.span`
+  display: inline-block;
   padding-top: 20px;
   color: #3e81f6;
-`;
-
-const BottomLogo = styled.img`
-  width: 120px;
-  height: 34px;
-  margin-top: 38px;
   cursor: pointer;
 `;
