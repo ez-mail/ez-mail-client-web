@@ -54,7 +54,7 @@ const emailTemplatesData = [
 ];
 
 export default function Emails() {
-  const handleNewEmail = () => {
+  const handleNewEmailButtonClick = () => {
     console.log('이메일 생성');
   };
 
@@ -112,7 +112,9 @@ export default function Emails() {
       <MainContainer>
         <Title>이메일</Title>
         <ContainerNav>
-          <NewEmailButton onClick={handleNewEmail}>새로 만들기</NewEmailButton>
+          <NewEmailButton onClick={handleNewEmailButtonClick}>
+            새로 만들기
+          </NewEmailButton>
         </ContainerNav>
         <ContentRows>{emailTemplatesList}</ContentRows>
       </MainContainer>
