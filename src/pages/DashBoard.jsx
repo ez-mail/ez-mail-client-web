@@ -54,7 +54,7 @@ export default function DashBoard() {
   });
 
   return (
-    <Section>
+    <section>
       <MainContainer>
         <Title>대시보드</Title>
         <SmallTitle>최근 발송한 이메일</SmallTitle>
@@ -75,11 +75,9 @@ export default function DashBoard() {
         <SmallTitle>구독자</SmallTitle>
         <Ul>{subscriberTrendList}</Ul>
       </MainContainer>
-    </Section>
+    </section>
   );
 }
-
-const Section = styled.section``;
 
 const MainContainer = styled.div`
   display: flex;
