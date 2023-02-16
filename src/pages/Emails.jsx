@@ -11,45 +11,45 @@ import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 const emailTemplatesData = [
   {
     _id: '12315',
-    totalSendCount: 1,
+    editingStep: 1,
     emailTitle: '이메일 테스트1',
     updatedAt: '2023. 02. 14 오후 2:00',
   },
   {
     _id: '12316',
-    totalSendCount: 0,
+    editingStep: '04',
     emailTitle: '이메일 테스트2',
     updatedAt: '2023. 02. 14 오후 2:00',
   },
   {
     _id: '12317',
-    totalSendCount: 1,
+    editingStep: '01',
     emailTitle: '이메일 테스트3',
     updatedAt: '2023. 02. 14 오후 2:00',
   },
   {
     _id: '12318',
-    totalSendCount: 1,
+    editingStep: '01',
     emailTitle: '이메일 테스트4',
     updatedAt: '2023. 02. 11 오후 2:00',
   },
   {
     _id: '12319',
-    totalSendCount: 0,
+    editingStep: '03',
     emailTitle: '이메일 테스트6',
     updatedAt: '2023. 01. 11 오후 2:00',
   },
   {
     _id: '12320',
-    totalSendCount: 1,
+    editingStep: '03',
     emailTitle: '이메일 테스트4',
     updatedAt: '2023. 02. 11 오후 2:00',
   },
   {
     _id: '12321',
-    totalSendCount: 0,
+    editingStep: '04',
     emailTitle: '이메일 테스트4',
-    updatedAt: '2023. 02. 01 오후 2:00',
+    updatedAt: '2023. 02. 01 오후 1:00',
   },
 ];
 
@@ -60,14 +60,14 @@ export default function Emails() {
 
   const emailTemplatesList = emailTemplatesData
     .sort((prev, cur) => {
-      if (prev.totalSendCount < cur.totalSendCount) return 1;
-      if (prev.totalSendCount > cur.totalSendCount) return -1;
+      if (prev.editingStep === '04') return 1;
+      if (prev.editingStep !== '04') return -1;
       if (prev.updatedAt > cur.updatedAt) return -1;
       if (prev.updatedAt < cur.updatedAt) return 1;
       return 0;
     })
     .map(item => {
-      if (item.totalSendCount > 0) {
+      if (item.editingStep === '04') {
         return (
           <ContentRow key={item._id}>
             <LeftContent>
