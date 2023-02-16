@@ -108,7 +108,7 @@ export default function Emails() {
     });
 
   return (
-    <Section>
+    <section>
       <MainContainer>
         <Title>이메일</Title>
         <ContainerNav>
@@ -116,11 +116,9 @@ export default function Emails() {
         </ContainerNav>
         <ContentRows>{emailTemplatesList}</ContentRows>
       </MainContainer>
-    </Section>
+    </section>
   );
 }
-
-const Section = styled.section``;
 
 const MainContainer = styled.div`
   display: flex;
