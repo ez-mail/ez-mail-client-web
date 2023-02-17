@@ -161,7 +161,6 @@ const NewEmailButton = styled.button`
   background-color: #ffdf2b;
   font-size: 14px;
   font-weight: 500;
-  cursor: pointer;
 `;
 
 const ContentRow = styled.li`
