@@ -6,7 +6,11 @@ import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Sender from '../pages/Sender';
 import SignUp from '../pages/SIgnUp';
-import Emails from '../pages/Emails';
+import Emails from '../pages/emails/Emails';
+import Step01 from '../pages/emails/EmailEditingStep01';
+import Step02 from '../pages/emails/EmailEditingStep02';
+import Step03 from '../pages/emails/EmailEditingStep03';
+import Step04 from '../pages/emails/EmailEditingStep04';
 import Subscribers from '../pages/Subscribers';
 
 const router = createBrowserRouter([
@@ -32,6 +36,22 @@ const router = createBrowserRouter([
         path: '/sender',
         element: <Sender />,
       },
+      {
+        path: '/emails/:email_id/step01',
+        element: <Step01 />,
+      },
+      {
+        path: '/emails/:email_id/step02',
+        element: <Step02 />,
+      },
+      {
+        path: '/emails/:email_id/step03',
+        element: <Step03 />,
+      },
+      {
+        path: '/emails/:email_id/step04',
+        element: <Step04 />,
+      },
     ],
   },
   {
@@ -42,6 +62,50 @@ const router = createBrowserRouter([
     path: '/sign-up',
     element: <SignUp />,
   },
+  // {
+  //   path: '/emails/:email_id',
+  //   element: <Step01 />,
+  // },
+  // {
+  //   path: '/emails',
+  //   element: <Emails />,
+  //   errorElement: <NotFound />,
+  //   children: [
+  //     {
+  //       index: true,
+  //       path: '/emails/:email_id/step01',
+  //       element: <Step01 />,
+  //     },
+  //     {
+  //       path: '/emails/:email_id/step02',
+  //       element: <Step02 />,
+  //     },
+  //     {
+  //       path: '/emails/:email_id/step03',
+  //       element: <Step03 />,
+  //     },
+  //     {
+  //       path: '/emails/:email_id/step04',
+  //       element: <Step04 />,
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: '/emails/:email_id/step01',
+  //   element: <Step01 />,
+  // },
+  // {
+  //   path: '/emails/:email_id/step02',
+  //   element: <Step02 />,
+  // },
+  // {
+  //   path: '/emails/:email_id/step03',
+  //   element: <Step03 />,
+  // },
+  // {
+  //   path: '/emails/:email_id/step04',
+  //   element: <Step04 />,
+  // },
 ]);
 
 export default router;

@@ -7,6 +7,7 @@ import {
   faPencil,
 } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const emailTemplatesData = [
   {
@@ -54,8 +55,15 @@ const emailTemplatesData = [
 ];
 
 export default function Emails() {
+  const navigate = useNavigate();
   const handleNewEmailButtonClick = () => {
-    console.log('이메일 생성');
+    console.log('이메일 생성 api 실행');
+    const emailId = 'test';
+    navigate(`/emails/${emailId}/step01`, {
+      state: {
+        emailId,
+      },
+    });
   };
 
   const emailTemplatesList = emailTemplatesData
