@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 export default function EmailEditingNav() {
   const navigate = useNavigate();
+
   const emailTitle = '제목없음';
+
   const handleSendButtonClick = () => {
     console.log('메일 발송');
   };
