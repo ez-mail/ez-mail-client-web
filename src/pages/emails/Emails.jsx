@@ -56,6 +56,7 @@ const emailTemplatesData = [
 
 export default function Emails() {
   const navigate = useNavigate();
+
   const handleNewEmailButtonClick = () => {
     console.log('이메일 생성 api 실행');
     const emailId = 'test';
