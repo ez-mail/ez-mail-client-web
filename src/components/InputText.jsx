@@ -10,6 +10,7 @@ export default function InputText({
   labelFontSize,
   inputFontSize,
   paddingBottom,
+  placeholder,
   onChange,
 }) {
   return (
@@ -24,6 +25,7 @@ export default function InputText({
         width={width}
         height={height}
         inputFontSize={inputFontSize}
+        placeholder={placeholder || ''}
         onChange={onChange}
       />
     </Container>
@@ -44,6 +46,7 @@ const Label = styled.label`
 const Input = styled.input`
   width: ${props => props.width || '300px'};
   height: ${props => props.height || '30px'};
+  padding: 0 5px;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
   font-size: ${props => props.inputFontSize || '14px'};

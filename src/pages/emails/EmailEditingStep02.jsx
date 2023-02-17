@@ -40,7 +40,11 @@ export default function EmailEditingStep02() {
           <InputText paddingBottom="50px" width="520px">
             발신자 이름
           </InputText>
-          <InputText paddingBottom="50px" width="520px">
+          <InputText
+            paddingBottom="50px"
+            width="520px"
+            placeholder="빈값일시 콘텐츠 일부가 자동으로 보여집니다."
+          >
             미리보기 텍스트
           </InputText>
         </MainContainer>
