@@ -11,7 +11,7 @@ import Step01 from '../pages/emails/EmailEditingStep01';
 import Step02 from '../pages/emails/EmailEditingStep02';
 import Step03 from '../pages/emails/EmailEditingStep03';
 import Step04 from '../pages/emails/EmailEditingStep04';
-import Subscribers from '../pages/Subscribers';
+import Subscribers from '../pages/subscribers/Subscribers';
 
 const router = createBrowserRouter([
   {
