@@ -62,50 +62,6 @@ const router = createBrowserRouter([
     path: '/sign-up',
     element: <SignUp />,
   },
-  // {
-  //   path: '/emails/:email_id',
-  //   element: <Step01 />,
-  // },
-  // {
-  //   path: '/emails',
-  //   element: <Emails />,
-  //   errorElement: <NotFound />,
-  //   children: [
-  //     {
-  //       index: true,
-  //       path: '/emails/:email_id/step01',
-  //       element: <Step01 />,
-  //     },
-  //     {
-  //       path: '/emails/:email_id/step02',
-  //       element: <Step02 />,
-  //     },
-  //     {
-  //       path: '/emails/:email_id/step03',
-  //       element: <Step03 />,
-  //     },
-  //     {
-  //       path: '/emails/:email_id/step04',
-  //       element: <Step04 />,
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/emails/:email_id/step01',
-  //   element: <Step01 />,
-  // },
-  // {
-  //   path: '/emails/:email_id/step02',
-  //   element: <Step02 />,
-  // },
-  // {
-  //   path: '/emails/:email_id/step03',
-  //   element: <Step03 />,
-  // },
-  // {
-  //   path: '/emails/:email_id/step04',
-  //   element: <Step04 />,
-  // },
 ]);
 
 export default router;
