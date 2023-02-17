@@ -59,11 +59,7 @@ export default function Emails() {
   const handleNewEmailButtonClick = () => {
     console.log('이메일 생성 api 실행');
     const emailId = 'test';
-    navigate(`/emails/${emailId}/step01`, {
-      state: {
-        emailId,
-      },
-    });
+    navigate(`/emails/${emailId}/step01`);
   };
 
   const emailTemplatesList = emailTemplatesData
