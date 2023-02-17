@@ -131,14 +131,13 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 1000px;
-  height: 640px;
   margin: auto;
 `;
 
 const ContentRows = styled.ul`
   overflow: auto;
   width: 1000px;
-  height: 640px;
+  height: 440px;
   margin: auto;
 `;
 

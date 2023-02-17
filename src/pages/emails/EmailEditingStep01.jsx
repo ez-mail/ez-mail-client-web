@@ -172,15 +172,15 @@ const Title = styled.span`
 const SubscriberTable = styled.div`
   overflow: auto;
   height: 300px;
+  border-top: 2px solid #b5acac;
   table {
     width: 100%;
     thead {
       position: sticky;
-      top: -1px;
+      top: 0;
       background-color: #f5f5f5;
       tr {
         padding: 30px 0;
-        border-top: 2px solid #b5acac;
         &:last-child {
           border-bottom: 2px solid #b5acac;
         }
