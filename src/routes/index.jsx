@@ -12,6 +12,7 @@ import Step02 from '../pages/emails/EmailEditingStep02';
 import Step03 from '../pages/emails/EmailEditingStep03';
 import Step04 from '../pages/emails/EmailEditingStep04';
 import Subscribers from '../pages/subscribers/Subscribers';
+import EmailsDashboard from '../pages/emails/EmailsDashboard';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: '/emails',
         element: <Emails />,
+      },
+      {
+        path: '/emails/:email_id/dashboard',
+        element: <EmailsDashboard />,
       },
       {
         path: '/subscribers',
