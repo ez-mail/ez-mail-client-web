@@ -71,11 +71,11 @@ export default function CdnCodeModal() {
 }
 
 const CdnContainer = styled.div`
+  overflow-x: auto;
+  overflow-y: auto;
   width: 100%;
   height: 100%;
   padding: 30px;
   background-color: #333333;
   color: white;
-  overflow-x: auto;
-  overflow-y: auto;
 `;
