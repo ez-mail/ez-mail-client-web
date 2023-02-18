@@ -14,6 +14,7 @@ import Step04 from '../pages/emails/EmailEditingStep04';
 import Subscribers from '../pages/subscribers/Subscribers';
 import EmailsDashboard from '../pages/emails/EmailsDashboard';
 import EmailRecipientsModal from '../pages/emails/EmailRecipientsModal';
+import CdnCodeModal from '../pages/CdnCodeModal';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,12 @@ const router = createBrowserRouter([
       {
         path: '/sender',
         element: <Sender />,
+        children: [
+          {
+            path: 'cdnCode',
+            element: <CdnCodeModal />,
+          },
+        ],
       },
       {
         path: '/emails/:email_id/step01',
