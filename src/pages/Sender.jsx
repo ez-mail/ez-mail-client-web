@@ -1,14 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 export default function Sender() {
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [senderInfo, setSenderInfo] = useState({
+    userName: 'ken',
+    companyName: '바닐라코딩',
+    address: '서울 강남구 테헤란로 522 홍우빌딩 6층',
+    contact: '02-6713-7279',
+  });
+
   const handleCodeButtonClick = () => {
     console.log('코드 내보내기 버튼 클릭');
   };
 
   const handleModifyButtonClick = () => {
-    console.log('수정하기 버튼 클릭');
+    setIsEditMode(true);
   };
+
+  const handleSaveButtonClick = () => {
+    setIsEditMode(false);
+  };
+
+  const handleInputChange = e => {
+    const newSenderInfo = {
+      ...senderInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    setSenderInfo(newSenderInfo);
+  };
+
+  if (isEditMode) {
+    return (
+      <section>
+        <MainContainer>
+          <Title>발신자 설정</Title>
+          <ButtonContainer>
+            <CodeButton onClick={handleCodeButtonClick}>
+              코드 내보내기
+            </CodeButton>
+            <SaveButton onClick={handleSaveButtonClick}>저장하기</SaveButton>
+          </ButtonContainer>
+          <SenderInfoContainer>
+            <SenderNameTitle>발신자 이름</SenderNameTitle>
+            <SenderNameInput
+              type="text"
+              id="userName"
+              name="userName"
+              value={senderInfo.userName}
+              onChange={handleInputChange}
+            />
+            <Spacer />
+            <EmailFooterTitle>이메일 푸터 정보</EmailFooterTitle>
+            <EmailFooterItemTitle>- 회사명 또는 이름</EmailFooterItemTitle>
+            <FooterInput
+              type="text"
+              id="companyName"
+              name="companyName"
+              value={senderInfo.companyName}
+              onChange={handleInputChange}
+            />
+            <EmailFooterItemTitle>- 주소</EmailFooterItemTitle>
+            <FooterInput
+              type="text"
+              id="address"
+              name="address"
+              value={senderInfo.address}
+              onChange={handleInputChange}
+            />
+            <EmailFooterItemTitle>- 전화번호</EmailFooterItemTitle>
+            <FooterInput
+              type="text"
+              id="contact"
+              name="contact"
+              value={senderInfo.contact}
+              onChange={handleInputChange}
+            />
+          </SenderInfoContainer>
+        </MainContainer>
+      </section>
+    );
+  }
 
   return (
     <section>
@@ -20,17 +93,17 @@ export default function Sender() {
         </ButtonContainer>
         <SenderInfoContainer>
           <SenderNameTitle>발신자 이름</SenderNameTitle>
-          <SenderNameContent>김개똥</SenderNameContent>
+          <SenderNameContent>{senderInfo.userName}</SenderNameContent>
           <Spacer />
           <EmailFooterTitle>이메일 푸터 정보</EmailFooterTitle>
           <EmailFooterItemTitle>- 회사명 또는 이름</EmailFooterItemTitle>
-          <EmailFooterItemContent>바닐라코딩</EmailFooterItemContent>
-          <EmailFooterItemTitle>- 주소</EmailFooterItemTitle>
           <EmailFooterItemContent>
-            서울 강남구 테헤란로 522 홍우빌딩 6층
+            {senderInfo.companyName}
           </EmailFooterItemContent>
+          <EmailFooterItemTitle>- 주소</EmailFooterItemTitle>
+          <EmailFooterItemContent>{senderInfo.address}</EmailFooterItemContent>
           <EmailFooterItemTitle>- 전화번호</EmailFooterItemTitle>
-          <EmailFooterItemContent>02-6713-7279</EmailFooterItemContent>
+          <EmailFooterItemContent>{senderInfo.contact}</EmailFooterItemContent>
         </SenderInfoContainer>
       </MainContainer>
     </section>
@@ -73,10 +146,19 @@ const EditButton = styled.button`
   font-weight: 500;
 `;
 
+const SaveButton = styled.button`
+  padding: 10px 14px;
+  border-radius: 5px;
+  background-color: black;
+  color: #ffdf2b;
+  font-size: 0.875rem;
+  font-weight: 500;
+`;
+
 const SenderInfoContainer = styled.main`
   display: grid;
   grid-template-columns: 200px auto;
-  grid-template-rows: repeat(1fr, 6);
+  grid-template-rows: 1fr 30px repeat(1fr, 4);
   align-items: center;
   width: 100%;
   height: 296px;
@@ -112,4 +194,21 @@ const EmailFooterItemTitle = styled.div`
 const EmailFooterItemContent = styled.div`
   font-size: 0.875rem;
   font-weight: 400;
+`;
+
+const SenderNameInput = styled.input`
+  position: relative;
+  left: -4px;
+  width: 50%;
+  height: 18px;
+  font-size: 1rem;
+`;
+
+const FooterInput = styled.input`
+  position: relative;
+  top: 1px;
+  left: -4px;
+  width: 50%;
+  height: 16px;
+  font-size: 0.875rem;
 `;
