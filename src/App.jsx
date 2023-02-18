@@ -12,7 +12,10 @@ function App() {
   const location = useLocation();
   const params = useParams();
   if (location.pathname !== '/') {
-    if (location.pathname.includes(`/emails/${params.email_id}/step`)) {
+    if (
+      location.pathname !== `/emails/${params.email_id}/step04` &&
+      location.pathname.includes(`/emails/${params.email_id}/step`)
+    ) {
       return (
         <>
           <EmailEditingNav />
