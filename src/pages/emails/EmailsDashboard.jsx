@@ -1,4 +1,5 @@
 import React from 'react';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   getKoreaDateString,
@@ -41,8 +42,11 @@ const emailData = {
 };
 
 export default function EmailsDashboard() {
+  const navigate = useNavigate();
+  const params = useParams();
+
   const handleRecipientsButtonClick = () => {
-    console.log('수신자 목록 버튼 클릭');
+    navigate(`/emails/${params.email_id}/dashboard/recipients`);
   };
 
   return (
@@ -88,6 +92,7 @@ export default function EmailsDashboard() {
           </RightPercentBox>
         </PercentInfoBox>
       </MainContainer>
+      <Outlet />
     </section>
   );
 }
