@@ -59,7 +59,9 @@ export default function Emails() {
 
   const handleNewEmailButtonClick = () => {
     console.log('이메일 생성 api 실행');
+
     const emailId = 'test';
+
     navigate(`/emails/${emailId}/step01`);
   };
 
@@ -69,6 +71,7 @@ export default function Emails() {
       if (prev.editingStep !== '04') return -1;
       if (prev.updatedAt > cur.updatedAt) return -1;
       if (prev.updatedAt < cur.updatedAt) return 1;
+
       return 0;
     })
     .map(item => {

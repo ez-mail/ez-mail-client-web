@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+
 import App from '../App';
 import DashBoard from '../pages/DashBoard';
 import Login from '../pages/Login';
@@ -7,10 +8,10 @@ import NotFound from '../pages/NotFound';
 import Sender from '../pages/Sender';
 import SignUp from '../pages/SIgnUp';
 import Emails from '../pages/emails/Emails';
-import Step01 from '../pages/emails/EmailEditingStep01';
-import Step02 from '../pages/emails/EmailEditingStep02';
-import Step03 from '../pages/emails/EmailEditingStep03';
-import Step04 from '../pages/emails/EmailEditingStep04';
+import EmailEditingStep01 from '../pages/emails/EmailEditingStep01';
+import EmailEditingStep02 from '../pages/emails/EmailEditingStep02';
+import EmailEditingStep03 from '../pages/emails/EmailEditingStep03';
+import EmailEditingStep04 from '../pages/emails/EmailEditingStep04';
 import Subscribers from '../pages/subscribers/Subscribers';
 import EmailsDashboard from '../pages/emails/EmailsDashboard';
 import EmailRecipientsModal from '../pages/emails/EmailRecipientsModal';
@@ -57,19 +58,19 @@ const router = createBrowserRouter([
       },
       {
         path: '/emails/:email_id/step01',
-        element: <Step01 />,
+        element: <EmailEditingStep01 />,
       },
       {
         path: '/emails/:email_id/step02',
-        element: <Step02 />,
+        element: <EmailEditingStep02 />,
       },
       {
         path: '/emails/:email_id/step03',
-        element: <Step03 />,
+        element: <EmailEditingStep03 />,
       },
       {
         path: '/emails/:email_id/step04',
-        element: <Step04 />,
+        element: <EmailEditingStep04 />,
       },
     ],
   },

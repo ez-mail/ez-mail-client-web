@@ -11,7 +11,9 @@ export default function EmailEditingStep01() {
 
   const handleNextClick = () => {
     console.log('이메일 수정 api 실행');
+
     const emailId = 'test';
+
     navigate(`/emails/${emailId}/step02`);
   };
 

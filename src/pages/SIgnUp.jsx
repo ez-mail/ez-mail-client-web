@@ -18,6 +18,7 @@ export default function SignUp() {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSignUpClick = () => {
     // 회원가입 api 요청
   };

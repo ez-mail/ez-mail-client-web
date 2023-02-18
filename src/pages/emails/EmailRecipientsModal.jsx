@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Modal from '../../components/Modal';
 
 const recipientsData = [
@@ -120,9 +121,9 @@ const AddressAgreementHeader = styled.span`
 `;
 
 const Ul = styled.ul`
+  overflow: auto;
   width: 100%;
   height: 390px;
-  overflow: auto;
 `;
 
 const Li = styled.li`

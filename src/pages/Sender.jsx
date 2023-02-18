@@ -4,6 +4,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Sender() {
+  const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
   const [senderInfo, setSenderInfo] = useState({
     userName: 'ken',
@@ -11,7 +12,6 @@ export default function Sender() {
     address: '서울 강남구 테헤란로 522 홍우빌딩 6층',
     contact: '02-6713-7279',
   });
-  const navigate = useNavigate();
 
   const handleCodeButtonClick = () => {
     navigate('/sender/cdnCode');
@@ -40,9 +40,6 @@ export default function Sender() {
         <MainContainer>
           <Title>발신자 설정</Title>
           <ButtonContainer>
-            <CodeButton onClick={handleCodeButtonClick}>
-              코드 내보내기
-            </CodeButton>
             <SaveButton onClick={handleSaveButtonClick}>저장하기</SaveButton>
           </ButtonContainer>
           <SenderInfoContainer>
@@ -118,7 +115,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 1000px;
-  height: 760px;
+  height: 680px;
   margin: auto;
 `;
 
@@ -173,6 +170,7 @@ const SenderInfoContainer = styled.main`
 const SenderNameTitle = styled.div`
   font-size: 1.125rem;
   font-weight: 500;
+  color: #757575;
 `;
 
 const SenderNameContent = styled.div`
@@ -188,11 +186,13 @@ const EmailFooterTitle = styled.div`
   grid-column: 1 / -1;
   font-size: 1.125rem;
   font-weight: 500;
+  color: #757575;
 `;
 
 const EmailFooterItemTitle = styled.div`
   font-size: 1rem;
   font-weight: 500;
+  color: #757575;
 `;
 
 const EmailFooterItemContent = styled.div`
