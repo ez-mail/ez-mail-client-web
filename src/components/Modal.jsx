@@ -51,6 +51,7 @@ const Content = styled.div`
   width: 426px;
   height: 450px;
   border: 1px solid black;
+  overflow: auto;
 `;
 
 const CloseButton = styled.button`
