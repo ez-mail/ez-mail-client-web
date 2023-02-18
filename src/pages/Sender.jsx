@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
+
 import styled from 'styled-components';
 
 export default function Sender() {
@@ -9,9 +11,10 @@ export default function Sender() {
     address: '서울 강남구 테헤란로 522 홍우빌딩 6층',
     contact: '02-6713-7279',
   });
+  const navigate = useNavigate();
 
   const handleCodeButtonClick = () => {
-    console.log('코드 내보내기 버튼 클릭');
+    navigate('/sender/cdnCode');
   };
 
   const handleModifyButtonClick = () => {
@@ -106,6 +109,7 @@ export default function Sender() {
           <EmailFooterItemContent>{senderInfo.contact}</EmailFooterItemContent>
         </SenderInfoContainer>
       </MainContainer>
+      <Outlet />
     </section>
   );
 }
