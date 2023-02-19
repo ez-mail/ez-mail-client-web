@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export default function CommonButton({
   children,
+  alignSelf,
   padding,
   color,
   backgroundColor,
@@ -12,6 +13,7 @@ export default function CommonButton({
 }) {
   return (
     <Button
+      alignSelf={alignSelf}
       padding={padding}
       color={color}
       backgroundColor={backgroundColor}
@@ -25,10 +27,12 @@ export default function CommonButton({
 }
 
 const Button = styled.button`
+  display: ${props => props.display || 'block'};
   padding: ${props => props.padding || '10px 14px'};
   border-radius: 5px;
   background-color: ${props => props.backgroundColor || '#ffdf2b'};
   font-size: ${props => props.fontSize || '14px'};
   font-weight: ${props => props.fontWeight || '500'};
+  align-self: ${props => props.alignSelf || 'auto'};
   cursor: pointer;
 `;
