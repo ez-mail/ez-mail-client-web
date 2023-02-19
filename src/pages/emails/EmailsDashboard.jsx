@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
 import {
   getKoreaDateString,
   getOpenMailPercentage,
@@ -136,7 +137,7 @@ const EmailInfoContainer = styled.main`
 `;
 
 const EmailInfoTitle = styled.div`
-  color: #747579;
+  color: #757575;
   font-size: 1rem;
   font-weight: 400;
 `;

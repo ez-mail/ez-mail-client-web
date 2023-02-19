@@ -8,6 +8,7 @@ export default function MainNav() {
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
   return (
     <Nav>
       <div>

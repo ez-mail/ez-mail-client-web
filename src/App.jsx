@@ -11,6 +11,7 @@ import MainTopSection from './components/MainTopSection';
 function App() {
   const location = useLocation();
   const params = useParams();
+
   if (location.pathname !== '/') {
     if (
       location.pathname !== `/emails/${params.email_id}/step04` &&

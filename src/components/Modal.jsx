@@ -21,14 +21,14 @@ export default function Modal({ title, children }) {
 }
 
 const ModalBackground = styled.div`
-  width: 100vw;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 const ModalContainer = styled.div`
@@ -47,9 +47,9 @@ const Title = styled.span`
 `;
 
 const Content = styled.div`
-  margin-bottom: 30px;
   width: 426px;
   height: 450px;
+  margin-bottom: 30px;
   border: 1px solid black;
 `;
 

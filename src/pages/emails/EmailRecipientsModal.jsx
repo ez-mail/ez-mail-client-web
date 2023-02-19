@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import Modal from '../../components/Modal';
 
 const recipientsData = [
@@ -96,8 +97,8 @@ const Nav = styled.nav`
   align-items: center;
   width: 100%;
   height: 58px;
-  background-color: #f5f5f5;
   border-bottom: 2px solid #dfe0e4;
+  background-color: #f5f5f5;
   text-align: center;
 `;
 
@@ -120,9 +121,9 @@ const AddressAgreementHeader = styled.span`
 `;
 
 const Ul = styled.ul`
+  overflow: auto;
   width: 100%;
   height: 390px;
-  overflow: auto;
 `;
 
 const Li = styled.li`
@@ -135,8 +136,8 @@ const Li = styled.li`
 `;
 
 const EmailData = styled.span`
-  width: 170px;
   word-wrap: break-word;
+  width: 170px;
   font-size: 0.875rem;
   font-weight: 400;
 `;

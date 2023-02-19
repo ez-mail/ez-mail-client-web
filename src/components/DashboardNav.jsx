@@ -10,6 +10,7 @@ export default function DashboardNav() {
   const handleLogoutClick = () => {
     console.log('로그아웃 실행');
   };
+
   return (
     <Nav>
       <LeftContainer>

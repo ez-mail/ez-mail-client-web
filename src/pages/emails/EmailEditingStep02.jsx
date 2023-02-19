@@ -12,13 +12,17 @@ export default function EmailEditingStep02() {
 
   const handlePrevClick = () => {
     console.log('이메일 수정 api 실행');
+
     const emailId = 'test';
+
     navigate(`/emails/${emailId}/step01`);
   };
 
   const handleNextClick = () => {
     console.log('이메일 수정 api 실행');
+
     const emailId = 'test';
+
     navigate(`/emails/${emailId}/step03`);
   };
 
