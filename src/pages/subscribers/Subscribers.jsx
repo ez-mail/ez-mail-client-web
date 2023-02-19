@@ -91,7 +91,7 @@ export default function Subscribers() {
 
   const subscribers = subscribersData.map(item => {
     return (
-      <tr>
+      <tr key={item._id}>
         <td>
           <input type="checkbox" />
         </td>

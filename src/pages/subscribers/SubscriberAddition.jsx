@@ -31,11 +31,11 @@ export default function SubscriberAddition() {
     setInputs(newInputs);
   };
 
-  const handleAddSubscribersClick = () => {
+  const handleAddSubscribersButtonClick = () => {
     console.log('구독자 추가 API');
   };
 
-  const handleRemoveInputsClick = id => {
+  const handleDeleteRowClick = id => {
     const newInputs = inputs.filter(input => input.id !== id);
     setInputs(newInputs);
   };
@@ -81,9 +81,7 @@ export default function SubscriberAddition() {
               </SelectAdAgreement>
             </SelectContainer>
             {input.id !== 0 && (
-              <DeleteButtonBox
-                onClick={() => handleRemoveInputsClick(input.id)}
-              >
+              <DeleteButtonBox onClick={() => handleDeleteRowClick(input.id)}>
                 <DeleteRowButton icon={faTrash} />
               </DeleteButtonBox>
             )}
@@ -92,7 +90,7 @@ export default function SubscriberAddition() {
         <AddRow onClick={handleAddRowClick}>+ 행추가</AddRow>
         <CommonButton
           alignSelf="flex-start"
-          onClick={handleAddSubscribersClick}
+          onClick={handleAddSubscribersButtonClick}
         >
           추가하기
         </CommonButton>
