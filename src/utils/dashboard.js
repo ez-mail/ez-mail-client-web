@@ -31,7 +31,9 @@ export function getRefinedTrendData(data) {
 export function getSuccessPercentage(data) {
   const { totalSendCount, successSendCount } = data;
 
-  return `${(successSendCount / totalSendCount) * 100}%`;
+  if (totalSendCount === 0) return '0%';
+
+  return `${Math.floor((successSendCount / totalSendCount) * 100)}%`;
 }
 
 export function getOpenMailPercentage(data) {
