@@ -6,7 +6,7 @@ import DashBoard from '../pages/DashBoard';
 import Login from '../pages/Login';
 import NotFound from '../pages/NotFound';
 import Sender from '../pages/Sender';
-import SignUp from '../pages/SIgnUp';
+import SignUp from '../pages/SignUp';
 import Emails from '../pages/emails/Emails';
 import EmailEditingStep01 from '../pages/emails/EmailEditingStep01';
 import EmailEditingStep02 from '../pages/emails/EmailEditingStep02';

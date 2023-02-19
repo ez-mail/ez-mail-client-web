@@ -50,7 +50,7 @@ const Description = styled.span`
 
 const Button = styled.button`
   width: 100%;
-  padding: 14px 0px 14px 0px;
+  padding: 14px 0px;
   border-radius: 5px;
   background-color: #ffdf2b;
   text-align: center;
