@@ -145,7 +145,7 @@ const SubscriberTable = styled.div`
     width: 100%;
     thead {
       position: sticky;
-      top: -1px;
+      top: 0px;
       background-color: #f5f5f5;
       tr {
         padding: 30px 0;

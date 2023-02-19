@@ -40,53 +40,57 @@ export default function SubscriberAddition() {
     setInputs(newInputs);
   };
 
+  const subscribersRow = inputs.map(input => {
+    return (
+      <InputContainer key={input.id}>
+        <InputText
+          id="email"
+          name="email"
+          value={input.email}
+          onChange={e => handleInputChange(e, input.id, 'email')}
+          paddingBottom="20px"
+          width="200px"
+          labelFontSize="16px"
+        >
+          이메일 주소
+        </InputText>
+        <InputText
+          id="name"
+          name="name"
+          value={input.name}
+          onChange={e => handleInputChange(e, input.id, 'name')}
+          paddingBottom="20px"
+          width="170px"
+          labelFontSize="16px"
+        >
+          이름
+        </InputText>
+        <SelectContainer>
+          <Label htmlFor="adAgreement">광고성 정보 수신 동의</Label>
+          <SelectAdAgreement
+            name="adAgreement"
+            id="adAgreement"
+            value={input.adAgreement}
+            onChange={e => handleInputChange(e, input.id, 'adAgreement')}
+          >
+            <option value={false}>동의하지 않음</option>
+            <option value>동의</option>
+          </SelectAdAgreement>
+        </SelectContainer>
+        {input.id !== 0 && (
+          <DeleteButtonBox onClick={() => handleDeleteRowClick(input.id)}>
+            <DeleteRowButton icon={faTrash} />
+          </DeleteButtonBox>
+        )}
+      </InputContainer>
+    );
+  });
+
   return (
     <section>
       <MainContainer>
         <Title>구독자 추가</Title>
-        {inputs.map(input => (
-          <InputContainer key={input.id}>
-            <InputText
-              id="email"
-              name="email"
-              value={input.email}
-              onChange={e => handleInputChange(e, input.id, 'email')}
-              paddingBottom="20px"
-              width="200px"
-              labelFontSize="16px"
-            >
-              이메일 주소
-            </InputText>
-            <InputText
-              id="name"
-              name="name"
-              value={input.name}
-              onChange={e => handleInputChange(e, input.id, 'name')}
-              paddingBottom="20px"
-              width="170px"
-              labelFontSize="16px"
-            >
-              이름
-            </InputText>
-            <SelectContainer>
-              <Label htmlFor="adAgreement">광고성 정보 수신 동의</Label>
-              <SelectAdAgreement
-                name="adAgreement"
-                id="adAgreement"
-                value={input.adAgreement}
-                onChange={e => handleInputChange(e, input.id, 'adAgreement')}
-              >
-                <option value={false}>동의하지 않음</option>
-                <option value>동의</option>
-              </SelectAdAgreement>
-            </SelectContainer>
-            {input.id !== 0 && (
-              <DeleteButtonBox onClick={() => handleDeleteRowClick(input.id)}>
-                <DeleteRowButton icon={faTrash} />
-              </DeleteButtonBox>
-            )}
-          </InputContainer>
-        ))}
+        {subscribersRow}
         <AddRow onClick={handleAddRowClick}>+ 행추가</AddRow>
         <CommonButton
           alignSelf="flex-start"
@@ -113,7 +117,7 @@ const Title = styled.span`
   font-weight: 500;
 `;
 
-const InputContainer = styled.div`
+const InputContainer = styled.ul`
   display: flex;
   justify-content: flex-start;
   gap: 15px;
