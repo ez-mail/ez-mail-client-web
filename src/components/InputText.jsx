@@ -32,7 +32,7 @@ export default function InputText({
   );
 }
 
-const Container = styled.div`
+const Container = styled.li`
   display: flex;
   flex-direction: column;
   padding-bottom: ${props => props.paddingBottom || '20px'};

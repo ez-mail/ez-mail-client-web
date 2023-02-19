@@ -65,6 +65,18 @@ export default function Emails() {
     navigate(`/emails/${emailId}/step01`);
   };
 
+  const handleSentEmailItemClick = emailId => {
+    navigate(`/emails/${emailId}/dashboard`);
+  };
+
+  const handleDeleteButtonClick = () => {
+    console.log('삭제 버튼 클릭');
+  };
+
+  const handleEditButtonClick = () => {
+    console.log('수정 버튼 클릭');
+  };
+
   const emailTemplatesList = emailTemplatesData
     .sort((prev, cur) => {
       if (prev.editingStep === '04') return 1;
@@ -82,14 +94,17 @@ export default function Emails() {
               <StyledFaCircleCheck icon={faCheckCircle} />
               발송완료
             </LeftContent>
-            <EmailTemplateData>
+            <EmailTemplateData
+              onClick={() => handleSentEmailItemClick(item._id)}
+              cursor="pointer"
+            >
               <EmailTemplateTitle>{item.emailTitle}</EmailTemplateTitle>
               <LastEditDate>
                 마지막 편집일 <Dates>{item.updatedAt}</Dates>
               </LastEditDate>
             </EmailTemplateData>
             <RightContent>
-              <StyledFaTrash icon={faTrash} />
+              <StyledFaTrash icon={faTrash} onClick={handleDeleteButtonClick} />
             </RightContent>
           </ContentRow>
         );
@@ -108,8 +123,8 @@ export default function Emails() {
             </LastEditDate>
           </EmailTemplateData>
           <RightContent>
-            <StyledFaPencil icon={faPencil} />
-            <StyledFaTrash icon={faTrash} />
+            <StyledFaPencil icon={faPencil} onClick={handleEditButtonClick} />
+            <StyledFaTrash icon={faTrash} onClick={handleDeleteButtonClick} />
           </RightContent>
         </ContentRow>
       );
@@ -191,6 +206,7 @@ const EmailTemplateData = styled.div`
   justify-content: center;
   width: 860px;
   gap: 10px;
+  cursor: ${props => props.cursor};
 `;
 
 const RightContent = styled.div`

@@ -13,6 +13,7 @@ import EmailEditingStep02 from '../pages/emails/EmailEditingStep02';
 import EmailEditingStep03 from '../pages/emails/EmailEditingStep03';
 import EmailEditingStep04 from '../pages/emails/EmailEditingStep04';
 import Subscribers from '../pages/subscribers/Subscribers';
+import SubscriberAddition from '../pages/subscribers/SubscriberAddition';
 import EmailsDashboard from '../pages/emails/EmailsDashboard';
 import EmailRecipientsModal from '../pages/emails/EmailRecipientsModal';
 import CdnCodeModal from '../pages/CdnCodeModal';
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: '/subscribers',
         element: <Subscribers />,
+      },
+      {
+        path: '/subscribers/addition',
+        element: <SubscriberAddition />,
       },
       {
         path: '/sender',
