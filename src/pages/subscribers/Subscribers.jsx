@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -10,67 +10,81 @@ const subscribersData = [
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
+    checked: false,
   },
   {
     _id: '123151',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
+    checked: false,
   },
   {
     _id: '123152',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
+    checked: false,
   },
   {
     _id: '123153',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
+    checked: false,
   },
   {
     _id: '123154',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
+    checked: false,
   },
   {
     _id: '123155',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
+    checked: false,
   },
   {
     _id: '123156',
-    email: 'abcd112342345@test.com',
+    email: '매우매우매우매우긴이메일@아주긴이메일.com',
     name: '김개똥',
     adAgreement: false,
+    checked: false,
   },
   {
     _id: '123157',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
+    checked: false,
   },
   {
     _id: '123158',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
+    checked: false,
   },
   {
     _id: '123159',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
+    checked: false,
   },
 ];
+
 export default function Subscribers() {
   const navigate = useNavigate();
+  const [isCheckedAll, setIsCheckedAll] = useState(false);
+  const [checkedItems, setCheckedItems] = useState(subscribersData);
 
   const handleDeleteSubscriberButtonClick = () => {
-    console.log('구독자 삭제');
+    const checkedRow = checkedItems.filter(item => item.checked);
+    console.log(checkedRow); // 삭제될 row
   };
 
   const handleNewSubscriberButtonClick = () => {
@@ -78,10 +92,29 @@ export default function Subscribers() {
     navigate(`/subscribers/addition`);
   };
 
+  const handleAllCheckboxChange = () => {
+    const newItems = subscribersData.map(item => ({
+      ...item,
+      checked: !isCheckedAll,
+    }));
+    setIsCheckedAll(!isCheckedAll);
+    setCheckedItems(newItems);
+  };
+
+  const handleCheckboxChange = id => {
+    const newItems = checkedItems.map(item => {
+      if (item._id === id) {
+        return { ...item, checked: !item.checked };
+      }
+      return item;
+    });
+    setCheckedItems(newItems);
+  };
+
   const tableHead = (
     <tr>
       <td>
-        <input type="checkbox" />
+        <input type="checkbox" onChange={handleAllCheckboxChange} />
       </td>
       <td>이메일주소</td>
       <td>이름</td>
@@ -89,11 +122,15 @@ export default function Subscribers() {
     </tr>
   );
 
-  const subscribers = subscribersData.map(item => {
+  const subscribers = checkedItems.map(item => {
     return (
       <tr key={item._id}>
         <td>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={item.checked}
+            onChange={() => handleCheckboxChange(item._id)}
+          />
         </td>
         <td>{item.email}</td>
         <td>{item.name}</td>
@@ -139,61 +176,57 @@ const Title = styled.span`
 `;
 
 const SubscriberTable = styled.div`
-  overflow: auto;
-  height: 440px;
   table {
-    width: 100%;
+    display: block;
     thead {
-      position: sticky;
-      top: 0px;
+      display: block;
       background-color: #f5f5f5;
+      border-bottom: 2px solid #b5acac;
       tr {
-        padding: 30px 0;
-        &:last-child {
-          border-bottom: 2px solid #b5acac;
-        }
-      }
-      td {
-        padding: 16px 0;
-        text-align: center;
-        &:nth-child(1) {
-          width: 7%;
-        }
-        &:nth-child(2) {
-          width: 15%;
-        }
-        &:nth-child(3) {
-          width: 15%;
-        }
-        &:nth-child(4) {
-          padding: 0 400px 0 0;
-          width: 60%;
+        display: block;
+        width: calc(100% - 10px);
+        td {
+          display: inline-block;
+          padding: 16px 0;
+          text-align: center;
+          &:nth-child(1) {
+            width: 6%;
+          }
+          &:nth-child(2) {
+            width: 30%;
+          }
+          &:nth-child(3) {
+            width: 20%;
+          }
+          &:nth-child(4) {
+            width: 44%;
+          }
         }
       }
     }
     tbody {
+      display: block;
+      overflow-y: scroll;
+      max-height: 340px;
       tr {
-        padding: 30px 0;
-        border-top: 2px solid #b5acac;
-        &:last-child {
-          border-bottom: 2px solid #b5acac;
-        }
-      }
-      td {
-        padding: 10px 0;
-        text-align: center;
-        &:nth-child(1) {
-          width: 7%;
-        }
-        &:nth-child(2) {
-          width: 15%;
-        }
-        &:nth-child(3) {
-          width: 15%;
-        }
-        &:nth-child(4) {
-          padding: 0 400px 0 0;
-          width: 60%;
+        display: block;
+        border-bottom: 2px solid #b5acac;
+        td {
+          display: inline-block;
+          padding: 10px 0;
+          text-align: center;
+          &:nth-child(1) {
+            width: 6%;
+          }
+          &:nth-child(2) {
+            width: 30%;
+          }
+          &:nth-child(3) {
+            width: 20%;
+          }
+          &:nth-child(4) {
+            width: 44%;
+          }
         }
       }
     }
@@ -209,7 +242,7 @@ const ContainerNav = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 70px;
+  padding-bottom: 10px;
   border-bottom: 2px solid #b5acac;
   gap: 10px;
 `;

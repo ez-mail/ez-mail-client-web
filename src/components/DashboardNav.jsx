@@ -26,7 +26,9 @@ export default function DashboardNav() {
         </Link>
         <Link to="/subscribers">
           <NavItem
-            inputColor={location.pathname === '/subscribers' ? 'black' : null}
+            inputColor={
+              location.pathname.includes('/subscribers') ? 'black' : null
+            }
           >
             구독자
           </NavItem>
