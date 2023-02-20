@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
+import { requestLogin } from '../api/auth';
 
 import logo from '../assets/login-logo.png';
 import bottomLogo from '../assets/nav-logo.png';
 import LoginInput from '../components/LoginInput';
+import loginUserAtom from '../recoil/loginUser/atom';
 
 export default function Login() {
+  const navigate = useNavigate();
+  const setLoginUser = useSetRecoilState(loginUserAtom);
   const [userInput, setUserInput] = useState({ email: '', password: '' });
 
   const handleUserInput = e => {
@@ -15,8 +20,19 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
   };
-  const handleLoginClick = () => {
-    // 로그인 api 요청
+  const handleLoginClick = async () => {
+    const result = await requestLogin(userInput.email, userInput.password);
+
+    if (result.status === 200) {
+      setLoginUser(await result.json());
+      setUserInput({ email: '', password: '' });
+
+      navigate('/dashboard');
+    } else {
+      alert('문제 발생(에러 처리 나중에)');
+
+      setUserInput({ email: '', password: '' });
+    }
   };
 
   return (

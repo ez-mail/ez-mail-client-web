@@ -4,8 +4,12 @@
     "node": true,
     "browser": true
   },
-  "plugins": ["react-hooks"],
-  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "plugins": ["react-hooks", "@tanstack/query"],
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
+  ],
   "rules": {
     "react/prop-types": "off",
     "no-underscore-dangle": "off",
@@ -15,6 +19,8 @@
       {
         "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
       }
-    ]
+    ],
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/prefer-query-object-syntax": "error"
   }
 }
