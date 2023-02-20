@@ -4,6 +4,7 @@
     "node": true,
     "browser": true
   },
+  "plugins": ["react-hooks"],
   "extends": ["airbnb", "plugin:prettier/recommended"],
   "rules": {
     "react/prop-types": "off",
