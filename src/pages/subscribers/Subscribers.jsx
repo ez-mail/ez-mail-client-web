@@ -84,11 +84,13 @@ export default function Subscribers() {
 
   const handleDeleteSubscriberButtonClick = () => {
     const checkedRow = checkedItems.filter(item => item.checked);
+
     console.log(checkedRow); // 삭제될 row
   };
 
   const handleNewSubscriberButtonClick = () => {
     console.log('구독자 추가 화면 이동');
+
     navigate(`/subscribers/addition`);
   };
 
@@ -97,6 +99,7 @@ export default function Subscribers() {
       ...item,
       checked: !isCheckedAll,
     }));
+
     setIsCheckedAll(!isCheckedAll);
     setCheckedItems(newItems);
   };
@@ -106,8 +109,10 @@ export default function Subscribers() {
       if (item._id === id) {
         return { ...item, checked: !item.checked };
       }
+
       return item;
     });
+
     setCheckedItems(newItems);
   };
 

@@ -89,6 +89,7 @@ export default function EmailEditingStep01() {
       ...item,
       checked: !isCheckedAll,
     }));
+
     setIsCheckedAll(!isCheckedAll);
     setCheckedItems(newItems);
   };
@@ -98,13 +99,16 @@ export default function EmailEditingStep01() {
       if (item._id === id) {
         return { ...item, checked: !item.checked };
       }
+
       return item;
     });
+
     setCheckedItems(newItems);
   };
 
   const handleNextClick = () => {
     const checkedRow = checkedItems.filter(item => item.checked);
+
     console.log(checkedRow); // 삭제될 row
     console.log('이메일 수정 api 실행');
 
