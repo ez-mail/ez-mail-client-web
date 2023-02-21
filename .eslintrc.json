@@ -11,6 +11,7 @@
     "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "rules": {
+    "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "no-underscore-dangle": "off",
     "react-hooks/rules-of-hooks": "error",
