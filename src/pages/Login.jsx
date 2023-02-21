@@ -21,10 +21,10 @@ export default function Login() {
     });
   };
   const handleLoginClick = async () => {
-    const result = await requestLogin(userInput.email, userInput.password);
+    const response = await requestLogin(userInput.email, userInput.password);
 
-    if (result.status === 200) {
-      setLoginUser(await result.json());
+    if (response.status === 200) {
+      setLoginUser(await response.json());
       setUserInput({ email: '', password: '' });
 
       navigate('/dashboard');
@@ -50,6 +50,7 @@ export default function Login() {
       </LoginInput>
       <LoginInput
         id="password"
+        type="password"
         inputValue={userInput.password}
         onChange={handleUserInput}
       >

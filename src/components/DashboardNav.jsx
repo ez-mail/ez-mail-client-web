@@ -1,14 +1,27 @@
 import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 
+import { requestLogout } from '../api/auth';
 import navLogo from '../assets/nav-logo.png';
+import loginUserAtom from '../recoil/loginUser/atom';
 
 export default function DashboardNav() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const setLoginUser = useSetRecoilState(loginUserAtom);
 
-  const handleLogoutClick = () => {
-    console.log('로그아웃 실행');
+  const handleLogoutClick = async () => {
+    const result = await requestLogout();
+
+    if (result.status === 200) {
+      setLoginUser(null);
+      document.cookie = 'sessionId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      navigate('/');
+    } else {
+      alert('문제 발생(에러 처리 나중에, 아마도 로그인 먼저해야함)');
+    }
   };
 
   return (

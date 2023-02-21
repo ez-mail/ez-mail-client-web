@@ -1,7 +1,5 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import loginUserAtom from '../recoil/loginUser/atom';
 
 import {
   getOpenMailPercentage,
@@ -45,10 +43,6 @@ const emailData = {
 const trendData = [1, 4, 2, 33, 60, 0, 1];
 
 export default function DashBoard() {
-  const loginUser = useRecoilValue(loginUserAtom);
-
-  console.log(loginUser);
-
   const subscriberTrendList = getRefinedTrendData(trendData).map(item => {
     return (
       <Li
