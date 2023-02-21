@@ -5,18 +5,18 @@ import styled from 'styled-components';
 
 import { requestLogout } from '../api/auth';
 import navLogo from '../assets/nav-logo.png';
-import loginUserAtom from '../recoil/loginUser/atom';
+import userIdAtom from '../recoil/userId/atom';
 
 export default function DashboardNav() {
   const location = useLocation();
   const navigate = useNavigate();
-  const setLoginUser = useSetRecoilState(loginUserAtom);
+  const setUserId = useSetRecoilState(userIdAtom);
 
   const handleLogoutClick = async () => {
     const result = await requestLogout();
 
     if (result.status === 200) {
-      setLoginUser(null);
+      setUserId(null);
       // document.cookie = 'sessionId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       navigate('/');
     } else {

@@ -7,11 +7,11 @@ import { requestLogin } from '../api/auth';
 import logo from '../assets/login-logo.png';
 import bottomLogo from '../assets/nav-logo.png';
 import LoginInput from '../components/LoginInput';
-import loginUserAtom from '../recoil/loginUser/atom';
+import userIdAtom from '../recoil/userId/atom';
 
 export default function Login() {
   const navigate = useNavigate();
-  const setLoginUser = useSetRecoilState(loginUserAtom);
+  const setUserId = useSetRecoilState(userIdAtom);
   const [userInput, setUserInput] = useState({ email: '', password: '' });
 
   const handleUserInput = e => {
@@ -24,7 +24,9 @@ export default function Login() {
     const response = await requestLogin(userInput.email, userInput.password);
 
     if (response.status === 200) {
-      setLoginUser(await response.json());
+      const body = await response.json();
+
+      setUserId(body.userId);
       setUserInput({ email: '', password: '' });
 
       navigate('/dashboard');
