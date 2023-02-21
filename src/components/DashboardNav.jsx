@@ -17,7 +17,7 @@ export default function DashboardNav() {
 
     if (result.status === 200) {
       setLoginUser(null);
-      document.cookie = 'sessionId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+      // document.cookie = 'sessionId=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
       navigate('/');
     } else {
       alert('문제 발생(에러 처리 나중에, 아마도 로그인 먼저해야함)');
