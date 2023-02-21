@@ -5,6 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import EmailBottomButton from '../../components/EmailBottomButton';
+import {
+  addIsCheckedProperty,
+  removeIsCheckedProperty,
+} from '../../utils/subscriber';
 
 const subscribersData = [
   {
@@ -12,104 +16,100 @@ const subscribersData = [
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
-    checked: false,
   },
   {
     _id: '123151',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
-    checked: false,
   },
   {
     _id: '123152',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123153',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123154',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123155',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123156',
     email: '매우매우매우매우긴이메일@아주긴이메일.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123157',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
-    checked: false,
   },
   {
     _id: '123158',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123159',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
 ];
 
 export default function EmailEditingStep01() {
   const navigate = useNavigate();
   const [isCheckedAll, setIsCheckedAll] = useState(false);
-  const [checkedItems, setCheckedItems] = useState(subscribersData);
+  const [addedIsCheckedSubscribers, setAddedIsCheckedSubscribers] = useState(
+    addIsCheckedProperty(subscribersData),
+  );
 
   const handleAllCheckboxChange = () => {
     const newItems = subscribersData.map(item => ({
       ...item,
-      checked: !isCheckedAll,
+      isChecked: !isCheckedAll,
     }));
 
     setIsCheckedAll(!isCheckedAll);
-    setCheckedItems(newItems);
+    setAddedIsCheckedSubscribers(newItems);
   };
 
   const handleCheckboxChange = id => {
-    const newItems = checkedItems.map(item => {
+    const newItems = addedIsCheckedSubscribers.map(item => {
       if (item._id === id) {
-        return { ...item, checked: !item.checked };
+        return { ...item, isChecked: !item.checked };
       }
 
       return item;
     });
 
-    setCheckedItems(newItems);
+    setAddedIsCheckedSubscribers(newItems);
   };
 
   const handleNextClick = () => {
-    const checkedRow = checkedItems.filter(item => item.checked);
+    const checkedRows = addedIsCheckedSubscribers.filter(
+      item => item.isChecked,
+    );
 
-    console.log(checkedRow); // 삭제될 row
+    const removedIsCheckedSubscribers = removeIsCheckedProperty(checkedRows);
+
+    console.log(removedIsCheckedSubscribers); // 추가될 row
     console.log('이메일 수정 api 실행');
 
     const emailId = 'test';
@@ -128,13 +128,13 @@ export default function EmailEditingStep01() {
     </tr>
   );
 
-  const subscribers = checkedItems.map(item => {
+  const subscribers = addedIsCheckedSubscribers.map(item => {
     return (
       <tr key={item._id}>
         <td>
           <input
             type="checkbox"
-            checked={item.checked}
+            checked={item.isChecked}
             onChange={() => handleCheckboxChange(item._id)}
           />
         </td>

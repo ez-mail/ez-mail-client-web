@@ -3,6 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import CommonButton from '../../components/CommonButton';
+import {
+  addIsCheckedProperty,
+  removeIsCheckedProperty,
+} from '../../utils/subscriber';
 
 const subscribersData = [
   {
@@ -10,82 +14,80 @@ const subscribersData = [
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
-    checked: false,
   },
   {
     _id: '123151',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
-    checked: false,
   },
   {
     _id: '123152',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123153',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123154',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123155',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123156',
     email: '매우매우매우매우긴이메일@아주긴이메일.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123157',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: true,
-    checked: false,
   },
   {
     _id: '123158',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
   {
     _id: '123159',
     email: 'abcd@test.com',
     name: '김개똥',
     adAgreement: false,
-    checked: false,
   },
 ];
 
 export default function Subscribers() {
   const navigate = useNavigate();
   const [isCheckedAll, setIsCheckedAll] = useState(false);
-  const [checkedItems, setCheckedItems] = useState(subscribersData);
+  const [addedIsCheckedSubscribers, setAddedIsCheckedSubscribers] = useState(
+    addIsCheckedProperty(subscribersData),
+  );
 
   const handleDeleteSubscriberButtonClick = () => {
-    const checkedRow = checkedItems.filter(item => item.checked);
+    const checkedRows = addedIsCheckedSubscribers.filter(
+      item => item.isChecked,
+    );
 
-    console.log(checkedRow); // 삭제될 row
+    const removedIsCheckedSubscribers = removeIsCheckedProperty(checkedRows);
+
+    console.log(removedIsCheckedSubscribers); // 구독자 삭제 api 요청, delete하고 리턴으로 조회한 값 받아옴
+
+    // setAddedIsCheckedSubscribers() 구독자 삭제후 setState()
   };
 
   const handleNewSubscriberButtonClick = () => {
@@ -97,23 +99,23 @@ export default function Subscribers() {
   const handleAllCheckboxChange = () => {
     const newItems = subscribersData.map(item => ({
       ...item,
-      checked: !isCheckedAll,
+      isChecked: !isCheckedAll,
     }));
 
     setIsCheckedAll(!isCheckedAll);
-    setCheckedItems(newItems);
+    setAddedIsCheckedSubscribers(newItems);
   };
 
   const handleCheckboxChange = id => {
-    const newItems = checkedItems.map(item => {
+    const newItems = addedIsCheckedSubscribers.map(item => {
       if (item._id === id) {
-        return { ...item, checked: !item.checked };
+        return { ...item, isChecked: !item.checked };
       }
 
       return item;
     });
 
-    setCheckedItems(newItems);
+    setAddedIsCheckedSubscribers(newItems);
   };
 
   const tableHead = (
@@ -127,13 +129,13 @@ export default function Subscribers() {
     </tr>
   );
 
-  const subscribers = checkedItems.map(item => {
+  const subscribers = addedIsCheckedSubscribers.map(item => {
     return (
       <tr key={item._id}>
         <td>
           <input
             type="checkbox"
-            checked={item.checked}
+            checked={item.isChecked}
             onChange={() => handleCheckboxChange(item._id)}
           />
         </td>
