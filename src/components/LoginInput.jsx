@@ -1,11 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function LoginInput({ children, id, inputValue, onChange }) {
+export default function LoginInput({
+  children,
+  id,
+  inputValue,
+  onChange,
+  type = 'text',
+}) {
   return (
     <Container>
       <Label htmlFor={id}>{children}</Label>
-      <Input id={id} name={id} value={inputValue} onChange={onChange} />
+      <Input
+        id={id}
+        name={id}
+        type={type}
+        value={inputValue}
+        onChange={onChange}
+      />
     </Container>
   );
 }

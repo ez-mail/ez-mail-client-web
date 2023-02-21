@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { requestSignUp } from '../api/auth';
 
 import logo from '../assets/login-logo.png';
 import SignUpInput from '../components/LoginInput';
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     email: '',
     name: '',
@@ -19,8 +21,18 @@ export default function SignUp() {
     });
   };
 
-  const handleSignUpClick = () => {
-    // 회원가입 api 요청
+  const handleSignUpClick = async () => {
+    const status = await requestSignUp(
+      userInput.email,
+      userInput.name,
+      userInput.password,
+    );
+
+    if (status === 201) {
+      navigate('/login');
+    } else {
+      alert('에러 발생(에러처리 나중에)');
+    }
   };
 
   return (
@@ -45,6 +57,7 @@ export default function SignUp() {
       </SignUpInput>
       <SignUpInput
         id="password"
+        type="password"
         inputValue={userInput.password}
         onChange={handleUserInput}
       >
