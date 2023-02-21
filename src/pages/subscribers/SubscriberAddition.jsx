@@ -26,8 +26,10 @@ export default function SubscriberAddition() {
           [field]: e.target.value,
         };
       }
+
       return input;
     });
+
     setInputs(newInputs);
   };
 
@@ -37,6 +39,7 @@ export default function SubscriberAddition() {
 
   const handleDeleteRowClick = id => {
     const newInputs = inputs.filter(input => input.id !== id);
+
     setInputs(newInputs);
   };
 

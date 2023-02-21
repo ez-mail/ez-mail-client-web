@@ -169,7 +169,7 @@ const ContainerNav = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  height: 70px;
+  padding-bottom: 10px;
   border-bottom: 2px solid #b5acac;
 `;
 

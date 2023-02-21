@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,9 @@ import InputText from '../../components/InputText';
 
 export default function EmailEditingStep02() {
   const navigate = useNavigate();
+  const [inputEmail, setInputEmail] = useState('');
+  const [inputName, setInputName] = useState('김개똥');
+  const [inputPreviewText, setInputPreviewText] = useState('');
 
   const handlePrevClick = () => {
     console.log('이메일 수정 api 실행');
@@ -38,13 +41,25 @@ export default function EmailEditingStep02() {
       <section>
         <MainContainer>
           <Title>발송정보를 입력하세요</Title>
-          <InputText paddingBottom="50px" width="520px">
+          <InputText
+            paddingBottom="50px"
+            width="520px"
+            value={inputEmail}
+            onChange={e => setInputEmail(e.target.value)}
+          >
             이메일 제목
           </InputText>
-          <InputText paddingBottom="50px" width="520px">
+          <InputText
+            inputValue={inputName}
+            onChange={e => setInputName(e.target.value)}
+            paddingBottom="50px"
+            width="520px"
+          >
             발신자 이름
           </InputText>
           <InputText
+            inputValue={inputPreviewText}
+            onChange={e => setInputPreviewText(e.target.value)}
             paddingBottom="50px"
             width="520px"
             placeholder="빈값일시 콘텐츠 일부가 자동으로 보여집니다."

@@ -1,15 +1,115 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import EmailBottomButton from '../../components/EmailBottomButton';
+import {
+  addIsCheckedProperty,
+  removeIsCheckedProperty,
+} from '../../utils/subscriber';
+
+const subscribersData = [
+  {
+    _id: '12315',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: true,
+  },
+  {
+    _id: '123151',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: true,
+  },
+  {
+    _id: '123152',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: false,
+  },
+  {
+    _id: '123153',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: false,
+  },
+  {
+    _id: '123154',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: false,
+  },
+  {
+    _id: '123155',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: false,
+  },
+  {
+    _id: '123156',
+    email: '매우매우매우매우긴이메일@아주긴이메일.com',
+    name: '김개똥',
+    adAgreement: false,
+  },
+  {
+    _id: '123157',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: true,
+  },
+  {
+    _id: '123158',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: false,
+  },
+  {
+    _id: '123159',
+    email: 'abcd@test.com',
+    name: '김개똥',
+    adAgreement: false,
+  },
+];
 
 export default function EmailEditingStep01() {
   const navigate = useNavigate();
+  const [isCheckedAll, setIsCheckedAll] = useState(false);
+  const [addedIsCheckedSubscribers, setAddedIsCheckedSubscribers] = useState(
+    addIsCheckedProperty(subscribersData),
+  );
+
+  const handleAllCheckboxChange = () => {
+    const newItems = subscribersData.map(item => ({
+      ...item,
+      isChecked: !isCheckedAll,
+    }));
+
+    setIsCheckedAll(!isCheckedAll);
+    setAddedIsCheckedSubscribers(newItems);
+  };
+
+  const handleCheckboxChange = id => {
+    const newItems = addedIsCheckedSubscribers.map(item => {
+      if (item._id === id) {
+        return { ...item, isChecked: !item.checked };
+      }
+
+      return item;
+    });
+
+    setAddedIsCheckedSubscribers(newItems);
+  };
 
   const handleNextClick = () => {
+    const checkedRows = addedIsCheckedSubscribers.filter(
+      item => item.isChecked,
+    );
+
+    const removedIsCheckedSubscribers = removeIsCheckedProperty(checkedRows);
+
+    console.log(removedIsCheckedSubscribers); // 추가될 row
     console.log('이메일 수정 api 실행');
 
     const emailId = 'test';
@@ -17,73 +117,10 @@ export default function EmailEditingStep01() {
     navigate(`/emails/${emailId}/step02`);
   };
 
-  const subscribersData = [
-    {
-      _id: '12315',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: true,
-    },
-    {
-      _id: '123151',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: true,
-    },
-    {
-      _id: '123152',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: false,
-    },
-    {
-      _id: '123153',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: false,
-    },
-    {
-      _id: '123154',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: false,
-    },
-    {
-      _id: '123155',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: false,
-    },
-    {
-      _id: '123156',
-      email: 'abcd112342345@test.com',
-      name: '김개똥',
-      adAgreement: false,
-    },
-    {
-      _id: '123157',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: true,
-    },
-    {
-      _id: '123158',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: false,
-    },
-    {
-      _id: '123159',
-      email: 'abcd@test.com',
-      name: '김개똥',
-      adAgreement: false,
-    },
-  ];
-
   const tableHead = (
     <tr>
       <td>
-        <input type="checkbox" />
+        <input type="checkbox" onChange={handleAllCheckboxChange} />
       </td>
       <td>이메일주소</td>
       <td>이름</td>
@@ -91,11 +128,15 @@ export default function EmailEditingStep01() {
     </tr>
   );
 
-  const subscribers = subscribersData.map(item => {
+  const subscribers = addedIsCheckedSubscribers.map(item => {
     return (
-      <tr>
+      <tr key={item._id}>
         <td>
-          <input type="checkbox" />
+          <input
+            type="checkbox"
+            checked={item.isChecked}
+            onChange={() => handleCheckboxChange(item._id)}
+          />
         </td>
         <td>{item.email}</td>
         <td>{item.name}</td>
@@ -172,62 +213,58 @@ const Title = styled.span`
 `;
 
 const SubscriberTable = styled.div`
-  overflow: auto;
-  height: 300px;
-  border-top: 2px solid #b5acac;
   table {
-    width: 100%;
+    display: block;
     thead {
-      position: sticky;
-      top: 0;
+      display: block;
       background-color: #f5f5f5;
+      border-bottom: 2px solid #b5acac;
+      border-top: 2px solid #b5acac;
       tr {
-        padding: 30px 0;
-        &:last-child {
-          border-bottom: 2px solid #b5acac;
-        }
-      }
-      td {
-        padding: 16px 0;
-        text-align: center;
-        &:nth-child(1) {
-          width: 7%;
-        }
-        &:nth-child(2) {
-          width: 15%;
-        }
-        &:nth-child(3) {
-          width: 15%;
-        }
-        &:nth-child(4) {
-          padding: 0 400px 0 0;
-          width: 60%;
+        display: block;
+        width: calc(100% - 10px);
+        td {
+          display: inline-block;
+          padding: 16px 0;
+          text-align: center;
+          &:nth-child(1) {
+            width: 6%;
+          }
+          &:nth-child(2) {
+            width: 30%;
+          }
+          &:nth-child(3) {
+            width: 20%;
+          }
+          &:nth-child(4) {
+            width: 44%;
+          }
         }
       }
     }
     tbody {
+      display: block;
+      overflow-y: scroll;
+      max-height: 300px;
       tr {
-        padding: 30px 0;
-        border-top: 2px solid #b5acac;
-        &:last-child {
-          border-bottom: 2px solid #b5acac;
-        }
-      }
-      td {
-        padding: 10px 0;
-        text-align: center;
-        &:nth-child(1) {
-          width: 7%;
-        }
-        &:nth-child(2) {
-          width: 15%;
-        }
-        &:nth-child(3) {
-          width: 15%;
-        }
-        &:nth-child(4) {
-          padding: 0 400px 0 0;
-          width: 60%;
+        display: block;
+        border-bottom: 2px solid #b5acac;
+        td {
+          display: inline-block;
+          padding: 10px 0;
+          text-align: center;
+          &:nth-child(1) {
+            width: 6%;
+          }
+          &:nth-child(2) {
+            width: 30%;
+          }
+          &:nth-child(3) {
+            width: 20%;
+          }
+          &:nth-child(4) {
+            width: 44%;
+          }
         }
       }
     }
