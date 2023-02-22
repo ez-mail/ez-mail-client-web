@@ -14,7 +14,7 @@ export default function EmailEditingNav() {
   };
 
   const handlePrevButtonClick = () => {
-    navigate(-1);
+    navigate('/dashboard');
   };
 
   return (

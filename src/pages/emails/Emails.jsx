@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faTrash,
-  faPenToSquare,
-  faPencil,
-} from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
 
-import { fetchEmails } from '../../api/email';
+import {
+  fetchEmails,
+  fetchCreateEmail,
+  fetchDeleteEmail,
+} from '../../api/email';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
@@ -19,16 +19,17 @@ import userIdAtom from '../../recoil/userId/atom';
 export default function Emails() {
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
-  const {
-    isLoading,
-    error,
-    data: emailTemplatesData,
-  } = useQuery({
+  const [emailTemplates, setEmailTemplates] = useState([]);
+
+  const { isLoading, error } = useQuery({
     queryKey: ['userEmailTemplates', userId],
     queryFn: async () => {
-      const data = await fetchEmails(userId);
+      const result = await fetchEmails(userId);
 
-      return data;
+      return result;
+    },
+    onSuccess: emailTemplatesInfoData => {
+      setEmailTemplates(emailTemplatesInfoData);
     },
   });
 
@@ -41,9 +42,7 @@ export default function Emails() {
   }
 
   const handleNewEmailButtonClick = () => {
-    console.log('이메일 생성 api 실행');
-
-    const emailId = 'test';
+    const emailId = fetchCreateEmail(userId);
 
     navigate(`/emails/${emailId}/step01`);
   };
@@ -52,15 +51,19 @@ export default function Emails() {
     navigate(`/emails/${emailId}/dashboard`);
   };
 
-  const handleDeleteButtonClick = () => {
-    console.log('삭제 버튼 클릭 -> 삭제 api 요청 후 재조회');
+  const handleDeleteButtonClick = async emailId => {
+    await fetchDeleteEmail(userId, emailId);
+
+    const deletedEmailTemplates = await fetchEmails(userId);
+
+    setEmailTemplates(deletedEmailTemplates);
   };
 
-  const handleEditButtonClick = () => {
-    console.log('수정 버튼 클릭 -> 해당 step으로 가야함');
+  const handleEditButtonClick = (emailId, editingStep) => {
+    navigate(`/emails/${emailId}/step${editingStep}`);
   };
 
-  const emailTemplatesList = emailTemplatesData
+  const emailTemplatesList = emailTemplates
     .sort((prev, cur) => {
       if (prev.editingStep === '04') return 1;
       if (prev.editingStep !== '04') return -1;
@@ -87,7 +90,10 @@ export default function Emails() {
               </LastEditDate>
             </EmailTemplateData>
             <RightContent>
-              <StyledFaTrash icon={faTrash} onClick={handleDeleteButtonClick} />
+              <StyledFaTrash
+                icon={faTrash}
+                onClick={() => handleDeleteButtonClick(item._id)}
+              />
             </RightContent>
           </ContentRow>
         );
@@ -99,15 +105,20 @@ export default function Emails() {
             <StyledFaPenToSquare icon={faPenToSquare} />
             작성중
           </LeftContent>
-          <EmailTemplateData>
+          <EmailTemplateData
+            onClick={() => handleEditButtonClick(item._id, item.editingStep)}
+            cursor="pointer"
+          >
             <EmailTemplateTitle>{item.emailTitle}</EmailTemplateTitle>
             <LastEditDate>
               마지막 편집일 <Dates>{item.updatedAt}</Dates>
             </LastEditDate>
           </EmailTemplateData>
           <RightContent>
-            <StyledFaPencil icon={faPencil} onClick={handleEditButtonClick} />
-            <StyledFaTrash icon={faTrash} onClick={handleDeleteButtonClick} />
+            <StyledFaTrash
+              icon={faTrash}
+              onClick={() => handleDeleteButtonClick(item._id)}
+            />
           </RightContent>
         </ContentRow>
       );
@@ -222,12 +233,6 @@ const Dates = styled.span`
   display: inline-block;
   margin-left: 5px;
   font-size: 11px;
-`;
-
-const StyledFaPencil = styled(FontAwesomeIcon)`
-  height: 18px;
-  margin-right: 15px;
-  cursor: pointer;
 `;
 
 const StyledFaTrash = styled(FontAwesomeIcon)`

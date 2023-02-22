@@ -63,3 +63,34 @@ export async function fetchCreateEmail(userId) {
 
   return data;
 }
+
+export async function fetchDeleteEmail(userId, emailId) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/email-templates/${emailId}`;
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+
+  return res.status;
+}
+
+export async function fetchUpdateEmail(userId, emailId, emailData) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/email-templates/${emailId}`;
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(emailData),
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+
+  return res.status;
+}

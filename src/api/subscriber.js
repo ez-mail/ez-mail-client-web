@@ -31,3 +31,19 @@ export async function fetchSubscribers(userId) {
 
   return data;
 }
+
+export async function fetchDeleteSubscribers(userId, subscribersData) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/subscribers`;
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(subscribersData),
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+
+  return res.status;
+}
