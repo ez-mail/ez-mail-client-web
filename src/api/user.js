@@ -28,3 +28,7 @@ export async function updateSendingInfo(userId, senderInfo) {
 
   return res.status;
 }
+
+// export async function fetchCdnCode() {
+
+// }
