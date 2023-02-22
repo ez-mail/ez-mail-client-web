@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { requestSignUp } from '../api/auth';
 
+import { requestSignUp } from '../api/auth';
 import logo from '../assets/login-logo.png';
 import SignUpInput from '../components/LoginInput';
+import userIdAtom from '../recoil/userId/atom';
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const userId = useRecoilValue(userIdAtom);
   const [userInput, setUserInput] = useState({
     email: '',
     name: '',
     password: '',
   });
+
+  useEffect(() => {
+    if (userId) {
+      navigate('/dashboard');
+    }
+  }, []);
 
   const handleUserInput = e => {
     setUserInput({

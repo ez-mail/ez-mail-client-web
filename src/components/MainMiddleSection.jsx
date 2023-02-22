@@ -44,6 +44,7 @@ const Inner = styled.div`
   align-items: center;
   justify-content: space-between;
   max-width: 700px;
+  min-width: 365px;
   height: 380px;
   margin: auto;
 `;

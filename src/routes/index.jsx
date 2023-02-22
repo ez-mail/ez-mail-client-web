@@ -17,6 +17,7 @@ import SubscriberAddition from '../pages/subscribers/SubscriberAddition';
 import EmailsDashboard from '../pages/emails/EmailsDashboard';
 import EmailRecipientsModal from '../pages/emails/EmailRecipientsModal';
 import CdnCodeModal from '../pages/CdnCodeModal';
+import EmailEditing from '../pages/emails/EmailEditing';
 
 const router = createBrowserRouter([
   {
@@ -62,6 +63,16 @@ const router = createBrowserRouter([
         ],
       },
       {
+        path: '/emails/:email_id/step04',
+        element: <EmailEditingStep04 />,
+      },
+    ],
+  },
+  {
+    path: '/emails/:email_id',
+    element: <EmailEditing />,
+    children: [
+      {
         path: '/emails/:email_id/step01',
         element: <EmailEditingStep01 />,
       },
@@ -72,10 +83,6 @@ const router = createBrowserRouter([
       {
         path: '/emails/:email_id/step03',
         element: <EmailEditingStep03 />,
-      },
-      {
-        path: '/emails/:email_id/step04',
-        element: <EmailEditingStep04 />,
       },
     ],
   },

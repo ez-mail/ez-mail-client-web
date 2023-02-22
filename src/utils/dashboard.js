@@ -21,7 +21,7 @@ export function getRefinedTrendData(data) {
     return [
       String(item),
       getPercentHeight(item, max),
-      getDateString(today - DAY * index),
+      getDateString(today - DAY * (6 - index)),
     ];
   });
 
