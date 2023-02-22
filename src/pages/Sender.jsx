@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
 import { fetchSendingInfo, updateSendingInfo } from '../api/user';
 import userIdAtom from '../recoil/userId/atom';
-
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 
