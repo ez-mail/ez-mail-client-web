@@ -8,54 +8,37 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
 
-const emailTemplatesData = [
-  {
-    _id: '12315',
-    editingStep: 1,
-    emailTitle: '이메일 테스트1',
-    updatedAt: '2023. 02. 14 오후 2:00',
-  },
-  {
-    _id: '12316',
-    editingStep: '04',
-    emailTitle: '이메일 테스트2',
-    updatedAt: '2023. 02. 14 오후 2:00',
-  },
-  {
-    _id: '12317',
-    editingStep: '01',
-    emailTitle: '이메일 테스트3',
-    updatedAt: '2023. 02. 14 오후 2:00',
-  },
-  {
-    _id: '12318',
-    editingStep: '01',
-    emailTitle: '이메일 테스트4',
-    updatedAt: '2023. 02. 11 오후 2:00',
-  },
-  {
-    _id: '12319',
-    editingStep: '03',
-    emailTitle: '이메일 테스트6',
-    updatedAt: '2023. 01. 11 오후 2:00',
-  },
-  {
-    _id: '12320',
-    editingStep: '03',
-    emailTitle: '이메일 테스트4',
-    updatedAt: '2023. 02. 11 오후 2:00',
-  },
-  {
-    _id: '12321',
-    editingStep: '04',
-    emailTitle: '이메일 테스트4',
-    updatedAt: '2023. 02. 01 오후 1:00',
-  },
-];
+import { fetchEmails } from '../../api/email';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import userIdAtom from '../../recoil/userId/atom';
 
 export default function Emails() {
   const navigate = useNavigate();
+  const userId = useRecoilValue(userIdAtom);
+  const {
+    isLoading,
+    error,
+    data: emailTemplatesData,
+  } = useQuery({
+    queryKey: ['userEmailTemplates', userId],
+    queryFn: async () => {
+      const data = await fetchEmails(userId);
+
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>error</Error>;
+  }
 
   const handleNewEmailButtonClick = () => {
     console.log('이메일 생성 api 실행');
@@ -70,11 +53,11 @@ export default function Emails() {
   };
 
   const handleDeleteButtonClick = () => {
-    console.log('삭제 버튼 클릭');
+    console.log('삭제 버튼 클릭 -> 삭제 api 요청 후 재조회');
   };
 
   const handleEditButtonClick = () => {
-    console.log('수정 버튼 클릭');
+    console.log('수정 버튼 클릭 -> 해당 step으로 가야함');
   };
 
   const emailTemplatesList = emailTemplatesData

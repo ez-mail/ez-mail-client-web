@@ -15,3 +15,19 @@ export async function fetchSubscriberTrend(userId) {
 
   return data;
 }
+
+export async function fetchSubscribers(userId) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/subscribers`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+  const data = await res.json();
+
+  return data;
+}

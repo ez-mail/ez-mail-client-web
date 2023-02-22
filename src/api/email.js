@@ -16,6 +16,34 @@ export async function fetchRecentEmail(userId) {
   return data;
 }
 
-export async function getEmails(userId) {
-  console.log(userId);
+export async function fetchEmails(userId) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/email-templates`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+  const data = await res.json();
+
+  return data;
+}
+
+export async function fetchCreateEmail(userId) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/email-templates`;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+  const data = await res.json();
+
+  return data;
 }
