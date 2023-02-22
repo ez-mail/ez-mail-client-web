@@ -1,17 +1,51 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
+import { fetchSendingInfo, updateSendingInfo } from '../api/user';
+import userIdAtom from '../recoil/userId/atom';
+import Loading from '../components/Loading';
+import Error from '../components/Error';
 
 export default function Sender() {
   const navigate = useNavigate();
+  const userId = useRecoilValue(userIdAtom);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [updateCount, setUpdateCount] = useState(0);
   const [senderInfo, setSenderInfo] = useState({
-    userName: 'ken',
-    companyName: '바닐라코딩',
-    address: '서울 강남구 테헤란로 522 홍우빌딩 6층',
-    contact: '02-6713-7279',
+    userName: '',
+    companyName: '',
+    address: '',
+    contact: '',
   });
+  const { isLoading, error } = useQuery({
+    queryKey: ['senderData', userId, updateCount],
+    queryFn: async () => {
+      const result = await fetchSendingInfo(userId);
+
+      return result;
+    },
+    onSuccess: data => {
+      const { userName, companyName, address, contact } = data;
+
+      setSenderInfo({
+        userName,
+        companyName,
+        address,
+        contact,
+      });
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>error</Error>;
+  }
 
   const handleCodeButtonClick = () => {
     navigate('/sender/cdnCode');
@@ -21,8 +55,17 @@ export default function Sender() {
     setIsEditMode(true);
   };
 
-  const handleSaveButtonClick = () => {
-    setIsEditMode(false);
+  const handleSaveButtonClick = async () => {
+    const status = await updateSendingInfo(userId, senderInfo);
+
+    if (status === 200) {
+      alert('성공적으로 수정');
+
+      setIsEditMode(false);
+      setUpdateCount(updateCount + 1);
+    } else {
+      alert('문제 발생 다시 시도해주세요');
+    }
   };
 
   const handleInputChange = e => {
