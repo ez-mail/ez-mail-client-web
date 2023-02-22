@@ -14,7 +14,6 @@ export default function Sender() {
   const userId = useRecoilValue(userIdAtom);
   const [isEditMode, setIsEditMode] = useState(false);
   const [updateCount, setUpdateCount] = useState(0);
-  const [userCdnCode, setUserCdnCode] = useState('');
   const [senderInfo, setSenderInfo] = useState({
     userName: '',
     companyName: '',
@@ -22,17 +21,16 @@ export default function Sender() {
     contact: '',
   });
 
-  const { isLoading, error } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ['senderData', userId, updateCount],
     queryFn: async () => {
       const result = await fetchSendingInfo(userId);
 
       return result;
     },
-    onSuccess: data => {
-      const { userName, companyName, address, contact, cdnCode } = data;
+    onSuccess: senderInfoData => {
+      const { userName, companyName, address, contact } = senderInfoData;
 
-      setUserCdnCode(cdnCode);
       setSenderInfo({
         userName,
         companyName,
@@ -53,7 +51,7 @@ export default function Sender() {
   const handleCodeButtonClick = () => {
     navigate('/sender/cdnCode', {
       state: {
-        userCdnCode,
+        userCdnCode: data.cdnCode,
       },
     });
   };

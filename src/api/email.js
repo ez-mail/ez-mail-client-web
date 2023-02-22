@@ -16,6 +16,22 @@ export async function fetchRecentEmail(userId) {
   return data;
 }
 
+export async function fetchEmail(userId, emailId) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/email-templates/${emailId}`;
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+  const data = await res.json();
+
+  return data;
+}
+
 export async function fetchEmails(userId) {
   const FETCH_URL = `${config.serverOrigin}/users/${userId}/email-templates`;
   const options = {

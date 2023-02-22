@@ -3,17 +3,18 @@ import { useRecoilValue } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 
-import Loading from './Loading';
 import userIdAtom from '../recoil/userId/atom';
 import { fetchRecentEmail } from '../api/email';
 import {
   getOpenMailPercentage,
   getSuccessPercentage,
 } from '../utils/dashboard';
+import Loading from './Loading';
 import Error from './Error';
 
 export default function RecentEmailPercent() {
   const userId = useRecoilValue(userIdAtom);
+
   const {
     isLoading,
     error,
