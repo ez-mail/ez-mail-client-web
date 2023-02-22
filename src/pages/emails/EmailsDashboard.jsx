@@ -3,8 +3,8 @@ import React from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { fetchEmail } from '../../api/email';
 
+import { fetchEmail } from '../../api/email';
 import userIdAtom from '../../recoil/userId/atom';
 import {
   getKoreaDateString,
