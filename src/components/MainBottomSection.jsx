@@ -14,6 +14,7 @@ export default function MainBottomSection() {
 }
 
 const Section = styled.section`
+  min-width: 436px;
   padding: 84px 0px;
   background-color: #ffdf2b;
   text-align: center;

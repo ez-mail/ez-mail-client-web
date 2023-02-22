@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { requestLogin } from '../api/auth';
 
+import { requestLogin } from '../api/auth';
 import logo from '../assets/login-logo.png';
 import bottomLogo from '../assets/nav-logo.png';
 import LoginInput from '../components/LoginInput';
@@ -11,8 +11,14 @@ import userIdAtom from '../recoil/userId/atom';
 
 export default function Login() {
   const navigate = useNavigate();
-  const setUserId = useSetRecoilState(userIdAtom);
+  const [userId, setUserId] = useRecoilState(userIdAtom);
   const [userInput, setUserInput] = useState({ email: '', password: '' });
+
+  useEffect(() => {
+    if (userId) {
+      navigate('/dashboard');
+    }
+  }, []);
 
   const handleUserInput = e => {
     setUserInput({

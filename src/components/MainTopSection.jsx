@@ -38,6 +38,7 @@ const Inner = styled.div`
   display: flex;
   justify-content: space-between;
   max-width: 1000px;
+  min-width: 820px;
   height: 370px;
   margin: auto;
 `;

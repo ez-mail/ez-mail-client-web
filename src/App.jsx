@@ -1,30 +1,30 @@
-import React from 'react';
-import { Outlet, useLocation, useParams } from 'react-router-dom';
-import DashboardNav from './components/DashboardNav';
+import React, { useEffect } from 'react';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 
 import MainBottomSection from './components/MainBottomSection';
 import MainMiddleSection from './components/MainMiddleSection';
 import MainNav from './components/MainNav';
-import EmailEditingNav from './components/EmailEditingNav';
 import MainTopSection from './components/MainTopSection';
+import userIdAtom from './recoil/userId/atom';
+import DashboardNav from './components/DashboardNav';
 
 function App() {
   const location = useLocation();
-  const params = useParams();
+  const navigate = useNavigate();
+  const userId = useRecoilValue(userIdAtom);
+
+  useEffect(() => {
+    if (!userId && location.pathname !== '/') {
+      alert('로그인이 필요합니다!');
+
+      navigate('/');
+    } else if (userId && location.pathname === '/') {
+      navigate('/dashboard');
+    }
+  }, []);
 
   if (location.pathname !== '/') {
-    if (
-      location.pathname !== `/emails/${params.email_id}/step04` &&
-      location.pathname.includes(`/emails/${params.email_id}/step`)
-    ) {
-      return (
-        <>
-          <EmailEditingNav />
-          <Outlet />
-        </>
-      );
-    }
-
     return (
       <>
         <DashboardNav />
