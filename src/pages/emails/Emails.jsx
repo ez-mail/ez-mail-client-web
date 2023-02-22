@@ -20,8 +20,8 @@ export default function Emails() {
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
   const {
-    isLoading: getLoading,
-    error: getError,
+    isLoading,
+    error,
     data: emailTemplatesData,
   } = useQuery({
     queryKey: ['userEmailTemplates', userId],
@@ -32,11 +32,11 @@ export default function Emails() {
     },
   });
 
-  if (getLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
-  if (getError) {
+  if (error) {
     return <Error>error</Error>;
   }
 
