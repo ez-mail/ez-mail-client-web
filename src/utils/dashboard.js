@@ -50,7 +50,7 @@ export function getOpenMailPercentage(data) {
 
 export function getKoreaDateString(date) {
   const koreaDate = new Date(
-    Date.parse(date) - date.getTimezoneOffset() * 60 * 1000,
+    Date.parse(date) - new Date(date).getTimezoneOffset() * 60 * 1000,
   );
 
   return koreaDate.toLocaleString('ko-KR', { timeZone: 'UTC' });

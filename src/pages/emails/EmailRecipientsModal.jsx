@@ -1,73 +1,13 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Modal from '../../components/Modal';
 
-const recipientsData = [
-  {
-    _id: '12315',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123151',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123152',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123153',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123154',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123155',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123156',
-    email: 'abcd112asdf342345@teasdfst.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123157',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123158',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123159',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-];
-
 export default function EmailRecipientsModal() {
-  const recipients = recipientsData.map(recipient => {
+  const location = useLocation();
+
+  const recipients = location.state.recipients.map(recipient => {
     return (
       <Li key={recipient._id}>
         <EmailData>{recipient.email}</EmailData>
@@ -138,6 +78,7 @@ const Li = styled.li`
 const EmailData = styled.span`
   word-wrap: break-word;
   width: 170px;
+  padding: 4px;
   font-size: 0.875rem;
   font-weight: 400;
 `;

@@ -1,53 +1,51 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { fetchEmail } from '../../api/email';
 
+import userIdAtom from '../../recoil/userId/atom';
 import {
   getKoreaDateString,
   getOpenMailPercentage,
   getSuccessPercentage,
 } from '../../utils/dashboard';
-
-// 임시 데이터
-const emailData = {
-  _id: '12315',
-  editingStep: 4,
-  emailTitle: '테스트 제목',
-  emailContent: '<h1>테스트 이메일 입니다<h1>',
-  sender: '홍길동',
-  emailPreviewText: '테스트 이메일 미리보기',
-  recipients: [
-    {
-      email: 'asdf@asdf.com',
-      name: '길홍동',
-      adAgreement: true,
-      isEmailOpen: false,
-    },
-    {
-      email: 'zxcv@asdf.com',
-      name: '홍길',
-      adAgreement: true,
-      isEmailOpen: true,
-    },
-    {
-      email: 'qwer@asdf.com',
-      name: '동길',
-      adAgreement: true,
-      isEmailOpen: true,
-    },
-  ],
-  totalSendCount: 3,
-  successSendCount: 3,
-  startSendDate: new Date(`2023/02/13`),
-  endSendDate: new Date('2023/02/14'),
-};
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
 
 export default function EmailsDashboard() {
   const navigate = useNavigate();
   const params = useParams();
+  const userId = useRecoilValue(userIdAtom);
+
+  const {
+    isLoading,
+    error,
+    data: emailData,
+  } = useQuery({
+    queryKey: ['emailDashboard', userId, params.email_id],
+    queryFn: async () => {
+      const result = await fetchEmail(userId, params.email_id);
+
+      return result;
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>error</Error>;
+  }
 
   const handleRecipientsButtonClick = () => {
-    navigate(`/emails/${params.email_id}/dashboard/recipients`);
+    navigate(`/emails/${params.email_id}/dashboard/recipients`, {
+      state: {
+        recipients: emailData.recipients,
+      },
+    });
   };
 
   return (
