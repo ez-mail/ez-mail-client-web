@@ -89,10 +89,10 @@ export default function EmailEditingStep01() {
     const checkedRows = addedIsCheckedSubscribers.filter(
       item => item.isChecked,
     );
-    const removedIsCheckedSubscribers = removeIsCheckedProperty(checkedRows);
+
     const emailTemplateData = {
       editingStep: '02',
-      recipients: removedIsCheckedSubscribers,
+      recipients: removeIsCheckedProperty(checkedRows),
     };
 
     await fetchUpdateEmail(userId, param.email_id, emailTemplateData);
