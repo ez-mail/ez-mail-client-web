@@ -5,7 +5,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
-import emailTitleAtom from '../recoil/emailTtile/atom';
+import emailTitleAtom from '../recoil/emailTitle/atom';
 
 export default function EmailEditingNav() {
   const emailTitle = useRecoilValue(emailTitleAtom);

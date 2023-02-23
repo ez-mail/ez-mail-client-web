@@ -42,10 +42,10 @@ export default function Emails() {
     return <Error>error</Error>;
   }
 
-  const handleNewEmailButtonClick = () => {
-    const emailId = fetchCreateEmail(userId);
+  const handleNewEmailButtonClick = async () => {
+    const emailId = await fetchCreateEmail(userId);
 
-    navigate(`/emails/${emailId}/step01`);
+    navigate(`/emails/${emailId.emailTemplateId}/step01`);
   };
 
   const handleSentEmailItemClick = emailId => {

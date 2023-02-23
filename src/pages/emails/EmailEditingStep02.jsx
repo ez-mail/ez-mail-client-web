@@ -12,7 +12,7 @@ import InputText from '../../components/InputText';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
-import emailTitleAtom from '../../recoil/emailTtile/atom';
+import emailTitleAtom from '../../recoil/emailTitle/atom';
 
 export default function EmailEditingStep02() {
   const navigate = useNavigate();

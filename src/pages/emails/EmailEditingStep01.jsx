@@ -4,47 +4,62 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import EmailBottomButton from '../../components/EmailBottomButton';
 import {
   addIsCheckedProperty,
   removeIsCheckedProperty,
 } from '../../utils/subscriber';
-import { fetchUpdateEmail } from '../../api/email';
+import { fetchUpdateEmail, fetchEmail } from '../../api/email';
 import { fetchSubscribers } from '../../api/subscriber';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
+import emailTitleAtom from '../../recoil/emailTitle/atom';
 
 export default function EmailEditingStep01() {
   const navigate = useNavigate();
   const param = useParams();
   const [isCheckedAll, setIsCheckedAll] = useState(false);
   const userId = useRecoilValue(userIdAtom);
+  const setNavEmailTitle = useSetRecoilState(emailTitleAtom);
   const [addedIsCheckedSubscribers, setAddedIsCheckedSubscribers] = useState(
     [],
   );
 
-  const { isLoading, error } = useQuery({
-    queryKey: ['userSubscribers', userId],
+  const { isLoading: isEmailLoading, error: isEmailError } = useQuery({
+    queryKey: ['userEmailTemplate', userId, param.email_id],
     queryFn: async () => {
-      const result = await fetchSubscribers(userId);
+      const result = await fetchEmail(userId, param.email_id);
 
       return result;
     },
-    onSuccess: subscribersData => {
-      setAddedIsCheckedSubscribers(
-        addIsCheckedProperty(subscribersData.subscribers),
-      );
+    onSuccess: emailTemplateData => {
+      setNavEmailTitle(emailTemplateData.emailTitle);
     },
   });
 
-  if (isLoading) {
+  const { isLoading: isSubscribersLoading, error: isSubscribersError } =
+    useQuery({
+      queryKey: ['userSubscribers', userId],
+      queryFn: async () => {
+        const result = await fetchSubscribers(userId);
+
+        return result;
+      },
+      onSuccess: subscribersData => {
+        setAddedIsCheckedSubscribers(
+          addIsCheckedProperty(subscribersData.subscribers),
+        );
+      },
+    });
+
+  if (isEmailLoading || isSubscribersLoading) {
     return <Loading />;
   }
 
-  if (error) {
+  if (isEmailError || isSubscribersError) {
     return <Error>error</Error>;
   }
 
