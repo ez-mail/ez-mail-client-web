@@ -2,11 +2,15 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { useRecoilValue } from 'recoil';
 
+import { fetchAddSubscribers } from '../../api/subscriber';
 import InputText from '../../components/InputText';
 import CommonButton from '../../components/CommonButton';
+import userIdAtom from '../../recoil/userId/atom';
 
 export default function SubscriberAddition() {
+  const userId = useRecoilValue(userIdAtom);
   const [inputs, setInputs] = useState([
     { email: '', name: '', adAgreement: false, id: 0 },
   ]);
@@ -33,8 +37,17 @@ export default function SubscriberAddition() {
     setInputs(newInputs);
   };
 
-  const handleAddSubscribersButtonClick = () => {
-    console.log('구독자 추가 API');
+  const handleAddSubscribersButtonClick = async () => {
+    const subscribers = {
+      subscribers: inputs,
+    };
+    const result = await fetchAddSubscribers(userId, subscribers);
+
+    if (result === 201) {
+      alert('구독자 추가 성공');
+    } else {
+      alert('문제발생');
+    }
   };
 
   const handleDeleteRowClick = id => {

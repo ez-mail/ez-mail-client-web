@@ -1,87 +1,70 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { useQuery } from '@tanstack/react-query';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import EmailBottomButton from '../../components/EmailBottomButton';
 import {
   addIsCheckedProperty,
   removeIsCheckedProperty,
 } from '../../utils/subscriber';
-
-const subscribersData = [
-  {
-    _id: '12315',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123151',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123152',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123153',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123154',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123155',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123156',
-    email: '매우매우매우매우긴이메일@아주긴이메일.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123157',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123158',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123159',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-];
+import { fetchUpdateEmail, fetchEmail } from '../../api/email';
+import { fetchSubscribers } from '../../api/subscriber';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import userIdAtom from '../../recoil/userId/atom';
+import emailTitleAtom from '../../recoil/emailTitle/atom';
 
 export default function EmailEditingStep01() {
   const navigate = useNavigate();
+  const param = useParams();
   const [isCheckedAll, setIsCheckedAll] = useState(false);
+  const userId = useRecoilValue(userIdAtom);
+  const setNavEmailTitle = useSetRecoilState(emailTitleAtom);
   const [addedIsCheckedSubscribers, setAddedIsCheckedSubscribers] = useState(
-    addIsCheckedProperty(subscribersData),
+    [],
   );
 
-  const handleAllCheckboxChange = () => {
-    const newItems = subscribersData.map(item => ({
+  const { isLoading: isEmailLoading, error: isEmailError } = useQuery({
+    queryKey: ['userEmailTemplate', userId, param.email_id],
+    queryFn: async () => {
+      const result = await fetchEmail(userId, param.email_id);
+
+      return result;
+    },
+    onSuccess: emailTemplateData => {
+      setNavEmailTitle(emailTemplateData.emailTitle);
+    },
+  });
+
+  const { isLoading: isSubscribersLoading, error: isSubscribersError } =
+    useQuery({
+      queryKey: ['userSubscribers', userId],
+      queryFn: async () => {
+        const result = await fetchSubscribers(userId);
+
+        return result;
+      },
+      onSuccess: subscribersData => {
+        setAddedIsCheckedSubscribers(
+          addIsCheckedProperty(subscribersData.subscribers),
+        );
+      },
+    });
+
+  if (isEmailLoading || isSubscribersLoading) {
+    return <Loading />;
+  }
+
+  if (isEmailError || isSubscribersError) {
+    return <Error>error</Error>;
+  }
+
+  const handleAllCheckboxChange = async () => {
+    const newItems = await addedIsCheckedSubscribers.map(item => ({
       ...item,
       isChecked: !isCheckedAll,
     }));
@@ -90,10 +73,10 @@ export default function EmailEditingStep01() {
     setAddedIsCheckedSubscribers(newItems);
   };
 
-  const handleCheckboxChange = id => {
-    const newItems = addedIsCheckedSubscribers.map(item => {
+  const handleCheckboxChange = async id => {
+    const newItems = await addedIsCheckedSubscribers.map(item => {
       if (item._id === id) {
-        return { ...item, isChecked: !item.checked };
+        return { ...item, isChecked: !item.isChecked };
       }
 
       return item;
@@ -102,19 +85,19 @@ export default function EmailEditingStep01() {
     setAddedIsCheckedSubscribers(newItems);
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     const checkedRows = addedIsCheckedSubscribers.filter(
       item => item.isChecked,
     );
 
-    const removedIsCheckedSubscribers = removeIsCheckedProperty(checkedRows);
+    const emailTemplateData = {
+      editingStep: '02',
+      recipients: removeIsCheckedProperty(checkedRows),
+    };
 
-    console.log(removedIsCheckedSubscribers); // 추가될 row
-    console.log('이메일 수정 api 실행');
+    await fetchUpdateEmail(userId, param.email_id, emailTemplateData);
 
-    const emailId = 'test';
-
-    navigate(`/emails/${emailId}/step02`);
+    navigate(`/emails/${param.email_id}/step02`);
   };
 
   const tableHead = (

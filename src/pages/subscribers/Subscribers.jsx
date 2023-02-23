@@ -1,103 +1,77 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { useQuery } from '@tanstack/react-query';
+import { useRecoilValue } from 'recoil';
 
 import CommonButton from '../../components/CommonButton';
 import {
   addIsCheckedProperty,
   removeIsCheckedProperty,
 } from '../../utils/subscriber';
-
-const subscribersData = [
-  {
-    _id: '12315',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123151',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123152',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123153',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123154',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123155',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123156',
-    email: '매우매우매우매우긴이메일@아주긴이메일.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123157',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: true,
-  },
-  {
-    _id: '123158',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-  {
-    _id: '123159',
-    email: 'abcd@test.com',
-    name: '김개똥',
-    adAgreement: false,
-  },
-];
+import { fetchSubscribers, fetchDeleteSubscribers } from '../../api/subscriber';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import userIdAtom from '../../recoil/userId/atom';
 
 export default function Subscribers() {
   const navigate = useNavigate();
+  const userId = useRecoilValue(userIdAtom);
   const [isCheckedAll, setIsCheckedAll] = useState(false);
+  const [updateCount, setUpdateCount] = useState(0);
   const [addedIsCheckedSubscribers, setAddedIsCheckedSubscribers] = useState(
-    addIsCheckedProperty(subscribersData),
+    addIsCheckedProperty([]),
   );
 
-  const handleDeleteSubscriberButtonClick = () => {
+  const { isLoading, error } = useQuery({
+    queryKey: ['userSubscribers', userId, updateCount],
+    queryFn: async () => {
+      const result = await fetchSubscribers(userId);
+
+      return result;
+    },
+    onSuccess: subscribersData => {
+      setAddedIsCheckedSubscribers(
+        addIsCheckedProperty(subscribersData.subscribers),
+      );
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>error</Error>;
+  }
+
+  const handleDeleteSubscriberButtonClick = async () => {
     const checkedRows = addedIsCheckedSubscribers.filter(
       item => item.isChecked,
     );
 
     const removedIsCheckedSubscribers = removeIsCheckedProperty(checkedRows);
+    const subscribersData = {
+      subscribers: removedIsCheckedSubscribers,
+    };
 
-    console.log(removedIsCheckedSubscribers); // 구독자 삭제 api 요청, delete하고 리턴으로 조회한 값 받아옴
+    const result = await fetchDeleteSubscribers(userId, subscribersData);
 
-    // setAddedIsCheckedSubscribers() 구독자 삭제후 setState()
+    if (result === 200) {
+      alert('구독자 삭제 성공');
+    } else {
+      alert('문제발생');
+    }
+
+    setUpdateCount(updateCount + 1);
   };
 
   const handleNewSubscriberButtonClick = () => {
-    console.log('구독자 추가 화면 이동');
-
     navigate(`/subscribers/addition`);
   };
 
-  const handleAllCheckboxChange = () => {
-    const newItems = subscribersData.map(item => ({
+  const handleAllCheckboxChange = async () => {
+    const newItems = await addedIsCheckedSubscribers.map(item => ({
       ...item,
       isChecked: !isCheckedAll,
     }));
@@ -106,10 +80,10 @@ export default function Subscribers() {
     setAddedIsCheckedSubscribers(newItems);
   };
 
-  const handleCheckboxChange = id => {
-    const newItems = addedIsCheckedSubscribers.map(item => {
+  const handleCheckboxChange = async id => {
+    const newItems = await addedIsCheckedSubscribers.map(item => {
       if (item._id === id) {
-        return { ...item, isChecked: !item.checked };
+        return { ...item, isChecked: !item.isChecked };
       }
 
       return item;

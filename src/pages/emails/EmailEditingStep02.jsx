@@ -1,32 +1,94 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { useQuery } from '@tanstack/react-query';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import { fetchEmail, fetchUpdateEmail } from '../../api/email';
 import EmailBottomButton from '../../components/EmailBottomButton';
 import InputText from '../../components/InputText';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import userIdAtom from '../../recoil/userId/atom';
+import emailTitleAtom from '../../recoil/emailTitle/atom';
 
 export default function EmailEditingStep02() {
   const navigate = useNavigate();
-  const [inputEmail, setInputEmail] = useState('');
-  const [inputName, setInputName] = useState('김개똥');
-  const [inputPreviewText, setInputPreviewText] = useState('');
+  const param = useParams();
+  const userId = useRecoilValue(userIdAtom);
+  const setNavEmailTitle = useSetRecoilState(emailTitleAtom);
+  const [sendingInfo, setSendingInfo] = useState({
+    emailTitle: '',
+    sender: '',
+    emailPreviewText: '',
+  });
 
-  const handlePrevClick = () => {
-    console.log('이메일 수정 api 실행');
+  const { isLoading, error } = useQuery({
+    queryKey: ['userEmailTemplate', userId, param.email_id],
+    queryFn: async () => {
+      const result = await fetchEmail(userId, param.email_id);
 
-    const emailId = 'test';
+      return result;
+    },
+    onSuccess: emailTemplateInfoData => {
+      const { emailTitle, sender, emailPreviewText } = emailTemplateInfoData;
 
-    navigate(`/emails/${emailId}/step01`);
+      setSendingInfo({
+        emailTitle,
+        sender,
+        emailPreviewText,
+      });
+      setNavEmailTitle(emailTitle);
+    },
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>error</Error>;
+  }
+
+  const handlePrevClick = async () => {
+    const emailTemplateData = {
+      editingStep: '01',
+      emailTitle: sendingInfo.emailTitle,
+      sender: sendingInfo.sender,
+      emailPreviewText: sendingInfo.emailPreviewText,
+    };
+
+    await fetchUpdateEmail(userId, param.email_id, emailTemplateData);
+
+    navigate(`/emails/${param.email_id}/step01`);
   };
 
-  const handleNextClick = () => {
-    console.log('이메일 수정 api 실행');
+  const handleNextClick = async () => {
+    const emailTemplateData = {
+      editingStep: '03',
+      emailTitle: sendingInfo.emailTitle,
+      sender: sendingInfo.sender,
+      emailPreviewText: sendingInfo.emailPreviewText,
+    };
 
-    const emailId = 'test';
+    await fetchUpdateEmail(userId, param.email_id, emailTemplateData);
 
-    navigate(`/emails/${emailId}/step03`);
+    navigate(`/emails/${param.email_id}/step03`);
+  };
+
+  const handleInputChange = e => {
+    const newSendingInfo = {
+      ...sendingInfo,
+      [e.target.name]: e.target.value,
+    };
+
+    if (e.target.name === 'emailTitle') {
+      setNavEmailTitle(e.target.value);
+    }
+
+    setSendingInfo(newSendingInfo);
   };
 
   return (
@@ -42,24 +104,27 @@ export default function EmailEditingStep02() {
         <MainContainer>
           <Title>발송정보를 입력하세요</Title>
           <InputText
+            id="emailTitle"
             paddingBottom="50px"
             width="520px"
-            value={inputEmail}
-            onChange={e => setInputEmail(e.target.value)}
+            inputValue={sendingInfo.emailTitle}
+            onChange={handleInputChange}
           >
             이메일 제목
           </InputText>
           <InputText
-            inputValue={inputName}
-            onChange={e => setInputName(e.target.value)}
+            id="sender"
+            inputValue={sendingInfo.sender}
+            onChange={handleInputChange}
             paddingBottom="50px"
             width="520px"
           >
             발신자 이름
           </InputText>
           <InputText
-            inputValue={inputPreviewText}
-            onChange={e => setInputPreviewText(e.target.value)}
+            id="emailPreviewText"
+            inputValue={sendingInfo.emailPreviewText}
+            onChange={handleInputChange}
             paddingBottom="50px"
             width="520px"
             placeholder="빈값일시 콘텐츠 일부가 자동으로 보여집니다."
