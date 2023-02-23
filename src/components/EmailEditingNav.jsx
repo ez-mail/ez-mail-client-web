@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+
+import emailTitleAtom from '../recoil/emailTtile/atom';
 
 export default function EmailEditingNav() {
+  const emailTitle = useRecoilValue(emailTitleAtom);
   const navigate = useNavigate();
-
-  const emailTitle = '제목없음';
 
   const handleSendButtonClick = () => {
     console.log('메일 발송');

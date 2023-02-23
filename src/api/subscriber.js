@@ -47,3 +47,19 @@ export async function fetchDeleteSubscribers(userId, subscribersData) {
 
   return res.status;
 }
+
+export async function fetchAddSubscribers(userId, subscribersData) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/subscribers`;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(subscribersData),
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+
+  return res.status;
+}

@@ -18,12 +18,13 @@ export default function Subscribers() {
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
   const [isCheckedAll, setIsCheckedAll] = useState(false);
+  const [updateCount, setUpdateCount] = useState(0);
   const [addedIsCheckedSubscribers, setAddedIsCheckedSubscribers] = useState(
     addIsCheckedProperty([]),
   );
 
   const { isLoading, error } = useQuery({
-    queryKey: ['userSubscribers', userId],
+    queryKey: ['userSubscribers', userId, updateCount],
     queryFn: async () => {
       const result = await fetchSubscribers(userId);
 
@@ -44,7 +45,7 @@ export default function Subscribers() {
     return <Error>error</Error>;
   }
 
-  const handleDeleteSubscriberButtonClick = () => {
+  const handleDeleteSubscriberButtonClick = async () => {
     const checkedRows = addedIsCheckedSubscribers.filter(
       item => item.isChecked,
     );
@@ -54,17 +55,23 @@ export default function Subscribers() {
       subscribers: removedIsCheckedSubscribers,
     };
 
-    fetchDeleteSubscribers(userId, subscribersData);
+    const result = await fetchDeleteSubscribers(userId, subscribersData);
+
+    if (result === 200) {
+      alert('구독자 삭제 성공');
+    } else {
+      alert('문제발생');
+    }
+
+    setUpdateCount(updateCount + 1);
   };
 
   const handleNewSubscriberButtonClick = () => {
-    console.log('구독자 추가 화면 이동');
-
     navigate(`/subscribers/addition`);
   };
 
-  const handleAllCheckboxChange = () => {
-    const newItems = addedIsCheckedSubscribers.map(item => ({
+  const handleAllCheckboxChange = async () => {
+    const newItems = await addedIsCheckedSubscribers.map(item => ({
       ...item,
       isChecked: !isCheckedAll,
     }));
@@ -73,8 +80,8 @@ export default function Subscribers() {
     setAddedIsCheckedSubscribers(newItems);
   };
 
-  const handleCheckboxChange = id => {
-    const newItems = addedIsCheckedSubscribers.map(item => {
+  const handleCheckboxChange = async id => {
+    const newItems = await addedIsCheckedSubscribers.map(item => {
       if (item._id === id) {
         return { ...item, isChecked: !item.isChecked };
       }

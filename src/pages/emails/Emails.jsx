@@ -20,9 +20,10 @@ export default function Emails() {
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
   const [emailTemplates, setEmailTemplates] = useState([]);
+  const [updateCount, setUpdateCount] = useState(0);
 
   const { isLoading, error } = useQuery({
-    queryKey: ['userEmailTemplates', userId],
+    queryKey: ['userEmailTemplates', userId, updateCount],
     queryFn: async () => {
       const result = await fetchEmails(userId);
 
@@ -52,14 +53,18 @@ export default function Emails() {
   };
 
   const handleDeleteButtonClick = async emailId => {
-    await fetchDeleteEmail(userId, emailId);
+    const result = await fetchDeleteEmail(userId, emailId);
 
-    const deletedEmailTemplates = await fetchEmails(userId);
+    if (result === 200) {
+      alert('이메일 삭제 성공');
+    } else {
+      alert('문제발생');
+    }
 
-    setEmailTemplates(deletedEmailTemplates);
+    setUpdateCount(updateCount + 1);
   };
 
-  const handleEditButtonClick = (emailId, editingStep) => {
+  const handleEmailTemplateClick = (emailId, editingStep) => {
     navigate(`/emails/${emailId}/step${editingStep}`);
   };
 
@@ -106,7 +111,7 @@ export default function Emails() {
             작성중
           </LeftContent>
           <EmailTemplateData
-            onClick={() => handleEditButtonClick(item._id, item.editingStep)}
+            onClick={() => handleEmailTemplateClick(item._id, item.editingStep)}
             cursor="pointer"
           >
             <EmailTemplateTitle>{item.emailTitle}</EmailTemplateTitle>

@@ -48,8 +48,8 @@ export default function EmailEditingStep01() {
     return <Error>error</Error>;
   }
 
-  const handleAllCheckboxChange = () => {
-    const newItems = addedIsCheckedSubscribers.map(item => ({
+  const handleAllCheckboxChange = async () => {
+    const newItems = await addedIsCheckedSubscribers.map(item => ({
       ...item,
       isChecked: !isCheckedAll,
     }));
@@ -58,8 +58,8 @@ export default function EmailEditingStep01() {
     setAddedIsCheckedSubscribers(newItems);
   };
 
-  const handleCheckboxChange = id => {
-    const newItems = addedIsCheckedSubscribers.map(item => {
+  const handleCheckboxChange = async id => {
+    const newItems = await addedIsCheckedSubscribers.map(item => {
       if (item._id === id) {
         return { ...item, isChecked: !item.isChecked };
       }
@@ -70,7 +70,7 @@ export default function EmailEditingStep01() {
     setAddedIsCheckedSubscribers(newItems);
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     const checkedRows = addedIsCheckedSubscribers.filter(
       item => item.isChecked,
     );
@@ -80,7 +80,7 @@ export default function EmailEditingStep01() {
       recipients: removedIsCheckedSubscribers,
     };
 
-    fetchUpdateEmail(userId, param.email_id, emailTemplateData);
+    await fetchUpdateEmail(userId, param.email_id, emailTemplateData);
 
     navigate(`/emails/${param.email_id}/step02`);
   };

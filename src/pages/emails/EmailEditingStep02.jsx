@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { useQuery } from '@tanstack/react-query';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { fetchEmail, fetchUpdateEmail } from '../../api/email';
 import EmailBottomButton from '../../components/EmailBottomButton';
@@ -12,11 +12,13 @@ import InputText from '../../components/InputText';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
+import emailTitleAtom from '../../recoil/emailTtile/atom';
 
 export default function EmailEditingStep02() {
   const navigate = useNavigate();
   const param = useParams();
   const userId = useRecoilValue(userIdAtom);
+  const setNavEmailTitle = useSetRecoilState(emailTitleAtom);
   const [sendingInfo, setSendingInfo] = useState({
     emailTitle: '',
     sender: '',
@@ -32,11 +34,13 @@ export default function EmailEditingStep02() {
     },
     onSuccess: emailTemplateInfoData => {
       const { emailTitle, sender, emailPreviewText } = emailTemplateInfoData;
+
       setSendingInfo({
         emailTitle,
         sender,
         emailPreviewText,
       });
+      setNavEmailTitle(emailTitle);
     },
   });
 
@@ -48,7 +52,7 @@ export default function EmailEditingStep02() {
     return <Error>error</Error>;
   }
 
-  const handlePrevClick = () => {
+  const handlePrevClick = async () => {
     const emailTemplateData = {
       editingStep: '01',
       emailTitle: sendingInfo.emailTitle,
@@ -56,12 +60,12 @@ export default function EmailEditingStep02() {
       emailPreviewText: sendingInfo.emailPreviewText,
     };
 
-    fetchUpdateEmail(userId, param.email_id, emailTemplateData);
+    await fetchUpdateEmail(userId, param.email_id, emailTemplateData);
 
     navigate(`/emails/${param.email_id}/step01`);
   };
 
-  const handleNextClick = () => {
+  const handleNextClick = async () => {
     const emailTemplateData = {
       editingStep: '03',
       emailTitle: sendingInfo.emailTitle,
@@ -69,7 +73,7 @@ export default function EmailEditingStep02() {
       emailPreviewText: sendingInfo.emailPreviewText,
     };
 
-    fetchUpdateEmail(userId, param.email_id, emailTemplateData);
+    await fetchUpdateEmail(userId, param.email_id, emailTemplateData);
 
     navigate(`/emails/${param.email_id}/step03`);
   };
@@ -79,6 +83,10 @@ export default function EmailEditingStep02() {
       ...sendingInfo,
       [e.target.name]: e.target.value,
     };
+
+    if (e.target.name === 'emailTitle') {
+      setNavEmailTitle(e.target.value);
+    }
 
     setSendingInfo(newSendingInfo);
   };
