@@ -62,7 +62,7 @@ export default function StyleTool() {
     setLinkStyle(newLinkStyle);
   };
 
-  const handleLinkStyleChange = async e => {
+  const handleLinkStyleChange = e => {
     if (e.currentTarget.name === 'bold') {
       setIsChecked(!isChecked);
       e.currentTarget.className = `${isChecked ? 'active' : ''}`;
