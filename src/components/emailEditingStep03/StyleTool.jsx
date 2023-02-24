@@ -22,7 +22,7 @@ export default function StyleTool() {
   const [linkStyle, setLinkStyle] = useRecoilState(linkStyleAtom);
   const [buttonStyle, setButtonStyle] = useRecoilState(buttonStyleAtom);
   const [boxStyle, setBoxStyle] = useRecoilState(boxStyleAtom);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isBoldChecked, setIsBoldChecked] = useState(false);
   const underline = useRef();
   const lineThrough = useRef();
 
@@ -64,11 +64,11 @@ export default function StyleTool() {
 
   const handleLinkStyleChange = e => {
     if (e.currentTarget.name === 'bold') {
-      setIsChecked(!isChecked);
-      e.currentTarget.className = `${isChecked ? 'active' : ''}`;
+      setIsBoldChecked(!isBoldChecked);
+      e.currentTarget.className = `${isBoldChecked ? 'active' : ''}`;
       const newLinkStyle = {
         ...linkStyle,
-        fontWeight: `${isChecked ? 'bold' : 'normal'}`,
+        fontWeight: `${isBoldChecked ? 'bold' : 'normal'}`,
       };
 
       setLinkStyle(newLinkStyle);
