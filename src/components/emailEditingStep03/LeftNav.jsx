@@ -34,9 +34,7 @@ const LeftToolContainer = styled.div`
   flex-direction: column;
   width: 320px;
   min-width: 320px;
-  height: 100vh;
   background-color: white;
-  box-shadow: 0px 4px 6px 1px rgba(0, 0, 0, 0.05);
 `;
 
 const ModeContainer = styled.div`

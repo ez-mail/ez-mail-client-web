@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
+import TextContent from '../../components/emailEditingStep03/TextContent';
+import SpaceContent from '../../components/emailEditingStep03/SpaceContent';
 
 export default function EmailEditingStep03() {
+  const handleFocusCapture = e => {
+    console.log(e);
+  };
+
   return (
     <>
       <SubNav>
@@ -16,9 +22,13 @@ export default function EmailEditingStep03() {
       </SubNav>
       <Background>
         <LeftNav />
-        <EmailTemplateContainer>
-          <EmailTemplate />
-        </EmailTemplateContainer>
+        <EmailBackground onFocusCapture={handleFocusCapture}>
+          <EmailContentsList>
+            <TextContent />
+            <SpaceContent />
+            <TextContent />
+          </EmailContentsList>
+        </EmailBackground>
       </Background>
     </>
   );
@@ -49,17 +59,24 @@ const StyledFaAngleRight = styled(FontAwesomeIcon)`
 
 const Background = styled.div`
   display: flex;
-  background-color: #f5f5f5;
+  height: calc(100vh - 145.5px);
 `;
 
-const EmailTemplateContainer = styled.div`
+const EmailBackground = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100vh;
+  min-width: 630px;
+  background-color: #f5f5f5;
+  overflow-y: auto;
 `;
 
-const EmailTemplate = styled.div`
+const EmailContentsList = styled.div`
+  display: flex;
+  flex-direction: column;
   width: 630px;
+  min-width: 630px;
+  height: max-content;
+  margin: 30px 0;
   background-color: white;
 `;
