@@ -16,31 +16,31 @@ import {
 export default function BoxTool() {
   return (
     <ToolBoxContainer>
-      <ToolBox>
+      <ToolBox draggable="true">
         <StyledIcon icon={faAlignLeft} />
         <ToolBoxText>텍스트</ToolBoxText>
       </ToolBox>
-      <ToolBox>
+      <ToolBox draggable="true">
         <StyledIcon icon={faImage} />
         <ToolBoxText>이미지</ToolBoxText>
       </ToolBox>
-      <ToolBox>
+      <ToolBox draggable="true">
         <StyledIcon icon={faHandPointer} />
         <ToolBoxText>버튼</ToolBoxText>
       </ToolBox>
-      <ToolBox>
+      <ToolBox draggable="true">
         <StyledIcon icon={faVideo} />
         <ToolBoxText>비디오</ToolBoxText>
       </ToolBox>
-      <ToolBox>
+      <ToolBox draggable="true">
         <StyledIcon icon={faSquareFull} />
         <ToolBoxText>공백</ToolBoxText>
       </ToolBox>
-      <ToolBox>
+      <ToolBox draggable="true">
         <StyledIcon icon={faXmarksLines} />
         <ToolBoxText>푸터</ToolBoxText>
       </ToolBox>
-      <ToolBox>
+      <ToolBox draggable="true">
         <StyledIcon icon={faWindowMinimize} />
         <ToolBoxText>구분선</ToolBoxText>
       </ToolBox>
