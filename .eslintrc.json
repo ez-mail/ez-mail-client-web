@@ -23,6 +23,8 @@
     ],
     "@tanstack/query/exhaustive-deps": "error",
     "@tanstack/query/prefer-query-object-syntax": "error",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "consistent-return": "warn",
+    "jsx-a11y/anchor-is-valid": "warn"
   }
 }
