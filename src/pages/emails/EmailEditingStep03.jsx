@@ -6,6 +6,7 @@ import LeftNav from '../../components/emailEditingStep03/LeftNav';
 import TextContent from '../../components/emailEditingStep03/TextContent';
 import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
 import { dataToComponent } from '../../utils/emailEditing';
+import FooterContent from '../../components/emailEditingStep03/FooterContent';
 
 const emailTemplateData = {
   emailBodyStyle: { backgroundColor: 'gray' },
@@ -60,9 +61,12 @@ const emailTemplateData = {
         borderStyle: 'solid',
         paddingTop: '15px',
         paddingBottom: '15px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
+        paddingLeft: '5px',
+        paddingRight: '5px',
         textAlign: 'center',
+      },
+      contentStyle: {
+        width: '400px',
       },
     },
     {
@@ -102,6 +106,7 @@ export default function EmailEditingStep03() {
         <EmailBackground style={emailTemplateData.emailBodyStyle}>
           <EmailContentsList style={emailTemplateData.emailContainerStyle}>
             {contents}
+            <FooterContent />
           </EmailContentsList>
         </EmailBackground>
         {/* <EmailBodyTable>

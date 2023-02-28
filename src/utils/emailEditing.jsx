@@ -18,6 +18,7 @@ export function dataToComponent(data) {
       return (
         <ImageContent
           boxStyle={data.boxStyle}
+          contentStyle={data.contentStyle}
           link={data.link}
           imageSrc={data.imageSrc}
         />

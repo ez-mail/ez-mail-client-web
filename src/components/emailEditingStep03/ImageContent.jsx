@@ -4,7 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { setImageUrl } from '../../utils/dragAndDrop';
 
-export default function ImageContent({ boxStyle, imageSrc, link }) {
+export default function ImageContent({
+  boxStyle,
+  imageSrc,
+  link,
+  contentStyle,
+}) {
   const [imgSrc, setImgSrc] = useState(imageSrc);
   const inputRef = useRef();
 
@@ -29,7 +34,7 @@ export default function ImageContent({ boxStyle, imageSrc, link }) {
     <div style={boxStyle}>
       {imgSrc ? (
         <a href={link} target="_blank" rel="noreferrer">
-          <Img src={imgSrc} alt="이미지" />
+          <Img src={imgSrc} alt="이미지" style={contentStyle} />
         </a>
       ) : (
         <PhotoDropBox
@@ -77,6 +82,5 @@ const PhotoInput = styled.input`
 `;
 
 const Img = styled.img`
-  width: 500px;
-  max-width: 500px;
+  max-width: 600px;
 `;
