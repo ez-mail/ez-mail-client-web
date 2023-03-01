@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonContent from '../components/emailEditingStep03/ButtonContent';
 import DividerContent from '../components/emailEditingStep03/DividerContent';
 import ImageContent from '../components/emailEditingStep03/ImageContent';
 import SpacerContent from '../components/emailEditingStep03/SpacerContent';
@@ -21,6 +22,15 @@ export function dataToComponent(data) {
           contentStyle={data.contentStyle}
           link={data.link}
           imageSrc={data.imageSrc}
+        />
+      );
+    case 'button':
+      return (
+        <ButtonContent
+          boxStyle={data.boxStyle}
+          contentStyle={data.contentStyle}
+          link={data.link}
+          content={data.content}
         />
       );
     default:

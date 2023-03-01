@@ -80,6 +80,34 @@ const emailTemplateData = {
         borderStyle: 'solid',
       },
     },
+    {
+      id: 'asdf5',
+      type: 'button',
+      link: 'https://beta.reactjs.org/',
+      content: '길지 버튼',
+      boxStyle: {
+        backgroundColor: 'orange',
+        borderWidth: '1px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '15px',
+        paddingRight: '15px',
+        textAlign: 'center',
+      },
+      contentStyle: {
+        backgroundColor: '#ffdf2b',
+        borderWidth: '0px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+        borderRadius: '3px',
+        color: 'white',
+        fontSize: '16px',
+        fontFamily:
+          'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
+      },
+    },
   ],
 };
 
