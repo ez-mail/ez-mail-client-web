@@ -4,12 +4,121 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
 import TextContent from '../../components/emailEditingStep03/TextContent';
-import SpaceContent from '../../components/emailEditingStep03/SpaceContent';
+import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
+import { dataToComponent } from '../../utils/emailEditing';
+import FooterContent from '../../components/emailEditingStep03/FooterContent';
+
+const emailTemplateData = {
+  emailBodyStyle: { backgroundColor: 'gray' },
+  emailContainerStyle: {
+    backgroundColor: 'white',
+    borderWidth: '0px',
+    borderColor: 'black',
+    borderStyle: 'solid',
+  },
+  emailContents: [
+    {
+      id: 'asdf1',
+      type: 'spacer',
+      boxStyle: {
+        backgroundColor: 'green',
+        borderWidth: '1px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+        height: '50px',
+      },
+    },
+    {
+      id: 'asdf2',
+      type: 'divider',
+      boxStyle: {
+        backgroundColor: 'yellow',
+        borderWidth: '0px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '10px',
+        paddingRight: '10px',
+      },
+      contentStyle: {
+        height: '1px',
+        borderTopWidth: '3px',
+        borderTopColor: 'black',
+        borderTopStyle: 'solid',
+      },
+    },
+    {
+      id: 'asdf3',
+      type: 'image',
+      link: 'https://beta.reactjs.org/',
+      imageSrc:
+        'https://images.unsplash.com/photo-1504194104404-433180773017?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
+      boxStyle: {
+        backgroundColor: 'yellow',
+        borderWidth: '0px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '5px',
+        paddingRight: '5px',
+        textAlign: 'center',
+      },
+      contentStyle: {
+        width: '400px',
+      },
+    },
+    {
+      id: 'asdf4',
+      type: 'spacer',
+      boxStyle: {
+        height: '20px',
+        backgroundColor: 'transparent',
+        borderWidth: '0px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+      },
+    },
+    {
+      id: 'asdf5',
+      type: 'button',
+      link: 'https://beta.reactjs.org/',
+      content: '길지 버튼',
+      boxStyle: {
+        backgroundColor: 'orange',
+        borderWidth: '1px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '15px',
+        paddingRight: '15px',
+        textAlign: 'center',
+      },
+      contentStyle: {
+        backgroundColor: '#ffdf2b',
+        borderWidth: '0px',
+        borderColor: 'black',
+        borderStyle: 'solid',
+        borderRadius: '3px',
+        color: 'white',
+        fontSize: '16px',
+        fontFamily:
+          'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
+      },
+    },
+  ],
+};
 
 export default function EmailEditingStep03() {
-  const handleFocusCapture = e => {
-    console.log(e);
-  };
+  const contents = emailTemplateData.emailContents.map(emailContentData => {
+    return (
+      <ContentWrapper key={emailContentData.id}>
+        {dataToComponent(emailContentData)}
+      </ContentWrapper>
+    );
+  });
 
   return (
     <>
@@ -22,13 +131,17 @@ export default function EmailEditingStep03() {
       </SubNav>
       <Background>
         <LeftNav />
-        <EmailBackground onFocusCapture={handleFocusCapture}>
-          <EmailContentsList>
-            <TextContent />
-            <SpaceContent />
-            <TextContent />
+        <EmailBackground style={emailTemplateData.emailBodyStyle}>
+          <EmailContentsList style={emailTemplateData.emailContainerStyle}>
+            {contents}
+            <FooterContent />
           </EmailContentsList>
         </EmailBackground>
+        {/* <EmailBodyTable>
+          <SpaceContent />
+          {dataToComponent(data[0])}
+          <SpaceContent />
+        </EmailBodyTable> */}
       </Background>
     </>
   );
