@@ -11,19 +11,18 @@ export default function ButtonContent({
   const [currentContent, setCurrentContent] = useState(content);
 
   const handleInputChange = e => {
-    setCurrentContent(e.target.innerText);
+    setCurrentContent(e.target.textContent);
   };
 
   const handleKeyDown = e => {
-    console.log(e.keyCode);
     if (e.keyCode === 13) {
       e.preventDefault();
     }
   };
 
   useEffect(() => {
-    buttonEditor.current.innerText = content;
-  }, []);
+    buttonEditor.current.textContent = currentContent;
+  }, [currentContent]);
 
   return (
     <div style={boxStyle}>

@@ -5,7 +5,6 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import { addProperties, removeProperties } from '../../utils/dragAndDrop';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
-import TextContent from '../../components/emailEditingStep03/TextContent';
 import ContentMovePanel from '../../components/emailEditingStep03/ContentMovePanel';
 import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
 import { dataToComponent } from '../../utils/emailEditing';
@@ -81,6 +80,23 @@ const emailTemplateData = {
         borderWidth: '0px',
         borderColor: 'black',
         borderStyle: 'solid',
+      },
+    },
+    {
+      id: 'text123',
+      type: 'text',
+      content: '뿡빵뿡빵',
+      boxStyle: {
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        textAlign: 'center',
+      },
+      contentStyle: {
+        fontSize: '24px',
+        fontFamily:
+          'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
       },
     },
     {
