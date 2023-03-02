@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+
+import { addProperties, removeProperties } from '../../utils/dragAndDrop';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
 import TextContent from '../../components/emailEditingStep03/TextContent';
+import ContentMovePanel from '../../components/emailEditingStep03/ContentMovePanel';
 import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
 import { dataToComponent } from '../../utils/emailEditing';
 import FooterContent from '../../components/emailEditingStep03/FooterContent';
@@ -112,10 +115,213 @@ const emailTemplateData = {
 };
 
 export default function EmailEditingStep03() {
-  const contents = emailTemplateData.emailContents.map(emailContentData => {
+  const [emailContentsData, setEmailContentsData] = useState([]);
+  const $dragItemRef = useRef();
+  const $dragOverItemRef = useRef();
+  const $dragItemIndexRef = useRef();
+  const $dragOverItemIndexRef = useRef();
+
+  useEffect(() => {
+    setEmailContentsData(addProperties(emailTemplateData.emailContents));
+  }, []);
+
+  const handleDraggable = e => {
+    const targetId = e.currentTarget.parentNode.parentNode.id;
+    const newEmailContents = emailContentsData.map(item => {
+      if (item.id === targetId) {
+        return { ...item, isDraggable: true };
+      }
+
+      return item;
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleFocus = e => {
+    const newEmailContents = emailContentsData.map(item => {
+      if (item.id === e.target.id) {
+        return { ...item, isActive: true };
+      }
+
+      return item;
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleBlur = e => {
+    const newEmailContents = emailContentsData.map(item => {
+      return { ...item, isActive: false };
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleDragStart = (e, index) => {
+    $dragItemIndexRef.current = index;
+    $dragItemRef.current = e.currentTarget;
+    e.dataTransfer.effectAllowed = 'move';
+    const img = new Image();
+
+    e.dataTransfer.setDragImage(img, 0, 0);
+  };
+
+  const handleDragEnter = (e, index) => {
+    $dragOverItemIndexRef.current = index;
+    $dragOverItemRef.current = e.currentTarget;
+  };
+
+  const handleDragEnd = e => {
+    const newEmailContents = emailContentsData.map(item => {
+      return { ...item, isDraggable: false };
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleDrop = (e, index) => {
+    const newEmailContents = [...emailContentsData];
+    const rect = e.currentTarget.getBoundingClientRect();
+    const contentHeight = e.currentTarget.offsetHeight / 2;
+    const middleOfContent = rect.top + contentHeight;
+    const absolute = Math.abs(
+      $dragItemIndexRef.current - $dragOverItemIndexRef.current,
+    );
+
+    if (e.dataTransfer.effectAllowed === 'move') {
+      if (
+        (absolute === 1 &&
+          e.clientY > middleOfContent &&
+          $dragItemIndexRef.current > $dragOverItemIndexRef.current) ||
+        (absolute === 1 &&
+          e.clientY < middleOfContent &&
+          $dragItemIndexRef.current < $dragOverItemIndexRef.current)
+      ) {
+        // 의미없는 이동 시도
+        return;
+      }
+
+      if (
+        e.clientY < middleOfContent &&
+        $dragItemIndexRef.current < $dragOverItemIndexRef.current &&
+        absolute > 1
+      ) {
+        // 위에서 아래로 2칸이상 이동, 컨텐츠 위쪽으로 넣을때
+        const draggedItem = newEmailContents.splice(
+          $dragItemIndexRef.current,
+          1,
+        )[0];
+
+        newEmailContents.splice(
+          $dragOverItemIndexRef.current - 1,
+          0,
+          draggedItem,
+        );
+      } else if (
+        e.clientY > middleOfContent &&
+        $dragItemIndexRef.current > $dragOverItemIndexRef.current &&
+        absolute > 1
+      ) {
+        // 아래에서 위로 2칸이상 이동, 컨텐츠 아래쪽으로 넣을때
+        const draggedItem = newEmailContents.splice(
+          $dragItemIndexRef.current,
+          1,
+        )[0];
+
+        newEmailContents.splice(
+          $dragOverItemIndexRef.current + 1,
+          0,
+          draggedItem,
+        );
+      } else {
+        const draggedItem = newEmailContents.splice(
+          $dragItemIndexRef.current,
+          1,
+        )[0];
+
+        newEmailContents.splice($dragOverItemIndexRef.current, 0, draggedItem);
+      }
+    } else {
+      const newContent = JSON.parse(e.dataTransfer.getData('content'));
+
+      if (e.clientY > middleOfContent) {
+        newEmailContents.splice(index + 1, 0, newContent);
+      } else {
+        newEmailContents.splice(index, 0, newContent);
+      }
+    }
+
+    $dragItemIndexRef.current = null;
+    $dragOverItemIndexRef.current = null;
+    $dragOverItemRef.current.style.boxShadow = 'none';
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleDragOver = e => {
+    e.preventDefault();
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const contentHeight = e.currentTarget.offsetHeight / 2;
+    const middleOfContent = rect.top + contentHeight;
+
+    if (e.clientY > middleOfContent) {
+      $dragOverItemRef.current.style.boxShadow = '0 2px red';
+    } else {
+      $dragOverItemRef.current.style.boxShadow = '0 -2px red';
+    }
+  };
+
+  const handleDragLeave = e => {
+    e.currentTarget.style.boxShadow = 'none';
+    e.target.style.boxShadow = 'none';
+  };
+
+  const handleCopy = (e, index, element) => {
+    const newEmailContents = [...emailContentsData];
+    const newContent = { ...element };
+
+    newContent.id = crypto.randomUUID();
+    newContent.isActive = false;
+
+    newEmailContents.splice(index, 0, newContent);
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleDelete = (e, element) => {
+    const newEmailContents = emailContentsData.filter(
+      item => item.id !== element.id,
+    );
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const contents = emailContentsData.map((emailContentData, index) => {
     return (
-      <ContentWrapper key={emailContentData.id}>
+      <ContentWrapper
+        key={emailContentData.id}
+        id={emailContentData.id}
+        isDraggable={emailContentData.isDraggable}
+        onDragStart={e => handleDragStart(e, index)}
+        onDragEnter={e => handleDragEnter(e, index)}
+        onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
+        onDragLeave={handleDragLeave}
+        onDrop={e => handleDrop(e, index)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onDelete={e => handleDelete(e, emailContentData)}
+      >
         {dataToComponent(emailContentData)}
+        {emailContentData.isActive && (
+          <ContentMovePanel
+            onDraggable={handleDraggable}
+            onCopy={e => handleCopy(e, index, emailContentData)}
+            onDelete={e => handleDelete(e, emailContentData)}
+          />
+        )}
       </ContentWrapper>
     );
   });
