@@ -5,7 +5,6 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import { addProperties, removeProperties } from '../../utils/dragAndDrop';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
-import TextContent from '../../components/emailEditingStep03/TextContent';
 import ContentMovePanel from '../../components/emailEditingStep03/ContentMovePanel';
 import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
 import { dataToComponent } from '../../utils/emailEditing';
