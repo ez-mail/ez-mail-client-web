@@ -7,19 +7,10 @@ import {
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function ContentMovePanel({
-  onDraggable,
-  onUnDraggable,
-  onDelete,
-  onCopy,
-}) {
+export default function ContentMovePanel({ onDraggable, onDelete, onCopy }) {
   return (
     <ControlBox draggable={false}>
-      <StyledIcon
-        icon={faArrowsUpDownLeftRight}
-        onMouseDown={onDraggable}
-        onMouseUp={onUnDraggable}
-      />
+      <StyledIcon icon={faArrowsUpDownLeftRight} onMouseDown={onDraggable} />
       <StyledIcon icon={faClone} onClick={onCopy} />
       <StyledIcon icon={faTrashCan} onClick={onDelete} />
     </ControlBox>

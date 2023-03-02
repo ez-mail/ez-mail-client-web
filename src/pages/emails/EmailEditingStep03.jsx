@@ -141,15 +141,6 @@ export default function EmailEditingStep03() {
       }
       return item;
     });
-
-    setEmailContentsData(newEmailContents);
-  };
-
-  const handleUnDraggable = e => {
-    const newEmailContents = emailContentsData.map(item => {
-      return { ...item, isDraggable: false };
-    });
-
     setEmailContentsData(newEmailContents);
   };
 
@@ -186,17 +177,76 @@ export default function EmailEditingStep03() {
     dragOverItem.current = e.currentTarget;
   };
 
+  const handleDragEnd = e => {
+    const newEmailContents = emailContentsData.map(item => {
+      return { ...item, isDraggable: false };
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
   const handleDrop = (e, index) => {
     const newEmailContents = [...emailContentsData];
+    const rect = e.currentTarget.getBoundingClientRect();
+    const contentHeight = e.currentTarget.offsetHeight / 2;
+    const middleOfContent = rect.top + contentHeight;
+    const absolute = Math.abs(
+      dragItemIndex.current - dragOverItemIndex.current,
+    );
 
     if (e.dataTransfer.effectAllowed === 'move') {
-      const draggedItem = newEmailContents.splice(dragItemIndex.current, 1)[0];
+      if (
+        (absolute === 1 &&
+          e.clientY > middleOfContent &&
+          dragItemIndex.current > dragOverItemIndex.current) ||
+        (absolute === 1 &&
+          e.clientY < middleOfContent &&
+          dragItemIndex.current < dragOverItemIndex.current)
+      ) {
+        // 의미없는 이동 시도
+        return;
+      }
 
-      newEmailContents.splice(dragOverItemIndex.current, 0, draggedItem);
+      if (
+        e.clientY < middleOfContent &&
+        dragItemIndex.current < dragOverItemIndex.current &&
+        absolute > 1
+      ) {
+        // 위에서 아래로 2칸이상 이동, 컨텐츠 위쪽으로 넣을때
+        const draggedItem = newEmailContents.splice(
+          dragItemIndex.current,
+          1,
+        )[0];
+
+        newEmailContents.splice(dragOverItemIndex.current - 1, 0, draggedItem);
+      } else if (
+        e.clientY > middleOfContent &&
+        dragItemIndex.current > dragOverItemIndex.current &&
+        absolute > 1
+      ) {
+        // 아래에서 위로 2칸이상 이동, 컨텐츠 아래쪽으로 넣을때
+        const draggedItem = newEmailContents.splice(
+          dragItemIndex.current,
+          1,
+        )[0];
+
+        newEmailContents.splice(dragOverItemIndex.current + 1, 0, draggedItem);
+      } else {
+        const draggedItem = newEmailContents.splice(
+          dragItemIndex.current,
+          1,
+        )[0];
+
+        newEmailContents.splice(dragOverItemIndex.current, 0, draggedItem);
+      }
     } else {
       const newContent = JSON.parse(e.dataTransfer.getData('content'));
 
-      newEmailContents.splice(index, 0, newContent);
+      if (e.clientY > middleOfContent) {
+        newEmailContents.splice(index + 1, 0, newContent);
+      } else {
+        newEmailContents.splice(index, 0, newContent);
+      }
     }
 
     dragItemIndex.current = null;
@@ -209,18 +259,27 @@ export default function EmailEditingStep03() {
   const handleDragOver = e => {
     e.preventDefault();
 
-    e.currentTarget.style.boxShadow = '0 -2px 0 red';
+    const rect = e.currentTarget.getBoundingClientRect();
+    const contentHeight = e.currentTarget.offsetHeight / 2;
+    const middleOfContent = rect.top + contentHeight;
+
+    if (e.clientY > middleOfContent) {
+      dragOverItem.current.style.boxShadow = '0 2px red';
+    } else {
+      dragOverItem.current.style.boxShadow = '0 -2px red';
+    }
   };
 
   const handleDragLeave = e => {
     e.currentTarget.style.boxShadow = 'none';
+    e.target.style.boxShadow = 'none';
   };
 
   const handleCopy = (e, index, element) => {
     const newEmailContents = [...emailContentsData];
     const newContent = { ...element };
 
-    newContent.id = String(Math.random());
+    newContent.id = crypto.randomUUID();
     newContent.isActive = false;
 
     newEmailContents.splice(index, 0, newContent);
@@ -245,6 +304,7 @@ export default function EmailEditingStep03() {
         onDragStart={e => handleDragStart(e, index)}
         onDragEnter={e => handleDragEnter(e, index)}
         onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
         onDragLeave={handleDragLeave}
         onDrop={e => handleDrop(e, index)}
         onFocus={handleFocus}
@@ -255,7 +315,6 @@ export default function EmailEditingStep03() {
         {emailContentData.isActive && (
           <ContentMovePanel
             onDraggable={handleDraggable}
-            onUnDraggable={handleUnDraggable}
             onCopy={e => handleCopy(e, index, emailContentData)}
             onDelete={e => handleDelete(e, emailContentData)}
           />

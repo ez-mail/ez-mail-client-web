@@ -19,7 +19,7 @@ export default function BoxTool() {
     switch (type) {
       case 'image':
         contentType = {
-          id: String(Math.random()),
+          id: crypto.randomUUID(),
           isActive: false,
           isDraggable: false,
           type: 'image',
@@ -44,7 +44,7 @@ export default function BoxTool() {
         break;
       case 'spacer':
         contentType = {
-          id: String(Math.random()),
+          id: crypto.randomUUID(),
           isActive: false,
           isDraggable: false,
           type: 'spacer',
@@ -59,7 +59,7 @@ export default function BoxTool() {
         break;
       case 'divider':
         contentType = {
-          id: String(Math.random()),
+          id: crypto.randomUUID(),
           isActive: false,
           isDraggable: false,
           type: 'divider',
@@ -83,7 +83,7 @@ export default function BoxTool() {
         break;
       case 'button':
         contentType = {
-          id: String(Math.random()),
+          id: crypto.randomUUID(),
           isActive: false,
           isDraggable: false,
           type: 'button',

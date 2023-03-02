@@ -9,6 +9,7 @@ export default function ContentWrapper({
   onDragEnter,
   onDragOver,
   onDragLeave,
+  onDragEnd,
   onDrop,
   onFocus,
   onBlur,
@@ -22,6 +23,7 @@ export default function ContentWrapper({
       onDragStart={onDragStart}
       onDragEnter={onDragEnter}
       onDragOver={onDragOver}
+      onDragEnd={onDragEnd}
       onDragLeave={onDragLeave}
       onDrop={onDrop}
       onFocus={onFocus}
