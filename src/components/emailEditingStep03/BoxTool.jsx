@@ -16,6 +16,7 @@ import {
 export default function BoxTool() {
   const onDragStart = (e, type) => {
     let contentType = null;
+
     switch (type) {
       case 'image':
         contentType = {
