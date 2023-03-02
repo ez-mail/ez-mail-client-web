@@ -5,25 +5,52 @@ import {
   faArrowsUpDownLeftRight,
   faClone,
   faTrashCan,
-} from '@fortawesome/free-regular-svg-icons';
+} from '@fortawesome/free-solid-svg-icons';
 
-export default function ContentMovePanel() {
+export default function ContentMovePanel({
+  onDraggable,
+  onUnDraggable,
+  onDelete,
+  onCopy,
+}) {
   return (
-    <ControlBox>
-      <FontAwesomeIcon icon={faArrowsUpDownLeftRight} />
-      <FontAwesomeIcon icon={faClone} />
-      <StyledIcon icon={faTrashCan} />
+    <ControlBox draggable={false}>
+      <StyledIcon
+        icon={faArrowsUpDownLeftRight}
+        onMouseDown={onDraggable}
+        onMouseUp={onUnDraggable}
+      />
+      <StyledIcon icon={faClone} onClick={onCopy} />
+      <StyledIcon icon={faTrashCan} onClick={onDelete} />
     </ControlBox>
   );
 }
 
 const ControlBox = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: -60px;
   width: 50px;
-  height: 150px;
-  background-color: white;
+  padding: 5px 10px;
+  background-color: #ffffff;
+  gap: 8px;
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 1.5rem;
-  color: #f44336;
+  font-size: 1.1rem;
+  &:hover {
+    background-color: #f5f5f5;
+  }
+  &:nth-child(1) {
+    cursor: grab;
+  }
+  &:nth-child(2) {
+    cursor: pointer;
+  }
+  &:nth-child(3) {
+    cursor: pointer;
+    color: #f44336;
+  }
 `;

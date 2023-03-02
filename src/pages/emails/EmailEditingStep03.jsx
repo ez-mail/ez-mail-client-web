@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
 import TextContent from '../../components/emailEditingStep03/TextContent';
+import ContentMovePanel from '../../components/emailEditingStep03/ContentMovePanel';
 import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
 import { dataToComponent } from '../../utils/emailEditing';
 import FooterContent from '../../components/emailEditingStep03/FooterContent';
@@ -19,6 +20,8 @@ const emailTemplateData = {
   emailContents: [
     {
       id: 'asdf1',
+      isActive: false,
+      isDraggable: false,
       type: 'spacer',
       boxStyle: {
         backgroundColor: 'green',
@@ -30,6 +33,8 @@ const emailTemplateData = {
     },
     {
       id: 'asdf2',
+      isActive: false,
+      isDraggable: false,
       type: 'divider',
       boxStyle: {
         backgroundColor: 'yellow',
@@ -50,6 +55,8 @@ const emailTemplateData = {
     },
     {
       id: 'asdf3',
+      isActive: false,
+      isDraggable: false,
       type: 'image',
       link: 'https://beta.reactjs.org/',
       imageSrc:
@@ -71,6 +78,8 @@ const emailTemplateData = {
     },
     {
       id: 'asdf4',
+      isActive: false,
+      isDraggable: false,
       type: 'spacer',
       boxStyle: {
         height: '20px',
@@ -82,6 +91,8 @@ const emailTemplateData = {
     },
     {
       id: 'asdf5',
+      isActive: false,
+      isDraggable: false,
       type: 'button',
       link: 'https://beta.reactjs.org/',
       content: '길지 버튼',
@@ -112,10 +123,143 @@ const emailTemplateData = {
 };
 
 export default function EmailEditingStep03() {
-  const contents = emailTemplateData.emailContents.map(emailContentData => {
+  const [emailContentsData, setEmailContentsData] = useState([]);
+  const dragItem = useRef();
+  const dragOverItem = useRef();
+  const dragItemIndex = useRef();
+  const dragOverItemIndex = useRef();
+
+  useEffect(() => {
+    setEmailContentsData(emailTemplateData.emailContents);
+  }, []);
+
+  const handleDraggable = e => {
+    const targetId = e.currentTarget.parentNode.parentNode.id;
+    const newEmailContents = emailContentsData.map(item => {
+      if (item.id === targetId) {
+        return { ...item, isDraggable: true };
+      }
+      return item;
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleUnDraggable = e => {
+    const newEmailContents = emailContentsData.map(item => {
+      return { ...item, isDraggable: false };
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleFocus = e => {
+    const newEmailContents = emailContentsData.map(item => {
+      if (item.id === e.target.id) {
+        return { ...item, isActive: true };
+      }
+      return item;
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleBlur = e => {
+    const newEmailContents = emailContentsData.map(item => {
+      return { ...item, isActive: false };
+    });
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleDragStart = (e, index) => {
+    dragItemIndex.current = index;
+    dragItem.current = e.currentTarget;
+    e.dataTransfer.effectAllowed = 'move';
+    const img = new Image();
+
+    e.dataTransfer.setDragImage(img, 0, 0);
+  };
+
+  const handleDragEnter = (e, index) => {
+    dragOverItemIndex.current = index;
+    dragOverItem.current = e.currentTarget;
+  };
+
+  const handleDrop = (e, index) => {
+    const newEmailContents = [...emailContentsData];
+
+    if (e.dataTransfer.effectAllowed === 'move') {
+      const draggedItem = newEmailContents.splice(dragItemIndex.current, 1)[0];
+
+      newEmailContents.splice(dragOverItemIndex.current, 0, draggedItem);
+    } else {
+      const newContent = JSON.parse(e.dataTransfer.getData('content'));
+
+      newEmailContents.splice(index, 0, newContent);
+    }
+
+    dragItemIndex.current = null;
+    dragOverItemIndex.current = null;
+    dragOverItem.current.style.boxShadow = 'none';
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleDragOver = e => {
+    e.preventDefault();
+
+    e.currentTarget.style.boxShadow = '0 -2px 0 red';
+  };
+
+  const handleDragLeave = e => {
+    e.currentTarget.style.boxShadow = 'none';
+  };
+
+  const handleCopy = (e, index, element) => {
+    const newEmailContents = [...emailContentsData];
+    const newContent = { ...element };
+
+    newContent.id = String(Math.random());
+    newContent.isActive = false;
+
+    newEmailContents.splice(index, 0, newContent);
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const handleDelete = (e, element) => {
+    const newEmailContents = emailContentsData.filter(
+      item => item.id !== element.id,
+    );
+
+    setEmailContentsData(newEmailContents);
+  };
+
+  const contents = emailContentsData.map((emailContentData, index) => {
     return (
-      <ContentWrapper key={emailContentData.id}>
+      <ContentWrapper
+        key={emailContentData.id}
+        id={emailContentData.id}
+        isDraggable={emailContentData.isDraggable}
+        onDragStart={e => handleDragStart(e, index)}
+        onDragEnter={e => handleDragEnter(e, index)}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+        onDrop={e => handleDrop(e, index)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        onDelete={e => handleDelete(e, emailContentData)}
+      >
         {dataToComponent(emailContentData)}
+        {emailContentData.isActive && (
+          <ContentMovePanel
+            onDraggable={handleDraggable}
+            onUnDraggable={handleUnDraggable}
+            onCopy={e => handleCopy(e, index, emailContentData)}
+            onDelete={e => handleDelete(e, emailContentData)}
+          />
+        )}
       </ContentWrapper>
     );
   });
