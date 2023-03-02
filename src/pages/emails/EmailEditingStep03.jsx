@@ -116,10 +116,10 @@ const emailTemplateData = {
 
 export default function EmailEditingStep03() {
   const [emailContentsData, setEmailContentsData] = useState([]);
-  const $dragItem = useRef();
-  const $dragOverItem = useRef();
-  const $dragItemIndex = useRef();
-  const $dragOverItemIndex = useRef();
+  const $dragItemRef = useRef();
+  const $dragOverItemRef = useRef();
+  const $dragItemIndexRef = useRef();
+  const $dragOverItemIndexRef = useRef();
 
   useEffect(() => {
     setEmailContentsData(addProperties(emailTemplateData.emailContents));
@@ -159,8 +159,8 @@ export default function EmailEditingStep03() {
   };
 
   const handleDragStart = (e, index) => {
-    $dragItemIndex.current = index;
-    $dragItem.current = e.currentTarget;
+    $dragItemIndexRef.current = index;
+    $dragItemRef.current = e.currentTarget;
     e.dataTransfer.effectAllowed = 'move';
     const img = new Image();
 
@@ -168,8 +168,8 @@ export default function EmailEditingStep03() {
   };
 
   const handleDragEnter = (e, index) => {
-    $dragOverItemIndex.current = index;
-    $dragOverItem.current = e.currentTarget;
+    $dragOverItemIndexRef.current = index;
+    $dragOverItemRef.current = e.currentTarget;
   };
 
   const handleDragEnd = e => {
@@ -186,17 +186,17 @@ export default function EmailEditingStep03() {
     const contentHeight = e.currentTarget.offsetHeight / 2;
     const middleOfContent = rect.top + contentHeight;
     const absolute = Math.abs(
-      $dragItemIndex.current - $dragOverItemIndex.current,
+      $dragItemIndexRef.current - $dragOverItemIndexRef.current,
     );
 
     if (e.dataTransfer.effectAllowed === 'move') {
       if (
         (absolute === 1 &&
           e.clientY > middleOfContent &&
-          $dragItemIndex.current > $dragOverItemIndex.current) ||
+          $dragItemIndexRef.current > $dragOverItemIndexRef.current) ||
         (absolute === 1 &&
           e.clientY < middleOfContent &&
-          $dragItemIndex.current < $dragOverItemIndex.current)
+          $dragItemIndexRef.current < $dragOverItemIndexRef.current)
       ) {
         // 의미없는 이동 시도
         return;
@@ -204,35 +204,43 @@ export default function EmailEditingStep03() {
 
       if (
         e.clientY < middleOfContent &&
-        $dragItemIndex.current < $dragOverItemIndex.current &&
+        $dragItemIndexRef.current < $dragOverItemIndexRef.current &&
         absolute > 1
       ) {
         // 위에서 아래로 2칸이상 이동, 컨텐츠 위쪽으로 넣을때
         const draggedItem = newEmailContents.splice(
-          $dragItemIndex.current,
+          $dragItemIndexRef.current,
           1,
         )[0];
 
-        newEmailContents.splice($dragOverItemIndex.current - 1, 0, draggedItem);
+        newEmailContents.splice(
+          $dragOverItemIndexRef.current - 1,
+          0,
+          draggedItem,
+        );
       } else if (
         e.clientY > middleOfContent &&
-        $dragItemIndex.current > $dragOverItemIndex.current &&
+        $dragItemIndexRef.current > $dragOverItemIndexRef.current &&
         absolute > 1
       ) {
         // 아래에서 위로 2칸이상 이동, 컨텐츠 아래쪽으로 넣을때
         const draggedItem = newEmailContents.splice(
-          $dragItemIndex.current,
+          $dragItemIndexRef.current,
           1,
         )[0];
 
-        newEmailContents.splice($dragOverItemIndex.current + 1, 0, draggedItem);
+        newEmailContents.splice(
+          $dragOverItemIndexRef.current + 1,
+          0,
+          draggedItem,
+        );
       } else {
         const draggedItem = newEmailContents.splice(
-          $dragItemIndex.current,
+          $dragItemIndexRef.current,
           1,
         )[0];
 
-        newEmailContents.splice($dragOverItemIndex.current, 0, draggedItem);
+        newEmailContents.splice($dragOverItemIndexRef.current, 0, draggedItem);
       }
     } else {
       const newContent = JSON.parse(e.dataTransfer.getData('content'));
@@ -244,9 +252,9 @@ export default function EmailEditingStep03() {
       }
     }
 
-    $dragItemIndex.current = null;
-    $dragOverItemIndex.current = null;
-    $dragOverItem.current.style.boxShadow = 'none';
+    $dragItemIndexRef.current = null;
+    $dragOverItemIndexRef.current = null;
+    $dragOverItemRef.current.style.boxShadow = 'none';
 
     setEmailContentsData(newEmailContents);
   };
@@ -259,9 +267,9 @@ export default function EmailEditingStep03() {
     const middleOfContent = rect.top + contentHeight;
 
     if (e.clientY > middleOfContent) {
-      $dragOverItem.current.style.boxShadow = '0 2px red';
+      $dragOverItemRef.current.style.boxShadow = '0 2px red';
     } else {
-      $dragOverItem.current.style.boxShadow = '0 -2px red';
+      $dragOverItemRef.current.style.boxShadow = '0 -2px red';
     }
   };
 
