@@ -84,6 +84,23 @@ const emailTemplateData = {
       },
     },
     {
+      id: 'text123',
+      type: 'text',
+      content: '뿡빵뿡빵',
+      boxStyle: {
+        paddingTop: '15px',
+        paddingBottom: '15px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
+        textAlign: 'center',
+      },
+      contentStyle: {
+        fontSize: '24px',
+        fontFamily:
+          'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
+      },
+    },
+    {
       id: 'asdf5',
       type: 'button',
       link: 'https://beta.reactjs.org/',

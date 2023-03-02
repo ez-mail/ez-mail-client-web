@@ -1,36 +1,32 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import ContentEditable from './ContentEditable';
 
-export default function TextContent() {
-  const [inputText, setInputText] = useState('안녕하세요');
+export default function TextContent({ boxStyle, contentStyle, content }) {
+  const [contentHTML, setContentHTML] = useState(content);
+  const [isContentEditable, setIsContentEditable] = useState(true);
+  const $editorRef = useRef();
 
-  const handleTextareaChange = e => {
-    setInputText(e.target.value);
-    console.log(e.target.value);
+  const handleContentChange = e => {
+    setContentHTML(e.target.value);
   };
 
   return (
-    <Div
-      value={inputText}
-      onChange={handleTextareaChange}
-      contentEditable
-      style={{
-        width: '100%',
-        paddingTop: '15px',
-        paddingBottom: `15px`,
-        paddingLeft: `15px`,
-        paddingRight: `15px`,
-      }}
-    />
+    <Box style={boxStyle}>
+      <ContentEditable
+        contentHTML={contentHTML}
+        isContentEditable={isContentEditable}
+        innerRef={$editorRef}
+        onChange={handleContentChange}
+        style={contentStyle}
+        tagName="div"
+      />
+    </Box>
   );
 }
 
-const Div = styled.div`
-  &:hover {
-    outline: 2px solid #ffdf2b;
-  }
-
-  &:focus {
-    outline: 2px solid #ffdf2b;
+const Box = styled.div`
+  & > div:focus {
+    outline: none;
   }
 `;

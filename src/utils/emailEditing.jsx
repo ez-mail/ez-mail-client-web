@@ -3,6 +3,7 @@ import ButtonContent from '../components/emailEditingStep03/ButtonContent';
 import DividerContent from '../components/emailEditingStep03/DividerContent';
 import ImageContent from '../components/emailEditingStep03/ImageContent';
 import SpacerContent from '../components/emailEditingStep03/SpacerContent';
+import TextContent from '../components/emailEditingStep03/TextContent';
 
 export function dataToComponent(data) {
   switch (data.type) {
@@ -30,6 +31,14 @@ export function dataToComponent(data) {
           boxStyle={data.boxStyle}
           contentStyle={data.contentStyle}
           link={data.link}
+          content={data.content}
+        />
+      );
+    case 'text':
+      return (
+        <TextContent
+          boxStyle={data.boxStyle}
+          contentStyle={data.contentStyle}
           content={data.content}
         />
       );
