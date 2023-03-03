@@ -327,6 +327,10 @@ export default function EmailEditingStep03() {
   };
 
   const handleDelete = (e, element) => {
+    if (emailContentsData.length <= 1) {
+      return alert('마지막 요소는 삭제 할 수 없습니다.');
+    }
+
     const newEmailContents = emailContentsData.filter(
       item => item.id !== element.id,
     );
