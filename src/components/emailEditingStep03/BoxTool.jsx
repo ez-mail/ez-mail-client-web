@@ -114,6 +114,27 @@ export default function BoxTool() {
           },
         };
         break;
+      case 'text':
+        contentType = {
+          id: crypto.randomUUID(),
+          isActive: false,
+          isDraggable: false,
+          type: 'text',
+          content: '뿡빵뿡빵',
+          boxStyle: {
+            paddingTop: '15px',
+            paddingBottom: '15px',
+            paddingLeft: '0px',
+            paddingRight: '0px',
+            textAlign: 'center',
+          },
+          contentStyle: {
+            fontSize: '24px',
+            fontFamily:
+              'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
+          },
+        };
+        break;
       default:
         console.log('해당타입이 없습니다.');
     }
