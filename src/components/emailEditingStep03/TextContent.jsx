@@ -1,14 +1,23 @@
+import DOMPurify from 'dompurify';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import ContentEditable from './ContentEditable';
 
 export default function TextContent({ boxStyle, contentStyle, content }) {
   const [contentHTML, setContentHTML] = useState(content);
-  const [isContentEditable, setIsContentEditable] = useState(true);
+  const [isContentEditable, setIsContentEditable] = useState(false);
   const $editorRef = useRef();
 
   const handleContentChange = e => {
-    setContentHTML(e.target.value);
+    setContentHTML(DOMPurify.sanitize(e.target.value));
+  };
+
+  const handleEditorBlur = () => {
+    setIsContentEditable(false);
+  };
+
+  const handleEditorClick = () => {
+    setIsContentEditable(true);
   };
 
   return (
@@ -20,13 +29,19 @@ export default function TextContent({ boxStyle, contentStyle, content }) {
         onChange={handleContentChange}
         style={contentStyle}
         tagName="div"
+        onBlur={handleEditorBlur}
+        onClick={handleEditorClick}
       />
     </Box>
   );
 }
 
 const Box = styled.div`
+  & > div:hover {
+    outline: dashed black;
+  }
+
   & > div:focus {
-    outline: none;
+    outline: dashed black;
   }
 `;

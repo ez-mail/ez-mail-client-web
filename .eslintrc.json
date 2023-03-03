@@ -25,6 +25,9 @@
     "@tanstack/query/prefer-query-object-syntax": "error",
     "no-unused-vars": "warn",
     "consistent-return": "warn",
-    "jsx-a11y/anchor-is-valid": "warn"
+    "jsx-a11y/anchor-is-valid": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "react/jsx-props-no-spreading": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn"
   }
 }

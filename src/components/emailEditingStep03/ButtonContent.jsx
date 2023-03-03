@@ -1,5 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import DOMPurify from 'dompurify';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import ContentEditable from './ContentEditable';
 
 export default function ButtonContent({
   boxStyle,
@@ -7,11 +10,12 @@ export default function ButtonContent({
   content = '버튼 이름',
   link = '#',
 }) {
-  const buttonEditor = useRef();
-  const [currentContent, setCurrentContent] = useState(content);
+  const [isContentEditable, setIsContentEditable] = useState(false);
+  const [contentHTML, setContentHTML] = useState(content);
+  const $editorRef = useRef();
 
-  const handleInputChange = e => {
-    setCurrentContent(e.target.textContent);
+  const handleContentChange = e => {
+    setContentHTML(DOMPurify.sanitize(e.target.value));
   };
 
   const handleKeyDown = e => {
@@ -20,29 +24,38 @@ export default function ButtonContent({
     }
   };
 
-  useEffect(() => {
-    buttonEditor.current.textContent = currentContent;
-  }, [currentContent]);
+  const handleEditorClick = () => {
+    setIsContentEditable(true);
+  };
+
+  const handleEditorBlur = () => {
+    setIsContentEditable(false);
+  };
 
   return (
-    <div style={boxStyle}>
-      <Button
-        href={link}
-        ref={buttonEditor}
+    <Box style={boxStyle}>
+      <ContentEditable
+        contentHTML={contentHTML}
+        isContentEditable={isContentEditable}
+        innerRef={$editorRef}
+        onChange={handleContentChange}
         style={contentStyle}
-        onInput={handleInputChange}
         onKeyDown={handleKeyDown}
-        contentEditable
+        tagName="a"
+        link={link}
+        onBlur={handleEditorBlur}
+        onClick={handleEditorClick}
       />
-    </div>
+    </Box>
   );
 }
 
-const Button = styled.a`
-  display: inline-block;
-  padding: 16px 18px;
+const Box = styled.div`
+  & > a:hover {
+    outline: dashed black;
+  }
 
-  &:focus {
-    outline: none;
+  & > a:focus {
+    outline: dashed black;
   }
 `;
