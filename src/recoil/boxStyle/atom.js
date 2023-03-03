@@ -6,7 +6,7 @@ const boxStyleAtom = atom({
     backgroundColor: '#ffffff',
     borderWidth: '0px',
     borderColor: '#000000',
-    paddingTop: '15px',
+    paddingTopBottom: '15px',
     paddingLeftRight: '15px',
   },
 });

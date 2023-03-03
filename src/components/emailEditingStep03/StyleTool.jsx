@@ -10,7 +10,7 @@ import { useRecoilState } from 'recoil';
 
 import emailStyleAtom from '../../recoil/emailStyle/atom';
 import buttonStyleAtom from '../../recoil/buttonStyle/atom';
-import fontStyleAtom from '../../recoil/fontStyle/atom';
+import textStyleAtom from '../../recoil/textStyle/atom';
 import linkStyleAtom from '../../recoil/linkStyle/atom';
 import boxStyleAtom from '../../recoil/boxStyle/atom';
 import dividerStyleAtom from '../../recoil/dividerStyle/atom';
@@ -18,7 +18,7 @@ import dividerStyleAtom from '../../recoil/dividerStyle/atom';
 export default function StyleTool() {
   const [emailStyle, setEmailStyle] = useRecoilState(emailStyleAtom);
   const [dividerStyle, setDividerStyle] = useRecoilState(dividerStyleAtom);
-  const [fontStyle, setFontStyle] = useRecoilState(fontStyleAtom);
+  const [textStyle, setTextStyle] = useRecoilState(textStyleAtom);
   const [linkStyle, setLinkStyle] = useRecoilState(linkStyleAtom);
   const [buttonStyle, setButtonStyle] = useRecoilState(buttonStyleAtom);
   const [boxStyle, setBoxStyle] = useRecoilState(boxStyleAtom);
@@ -44,13 +44,13 @@ export default function StyleTool() {
     setDividerStyle(newDividerStyle);
   };
 
-  const handleFontStyleChange = e => {
-    const newFontStyle = {
-      ...fontStyle,
+  const handleTextStyleChange = e => {
+    const newTextStyle = {
+      ...textStyle,
       [e.target.name]: e.target.value,
     };
 
-    setFontStyle(newFontStyle);
+    setTextStyle(newTextStyle);
   };
 
   const handleLinkStyleColorChange = e => {
@@ -196,8 +196,8 @@ export default function StyleTool() {
           <StyleRowText>폰트</StyleRowText>
           <SelectBox
             name="fontFamily"
-            value={fontStyle.fontFamily}
-            onChange={e => handleFontStyleChange(e)}
+            value={textStyle.fontFamily}
+            onChange={e => handleTextStyleChange(e)}
           >
             <option value="나눔고딕">나눔고딕</option>
             <option value="나눔명조">나눔명조</option>
@@ -207,8 +207,8 @@ export default function StyleTool() {
           <StyleRowText>크기</StyleRowText>
           <SelectBox
             name="fontSize"
-            value={fontStyle.fontSize}
-            onChange={e => handleFontStyleChange(e)}
+            value={textStyle.fontSize}
+            onChange={e => handleTextStyleChange(e)}
           >
             <option value="12px">12px</option>
             <option value="14px">14px</option>
@@ -223,16 +223,16 @@ export default function StyleTool() {
           <ColorPicker
             type="color"
             name="color"
-            value={fontStyle.color}
-            onChange={e => handleFontStyleChange(e)}
+            value={textStyle.color}
+            onChange={e => handleTextStyleChange(e)}
           />
         </StyleRow>
         <StyleRow>
           <StyleRowText>정렬</StyleRowText>
           <SelectBox
             name="textAlign"
-            value={fontStyle.textAlign}
-            onChange={e => handleFontStyleChange(e)}
+            value={textStyle.textAlign}
+            onChange={e => handleTextStyleChange(e)}
           >
             <option value="left">왼쪽</option>
             <option value="center">가운데</option>

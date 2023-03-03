@@ -178,7 +178,6 @@ export default function EmailEditingStep03() {
       return { ...item, isActive: false };
     });
 
-    setFocusedType(null);
     setEmailContentsData(newEmailContents);
   };
 
@@ -360,7 +359,14 @@ export default function EmailEditingStep03() {
         <Step>콘텐츠</Step>
       </SubNav>
       <Background>
-        {focusedType ? <ContentStyleTool type={focusedType} /> : <LeftNav />}
+        {focusedType ? (
+          <ContentStyleTool
+            type={focusedType}
+            setFocusedType={setFocusedType}
+          />
+        ) : (
+          <LeftNav />
+        )}
         <EmailBackground style={emailTemplateData.emailBodyStyle}>
           <EmailContentsList style={emailTemplateData.emailContainerStyle}>
             {contents}
