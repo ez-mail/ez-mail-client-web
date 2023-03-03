@@ -19,6 +19,19 @@ const emailTemplateData = {
     borderColor: 'black',
     borderStyle: 'solid',
   },
+  emailFooter: {
+    companyOrUserName: '바닐라코딩',
+    contact: '010-1234-5678',
+    address: '서울시 강남구 태해란로 어쩌구 저쩌구',
+    boxStyle: {
+      paddingTop: '25px',
+      paddingBottom: '25px',
+      textAlign: 'center',
+      fontSize: '12px',
+      color: '#757575',
+      lineHeight: '24px',
+    },
+  },
   emailContents: [
     {
       id: 'asdf1',
@@ -132,10 +145,20 @@ const emailTemplateData = {
       },
     },
   ],
+};
+
+const serverDefault = {
+  emailBodyStyle: { backgroundColor: '#f5f5f5' },
+  emailContainerStyle: {
+    backgroundColor: 'white',
+    borderWidth: '0px',
+    borderColor: 'black',
+    borderStyle: 'solid',
+  },
   emailFooter: {
-    companyOrUserName: '바닐라코딩',
-    contact: '010-1234-5678',
-    address: '서울시 강남구 태해란로 어쩌구 저쩌구',
+    companyOrUserName: '발신자 설정페이지에서 회사이름을 설정해주세요',
+    contact: '발신자 설정페이지에서 연락처를 설정해주세요',
+    address: '발신자 설정페이지에서 주소를 설정해주세요',
     boxStyle: {
       paddingTop: '25px',
       paddingBottom: '25px',
@@ -146,6 +169,10 @@ const emailTemplateData = {
     },
   },
 };
+
+const stringee = JSON.stringify(serverDefault);
+
+console.log('stringee', stringee);
 
 export default function EmailEditingStep03() {
   const [emailContentsData, setEmailContentsData] = useState([]);
