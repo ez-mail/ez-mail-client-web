@@ -49,7 +49,7 @@ export default function ImageContent({
             rel="noreferrer"
             onClick={handleImageClick}
           >
-            <Img src={imgSrc} alt="이미지" style={contentStyle} />
+            <img src={imgSrc} alt="이미지" style={contentStyle} />
           </a>
           <PhotoInput
             ref={inputRef}
@@ -101,8 +101,4 @@ const AddPhotoText = styled.div`
 
 const PhotoInput = styled.input`
   display: none;
-`;
-
-const Img = styled.img`
-  max-width: 600px;
 `;

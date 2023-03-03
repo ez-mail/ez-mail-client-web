@@ -11,7 +11,7 @@ import { dataToComponent } from '../../utils/emailEditing';
 import FooterContent from '../../components/emailEditingStep03/FooterContent';
 
 const emailTemplateData = {
-  emailBodyStyle: { backgroundColor: 'gray' },
+  emailBodyStyle: { backgroundColor: '#f5f5f5' },
   emailContainerStyle: {
     backgroundColor: 'white',
     borderWidth: '0px',
@@ -63,12 +63,13 @@ const emailTemplateData = {
         borderStyle: 'solid',
         paddingTop: '15px',
         paddingBottom: '15px',
-        paddingLeft: '5px',
-        paddingRight: '5px',
+        paddingLeft: '0px',
+        paddingRight: '0px',
         textAlign: 'center',
       },
       contentStyle: {
-        width: '400px',
+        maxWidth: '100%',
+        width: '',
       },
     },
     {
@@ -123,7 +124,7 @@ const emailTemplateData = {
         borderStyle: 'solid',
         borderRadius: '3px',
         padding: '16px 18px',
-        color: 'white',
+        color: '#000000',
         fontSize: '16px',
         fontFamily:
           'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
@@ -285,9 +286,9 @@ export default function EmailEditingStep03() {
     const middleOfContent = rect.top + contentHeight;
 
     if (e.clientY > middleOfContent) {
-      $dragOverItemRef.current.style.boxShadow = '0 2px red';
+      $dragOverItemRef.current.style.boxShadow = '0 2px orange';
     } else {
-      $dragOverItemRef.current.style.boxShadow = '0 -2px red';
+      $dragOverItemRef.current.style.boxShadow = '0 -2px orange';
     }
   };
 
