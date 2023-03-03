@@ -42,6 +42,7 @@ const emailTemplateData = {
         borderColor: 'black',
         borderStyle: 'solid',
         height: '50px',
+        zIndex: 1,
       },
     },
     {
@@ -56,6 +57,7 @@ const emailTemplateData = {
         paddingBottom: '15px',
         paddingLeft: '10px',
         paddingRight: '10px',
+        zIndex: 1,
       },
       contentStyle: {
         height: '1px',
@@ -80,6 +82,7 @@ const emailTemplateData = {
         paddingLeft: '0px',
         paddingRight: '0px',
         textAlign: 'center',
+        zIndex: 1,
       },
       contentStyle: {
         maxWidth: '100%',
@@ -95,6 +98,7 @@ const emailTemplateData = {
         borderWidth: '0px',
         borderColor: 'black',
         borderStyle: 'solid',
+        zIndex: 1,
       },
     },
     {
@@ -107,6 +111,7 @@ const emailTemplateData = {
         paddingLeft: '0px',
         paddingRight: '0px',
         textAlign: 'center',
+        zIndex: 1,
       },
       contentStyle: {
         fontSize: '24px',
@@ -129,6 +134,7 @@ const emailTemplateData = {
         paddingLeft: '15px',
         paddingRight: '15px',
         textAlign: 'center',
+        zIndex: 1,
       },
       contentStyle: {
         display: 'inline-block',
@@ -301,6 +307,7 @@ export default function EmailEditingStep03() {
     const rect = e.currentTarget.getBoundingClientRect();
     const contentHeight = e.currentTarget.offsetHeight / 2;
     const middleOfContent = rect.top + contentHeight;
+    $dragOverItemRef.current.style.zIndex = 10;
 
     if (e.clientY > middleOfContent) {
       $dragOverItemRef.current.style.boxShadow = '0 2px orange';
@@ -311,7 +318,7 @@ export default function EmailEditingStep03() {
 
   const handleDragLeave = e => {
     e.currentTarget.style.boxShadow = 'none';
-    e.target.style.boxShadow = 'none';
+    e.currentTarget.style.zIndex = 1;
   };
 
   const handleCopy = (e, index, element) => {
