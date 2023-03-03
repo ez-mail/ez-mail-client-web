@@ -61,7 +61,8 @@ const ContentHeader = styled.div`
 const CloseButton = styled.button`
   padding: 10px 14px;
   border-radius: 5px;
-  background-color: #bdbdbd;
+  background-color: #dfe0e4;
+  font-size: 0.875rem;
   align-self: flex-end;
 `;
 
@@ -82,7 +83,7 @@ const StyleBoxContainer = styled.div`
 `;
 
 const BoxHeading = styled.h3`
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 `;
 
 const Divider = styled.div`

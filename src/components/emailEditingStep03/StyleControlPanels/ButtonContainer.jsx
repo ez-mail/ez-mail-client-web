@@ -7,6 +7,15 @@ import buttonStyleAtom from '../../../recoil/buttonStyle/atom';
 export default function ButtonContainer() {
   const [buttonStyle, setButtonStyle] = useRecoilState(buttonStyleAtom);
 
+  const handleButtonDataChange = e => {
+    const newContentStyle = {
+      ...buttonStyle,
+      [e.target.name]: e.target.value === '' ? '#' : e.target.value,
+    };
+
+    setButtonStyle(newContentStyle);
+  };
+
   const handleContentStyleChange = e => {
     const newContentStyle = {
       ...buttonStyle,
@@ -32,6 +41,15 @@ export default function ButtonContainer() {
   return (
     <>
       <StyleBox>
+        <StyleRow>
+          <StyleRowText>링크</StyleRowText>
+          <LinkInput
+            name="link"
+            value={buttonStyle.link === '#' ? '' : buttonStyle.link}
+            onChange={e => handleButtonDataChange(e)}
+            placeholder="http://example.com"
+          />
+        </StyleRow>
         <StyleRow>
           <StyleRowText>모양</StyleRowText>
           <SelectBox
@@ -261,4 +279,8 @@ const StyleRowText = styled.div`
 const BoxHeading = styled.h3`
   margin: 15px 0 5px 0;
   font-size: 1.1rem;
+`;
+
+const LinkInput = styled.input`
+  width: 70%;
 `;

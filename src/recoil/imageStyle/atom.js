@@ -3,6 +3,8 @@ import { atom } from 'recoil';
 const imageStyleAtom = atom({
   key: 'imageStyle',
   default: {
+    link: '#',
+    imageSrc: '',
     boxStyle: {
       backgroundColor: '#FFFFFF',
       borderWidth: '0px',

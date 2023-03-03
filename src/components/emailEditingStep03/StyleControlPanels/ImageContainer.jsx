@@ -7,6 +7,15 @@ import imageStyleAtom from '../../../recoil/imageStyle/atom';
 export default function ImageContainer() {
   const [imageStyle, setImageStyle] = useRecoilState(imageStyleAtom);
 
+  const handleImageDataChange = e => {
+    const newContentStyle = {
+      ...imageStyle,
+      [e.target.name]: e.target.value === '' ? '#' : e.target.value,
+    };
+
+    setImageStyle(newContentStyle);
+  };
+
   const handleContentStyleChange = e => {
     const newContentStyle = {
       ...imageStyle,
@@ -32,6 +41,15 @@ export default function ImageContainer() {
   return (
     <>
       <StyleBox>
+        <StyleRow>
+          <StyleRowText>링크</StyleRowText>
+          <LinkInput
+            name="link"
+            value={imageStyle.link === '#' ? '' : imageStyle.link}
+            onChange={e => handleImageDataChange(e)}
+            placeholder="http://example.com"
+          />
+        </StyleRow>
         <StyleRow>
           <StyleRowText>크기</StyleRowText>
           <SelectBox
@@ -203,4 +221,8 @@ const StyleRowText = styled.div`
 const BoxHeading = styled.h3`
   margin: 15px 0 5px 0;
   font-size: 1.1rem;
+`;
+
+const LinkInput = styled.input`
+  width: 70%;
 `;

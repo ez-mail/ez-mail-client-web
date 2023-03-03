@@ -3,6 +3,7 @@ import { atom } from 'recoil';
 const textStyleAtom = atom({
   key: 'textStyle',
   default: {
+    content: '여기에 내용을 입력하세요.',
     boxStyle: {
       backgroundColor: '#FFFFFF',
       borderWidth: '0px',

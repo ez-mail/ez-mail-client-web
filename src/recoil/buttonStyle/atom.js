@@ -3,6 +3,8 @@ import { atom } from 'recoil';
 const buttonStyleAtom = atom({
   key: 'buttonStyle',
   default: {
+    link: '#',
+    content: '버튼 이름',
     boxStyle: {
       backgroundColor: '#FFFFFF',
       borderWidth: '0px',
