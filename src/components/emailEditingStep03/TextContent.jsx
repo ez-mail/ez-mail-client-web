@@ -1,6 +1,7 @@
 import DOMPurify from 'dompurify';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+
 import ContentEditable from './ContentEditable';
 
 export default function TextContent({ boxStyle, contentStyle, content }) {
