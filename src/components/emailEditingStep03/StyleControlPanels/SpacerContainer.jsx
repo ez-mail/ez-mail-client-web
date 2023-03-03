@@ -14,7 +14,7 @@ export default function SpacerContainer() {
         [e.target.name]: e.target.value,
       },
     };
-    console.log(newBoxStyle);
+
     setSpacerStyle(newBoxStyle);
   };
 
