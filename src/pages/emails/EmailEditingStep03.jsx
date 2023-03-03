@@ -87,7 +87,7 @@ const emailTemplateData = {
     {
       id: 'text123',
       type: 'text',
-      content: '뿡빵뿡빵',
+      content: '뿡빵뿡빵 <div style="font-size: 18px">키득</div>',
       boxStyle: {
         paddingTop: '15px',
         paddingBottom: '15px',
@@ -132,6 +132,19 @@ const emailTemplateData = {
       },
     },
   ],
+  emailFooter: {
+    companyOrUserName: '바닐라코딩',
+    contact: '010-1234-5678',
+    address: '서울시 강남구 태해란로 어쩌구 저쩌구',
+    boxStyle: {
+      paddingTop: '25px',
+      paddingBottom: '25px',
+      textAlign: 'center',
+      fontSize: '12px',
+      color: '#757575',
+      lineHeight: '24px',
+    },
+  },
 };
 
 export default function EmailEditingStep03() {
@@ -370,14 +383,16 @@ export default function EmailEditingStep03() {
         <EmailBackground style={emailTemplateData.emailBodyStyle}>
           <EmailContentsList style={emailTemplateData.emailContainerStyle}>
             {contents}
-            <FooterContent />
+            <FooterContent
+              style={emailTemplateData.emailFooter.boxStyle}
+              companyOrUserName={
+                emailTemplateData.emailFooter.companyOrUserName
+              }
+              address={emailTemplateData.emailFooter.address}
+              contact={emailTemplateData.emailFooter.contact}
+            />
           </EmailContentsList>
         </EmailBackground>
-        {/* <EmailBodyTable>
-          <SpaceContent />
-          {dataToComponent(data[0])}
-          <SpaceContent />
-        </EmailBodyTable> */}
       </Background>
     </>
   );
