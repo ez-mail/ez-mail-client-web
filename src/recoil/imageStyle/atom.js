@@ -1,8 +1,10 @@
 import { atom } from 'recoil';
 
-const dividerStyleAtom = atom({
-  key: 'dividerStyle',
+const imageStyleAtom = atom({
+  key: 'imageStyle',
   default: {
+    link: '#',
+    imageSrc: '',
     boxStyle: {
       backgroundColor: '#FFFFFF',
       borderWidth: '0px',
@@ -10,16 +12,15 @@ const dividerStyleAtom = atom({
       borderStyle: 'solid',
       paddingTop: '15px',
       paddingBottom: '15px',
-      paddingLeft: '0px',
-      paddingRight: '0px',
+      paddingLeft: '15px',
+      paddingRight: '15px',
+      textAlign: 'center',
     },
     contentStyle: {
-      height: '1px',
-      borderTopWidth: '2px',
-      borderTopStyle: 'solid',
-      borderTopColor: '#000000',
+      maxWidth: '100%',
+      width: '',
     },
   },
 });
 
-export default dividerStyleAtom;
+export default imageStyleAtom;

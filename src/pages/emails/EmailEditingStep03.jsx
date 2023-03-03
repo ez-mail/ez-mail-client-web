@@ -9,6 +9,7 @@ import ContentMovePanel from '../../components/emailEditingStep03/ContentMovePan
 import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
 import { dataToComponent } from '../../utils/emailEditing';
 import FooterContent from '../../components/emailEditingStep03/FooterContent';
+import ContentStyleTool from '../../components/emailEditingStep03/ContentStyleTool';
 
 const emailTemplateData = {
   emailBodyStyle: { backgroundColor: '#f5f5f5' },
@@ -139,6 +140,7 @@ export default function EmailEditingStep03() {
   const $dragOverItemRef = useRef();
   const $dragItemIndexRef = useRef();
   const $dragOverItemIndexRef = useRef();
+  const [focusedType, setFocusedType] = useState(null);
 
   useEffect(() => {
     setEmailContentsData(addProperties(emailTemplateData.emailContents));
@@ -160,6 +162,8 @@ export default function EmailEditingStep03() {
   const handleFocus = e => {
     const newEmailContents = emailContentsData.map(item => {
       if (item.id === e.target.id) {
+        setFocusedType(item.type);
+
         return { ...item, isActive: true };
       }
 
@@ -355,7 +359,14 @@ export default function EmailEditingStep03() {
         <Step>콘텐츠</Step>
       </SubNav>
       <Background>
-        <LeftNav />
+        {focusedType ? (
+          <ContentStyleTool
+            type={focusedType}
+            setFocusedType={setFocusedType}
+          />
+        ) : (
+          <LeftNav />
+        )}
         <EmailBackground style={emailTemplateData.emailBodyStyle}>
           <EmailContentsList style={emailTemplateData.emailContainerStyle}>
             {contents}
