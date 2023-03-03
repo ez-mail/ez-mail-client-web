@@ -7,8 +7,8 @@ import ContentEditable from './ContentEditable';
 export default function ButtonContent({
   boxStyle,
   contentStyle,
-  content = '버튼 이름',
-  link = '#',
+  content,
+  link,
 }) {
   const [isContentEditable, setIsContentEditable] = useState(false);
   const [contentHTML, setContentHTML] = useState(content);
