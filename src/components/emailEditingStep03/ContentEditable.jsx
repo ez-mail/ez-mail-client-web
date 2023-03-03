@@ -1,4 +1,6 @@
 import React, { memo, useEffect, useRef } from 'react';
+import deepEqual from 'fast-deep-equal';
+
 import { moveCaretToEnd, normalizeHtml } from '../../utils/contentEditable';
 
 const ContentEditable = memo(
@@ -11,6 +13,8 @@ const ContentEditable = memo(
     onBlur,
     onKeyDown,
     style,
+    link,
+    onClick,
   }) {
     const ContentEditableTag = `${tagName}`;
     const $editorRef = useRef();
@@ -64,6 +68,8 @@ const ContentEditable = memo(
         onBlur={onBlur}
         onKeyDown={onKeyDown}
         style={style}
+        href={link}
+        onClick={onClick}
       />
     );
   },
@@ -75,7 +81,10 @@ const ContentEditable = memo(
       return false;
     }
 
-    return true;
+    return (
+      prevProps.isContentEditable === nextProps.isContentEditable &&
+      deepEqual(prevProps.style, nextProps.style)
+    );
   },
 );
 

@@ -116,11 +116,13 @@ const emailTemplateData = {
         textAlign: 'center',
       },
       contentStyle: {
+        display: 'inline-block',
         backgroundColor: '#ffdf2b',
         borderWidth: '0px',
         borderColor: 'black',
         borderStyle: 'solid',
         borderRadius: '3px',
+        padding: '16px 18px',
         color: 'white',
         fontSize: '16px',
         fontFamily:
