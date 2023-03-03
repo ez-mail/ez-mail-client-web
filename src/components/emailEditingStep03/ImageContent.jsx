@@ -31,12 +31,33 @@ export default function ImageContent({
     e.preventDefault();
   };
 
+  const handleImageClick = e => {
+    e.preventDefault();
+  };
+
   return (
     <div style={boxStyle}>
       {imgSrc ? (
-        <a href={link} target="_blank" rel="noreferrer">
-          <Img src={imgSrc} alt="이미지" style={contentStyle} />
-        </a>
+        <div
+          onClick={handleAddPhotoClick}
+          onDrop={handleImgDrop}
+          onDragOver={handleDragOver}
+        >
+          <a
+            href={link}
+            target="_blank"
+            rel="noreferrer"
+            onClick={handleImageClick}
+          >
+            <Img src={imgSrc} alt="이미지" style={contentStyle} />
+          </a>
+          <PhotoInput
+            ref={inputRef}
+            type="file"
+            onChange={handleInputChange}
+            accept=".png, .jpg, .jpeg"
+          />
+        </div>
       ) : (
         <PhotoDropBox
           onClick={handleAddPhotoClick}
