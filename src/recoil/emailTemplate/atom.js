@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 
-const emailTemplateAtom = atom({
-  key: 'emailTemplate',
+const emailTemplateDataAtom = atom({
+  key: 'emailTemplateData',
   default: {
     emailBodyStyle: '',
     emailContainerStyle: '',
@@ -10,4 +10,4 @@ const emailTemplateAtom = atom({
   },
 });
 
-export default emailTemplateAtom;
+export default emailTemplateDataAtom;

@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
 import produce from 'immer';
 
-import emailTemplateAtom from '../../../recoil/emailTemplate/atom';
+import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
 
 export default function DividerContainer({ index }) {
-  const [emailContentsData, setEmailContentsData] =
-    useRecoilState(emailTemplateAtom);
+  const [emailContentsData, setEmailContentsData] = useRecoilState(
+    emailTemplateDataAtom,
+  );
 
   const handleContentStyleChange = e => {
     setEmailContentsData(

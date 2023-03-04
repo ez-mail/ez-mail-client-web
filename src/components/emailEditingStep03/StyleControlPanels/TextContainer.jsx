@@ -10,11 +10,12 @@ import {
   faItalic,
 } from '@fortawesome/free-solid-svg-icons';
 
-import emailTemplateAtom from '../../../recoil/emailTemplate/atom';
+import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
 
 export default function TextContainer({ index }) {
-  const [emailContentsData, setEmailContentsData] =
-    useRecoilState(emailTemplateAtom);
+  const [emailContentsData, setEmailContentsData] = useRecoilState(
+    emailTemplateDataAtom,
+  );
 
   const underline = useRef();
   const lineThrough = useRef();
