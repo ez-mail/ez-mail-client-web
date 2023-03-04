@@ -37,6 +37,18 @@ const GlobalStyles = createGlobalStyle`
     font-size: 16px;
   }
 
+  i {
+    font-style: italic;
+  }
+
+  b {
+    font-weight: 700;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
   ol, ul {
     list-style: none;
   }

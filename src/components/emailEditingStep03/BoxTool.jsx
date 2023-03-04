@@ -109,6 +109,7 @@ export default function BoxTool() {
             borderStyle: 'solid', // 사용자 조절값 X, 스타일 유지를 위한 고정값
             borderRadius: '3px', // 버튼 모양 기본값 사각형, 원형: 500px
             fontSize: '16px', // 글자 크기 기본값 16px, 12, 14, 18, 20, 26, 32, 40, 48, 60
+            textDecoration: 'none', // 사용자 조절값 X
             fontFamily:
               'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
           },

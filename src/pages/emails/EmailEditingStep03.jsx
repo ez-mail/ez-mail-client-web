@@ -14,10 +14,12 @@ import ContentStyleTool from '../../components/emailEditingStep03/ContentStyleTo
 const emailTemplateData = {
   emailBodyStyle: { backgroundColor: '#f5f5f5' },
   emailContainerStyle: {
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     borderWidth: '0px',
-    borderColor: 'black',
+    borderColor: '#000000',
     borderStyle: 'solid',
+    fontFamily:
+      'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
   },
   emailFooter: {
     companyOrUserName: '바닐라코딩',
@@ -37,9 +39,9 @@ const emailTemplateData = {
       id: 'asdf1',
       type: 'spacer',
       boxStyle: {
-        backgroundColor: 'green',
+        backgroundColor: '#2DD500',
         borderWidth: '1px',
-        borderColor: 'black',
+        borderColor: '#000000',
         borderStyle: 'solid',
         height: '50px',
       },
@@ -48,9 +50,9 @@ const emailTemplateData = {
       id: 'asdf2',
       type: 'divider',
       boxStyle: {
-        backgroundColor: 'yellow',
+        backgroundColor: '#FFEC00',
         borderWidth: '0px',
-        borderColor: 'black',
+        borderColor: '#000000',
         borderStyle: 'solid',
         paddingTop: '15px',
         paddingBottom: '15px',
@@ -60,7 +62,7 @@ const emailTemplateData = {
       contentStyle: {
         height: '1px',
         borderTopWidth: '3px',
-        borderTopColor: 'black',
+        borderTopColor: '#000000',
         borderTopStyle: 'solid',
       },
     },
@@ -71,7 +73,7 @@ const emailTemplateData = {
       imageSrc:
         'https://images.unsplash.com/photo-1504194104404-433180773017?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
       boxStyle: {
-        backgroundColor: 'yellow',
+        backgroundColor: '#FFEC00',
         borderWidth: '0px',
         borderColor: 'black',
         borderStyle: 'solid',
@@ -91,16 +93,17 @@ const emailTemplateData = {
       type: 'spacer',
       boxStyle: {
         height: '20px',
-        backgroundColor: 'transparent',
+        backgroundColor: '#ffffff',
         borderWidth: '0px',
-        borderColor: 'black',
+        borderColor: '#000000',
         borderStyle: 'solid',
       },
     },
     {
       id: 'text123',
       type: 'text',
-      content: '뿡빵뿡빵 <div style="font-size: 18px">키득</div>',
+      content:
+        '텍스트 에디터<div><br></div><div><b>이것은</b> <del>가로줄</del> <i>테스트</i> <u>글자</u></div>',
       boxStyle: {
         paddingTop: '15px',
         paddingBottom: '15px',
@@ -120,9 +123,9 @@ const emailTemplateData = {
       link: 'https://beta.reactjs.org/',
       content: '길지 버튼',
       boxStyle: {
-        backgroundColor: 'orange',
+        backgroundColor: '#FFA600',
         borderWidth: '1px',
-        borderColor: 'black',
+        borderColor: '#000000',
         borderStyle: 'solid',
         paddingTop: '15px',
         paddingBottom: '15px',
@@ -134,12 +137,13 @@ const emailTemplateData = {
         display: 'inline-block',
         backgroundColor: '#ffdf2b',
         borderWidth: '0px',
-        borderColor: 'black',
+        borderColor: '#000000',
         borderStyle: 'solid',
         borderRadius: '3px',
         padding: '16px 18px',
         color: '#000000',
         fontSize: '16px',
+        textDecoration: 'none',
         fontFamily:
           'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
       },

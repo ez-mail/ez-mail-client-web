@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import ReactDOMServer from 'react-dom/server';
 
 import ButtonContent from '../components/emailEditingStep03/ButtonContent';
 import DividerContent from '../components/emailEditingStep03/DividerContent';
@@ -48,7 +49,124 @@ export function dataToComponent(data) {
   }
 }
 
-export function dataToEmailTemplate(data) {
+function dataToEmailComponent(data) {
+  switch (data.type) {
+    case 'spacer':
+      return (
+        <tr>
+          <td align="center" valign="top">
+            <table
+              border="0"
+              cellPadding="0"
+              cellSpacing="0"
+              width="100%"
+              style={data.boxStyle}
+            />
+          </td>
+        </tr>
+      );
+    case 'divider':
+      return (
+        <tr>
+          <td align="center" valign="top">
+            <table
+              border="0"
+              cellPadding="0"
+              cellSpacing="0"
+              width="100%"
+              style={data.boxStyle}
+            >
+              <tr>
+                <td align="center" valign="top" style={data.contentStyle} />
+              </tr>
+            </table>
+          </td>
+        </tr>
+      );
+    case 'image':
+      return (
+        <tr>
+          <td align="center" valign="top">
+            <table
+              border="0"
+              cellPadding="0"
+              cellSpacing="0"
+              width="100%"
+              style={data.boxStyle}
+            >
+              <tr>
+                <td valign="top">
+                  <a href={data.link}>
+                    <img
+                      alt="userImg"
+                      src={data.imageSrc}
+                      style={data.contentStyle}
+                    />
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      );
+    case 'button':
+      return (
+        <tr>
+          <td align="center" valign="top">
+            <table
+              border="0"
+              cellPadding="0"
+              cellSpacing="0"
+              width="100%"
+              style={data.boxStyle}
+            >
+              <tr>
+                <td valign="top">
+                  <a href={data.link} style={data.contentStyle}>
+                    {data.content}
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      );
+    case 'text':
+      return (
+        <tr>
+          <td align="center" valign="top">
+            <table
+              border="0"
+              cellPadding="0"
+              cellSpacing="0"
+              width="100%"
+              style={data.boxStyle}
+            >
+              <tr>
+                <td
+                  valign="top"
+                  style={data.contentStyle}
+                  dangerouslySetInnerHTML={{ __html: data.content }}
+                />
+              </tr>
+            </table>
+          </td>
+        </tr>
+      );
+    default:
+      console.log('해당 타입이 없습니다.');
+  }
+}
+
+function dataToEmailTemplate(emailTemplateData) {
+  const contents = emailTemplateData.emailContents.map(contentData => {
+    return (
+      <Fragment key={contentData.id}>
+        {dataToEmailComponent(contentData)}
+      </Fragment>
+    );
+  });
+
   return (
     <table
       border="0"
@@ -57,6 +175,7 @@ export function dataToEmailTemplate(data) {
       height="100%"
       width="100%"
       id="bodyTable"
+      style={emailTemplateData.emailBodyStyle}
     >
       <tr>
         <td align="center" valign="top">
@@ -66,41 +185,9 @@ export function dataToEmailTemplate(data) {
             cellSpacing="0"
             width="600"
             id="emailContainer"
+            style={emailTemplateData.emailContainerStyle}
           >
-            <tr>
-              <td align="center" valign="top">
-                <table
-                  border="0"
-                  cellPadding="0"
-                  cellSpacing="0"
-                  width="100%"
-                  id="emailHeader"
-                >
-                  <tr>
-                    <td align="center" valign="top">
-                      This is where my header content goes.
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-            <tr>
-              <td align="center" valign="top">
-                <table
-                  border="0"
-                  cellPadding="0"
-                  cellSpacing="0"
-                  width="100%"
-                  id="emailBody"
-                >
-                  <tr>
-                    <td align="center" valign="top">
-                      This is where my body content goes.
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
+            {contents}
             <tr>
               <td align="center" valign="top">
                 <table
@@ -111,8 +198,16 @@ export function dataToEmailTemplate(data) {
                   id="emailFooter"
                 >
                   <tr>
-                    <td align="center" valign="top">
-                      This is where my footer content goes.
+                    <td
+                      align="center"
+                      valign="top"
+                      style={emailTemplateData.emailFooter.boxStyle}
+                    >
+                      <div>
+                        {emailTemplateData.emailFooter.companyOrUserName}
+                      </div>
+                      <div>{emailTemplateData.emailFooter.contact}</div>
+                      <div>{emailTemplateData.emailFooter.address}</div>
                     </td>
                   </tr>
                 </table>
@@ -123,4 +218,12 @@ export function dataToEmailTemplate(data) {
       </tr>
     </table>
   );
+}
+
+export function getEmailHtml(data) {
+  const emailHtml = ReactDOMServer.renderToStaticMarkup(
+    dataToEmailTemplate(data),
+  );
+
+  return emailHtml;
 }
