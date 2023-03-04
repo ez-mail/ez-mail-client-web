@@ -1,32 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+import produce from 'immer';
 
-import dividerStyleAtom from '../../../recoil/dividerStyle/atom';
+import emailTemplateAtom from '../../../recoil/emailTemplate/atom';
 
-export default function DividerContainer() {
-  const [dividerStyle, setDividerStyle] = useRecoilState(dividerStyleAtom);
+export default function DividerContainer({ index }) {
+  const [emailContentsData, setEmailContentsData] =
+    useRecoilState(emailTemplateAtom);
 
   const handleContentStyleChange = e => {
-    const newContentStyle = {
-      ...dividerStyle,
-      contentStyle: {
-        [e.target.name]: e.target.value,
-      },
-    };
-
-    setDividerStyle(newContentStyle);
+    setEmailContentsData(
+      produce(emailContentsData, draft => {
+        const dividerStyle = draft.emailContents[index];
+        dividerStyle.contentStyle[e.target.name] = e.target.value;
+      }),
+    );
   };
 
   const handleBoxStyleChange = e => {
-    const newBoxStyle = {
-      ...dividerStyle,
-      boxStyle: {
-        [e.target.name]: e.target.value,
-      },
-    };
-
-    setDividerStyle(newBoxStyle);
+    setEmailContentsData(
+      produce(emailContentsData, draft => {
+        const dividerStyle = draft.emailContents[index];
+        dividerStyle.boxStyle[e.target.name] = e.target.value;
+      }),
+    );
   };
 
   return (
@@ -36,7 +34,9 @@ export default function DividerContainer() {
           <StyleRowText>두께</StyleRowText>
           <SelectBox
             name="borderTopWidth"
-            value={dividerStyle.contentStyle.borderTopWidth}
+            value={
+              emailContentsData.emailContents[index].contentStyle.borderTopWidth
+            }
             onChange={e => handleContentStyleChange(e)}
           >
             <option value="1px">얇게</option>
@@ -48,7 +48,9 @@ export default function DividerContainer() {
           <StyleRowText>스타일</StyleRowText>
           <SelectBox
             name="borderTopStyle"
-            value={dividerStyle.contentStyle.borderTopStyle}
+            value={
+              emailContentsData.emailContents[index].contentStyle.borderTopStyle
+            }
             onChange={e => handleContentStyleChange(e)}
           >
             <option value="solid">실선</option>
@@ -61,7 +63,9 @@ export default function DividerContainer() {
           <ColorPicker
             type="color"
             name="borderTopColor"
-            value={dividerStyle.contentStyle.borderTopColor}
+            value={
+              emailContentsData.emailContents[index].contentStyle.borderTopColor
+            }
             onChange={e => handleContentStyleChange(e)}
           />
         </StyleRow>
@@ -73,7 +77,9 @@ export default function DividerContainer() {
           <ColorPicker
             type="color"
             name="backgroundColor"
-            value={dividerStyle.boxStyle.backgroundColor}
+            value={
+              emailContentsData.emailContents[index].boxStyle.backgroundColor
+            }
             onChange={e => handleBoxStyleChange(e)}
           />
         </StyleRow>
@@ -81,7 +87,7 @@ export default function DividerContainer() {
           <StyleRowText>배경 테두리</StyleRowText>
           <SelectBox
             name="borderWidth"
-            value={dividerStyle.boxStyle.borderWidth}
+            value={emailContentsData.emailContents[index].boxStyle.borderWidth}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -92,7 +98,7 @@ export default function DividerContainer() {
           <ColorPicker
             type="color"
             name="borderColor"
-            value={dividerStyle.boxStyle.borderColor}
+            value={emailContentsData.emailContents[index].boxStyle.borderColor}
             onChange={e => handleBoxStyleChange(e)}
           />
         </StyleRow>
@@ -100,7 +106,7 @@ export default function DividerContainer() {
           <StyleRowText>내부 여백 상단</StyleRowText>
           <SelectBox
             name="paddingTop"
-            value={dividerStyle.boxStyle.paddingTop}
+            value={emailContentsData.emailContents[index].boxStyle.paddingTop}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -113,7 +119,9 @@ export default function DividerContainer() {
           <StyleRowText>내부 여백 하단</StyleRowText>
           <SelectBox
             name="paddingBottom"
-            value={dividerStyle.boxStyle.paddingBottom}
+            value={
+              emailContentsData.emailContents[index].boxStyle.paddingBottom
+            }
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -126,7 +134,7 @@ export default function DividerContainer() {
           <StyleRowText>내부 여백 좌측</StyleRowText>
           <SelectBox
             name="paddingLeft"
-            value={dividerStyle.boxStyle.paddingLeft}
+            value={emailContentsData.emailContents[index].boxStyle.paddingLeft}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -139,7 +147,7 @@ export default function DividerContainer() {
           <StyleRowText>내부 여백 우측</StyleRowText>
           <SelectBox
             name="paddingRight"
-            value={dividerStyle.boxStyle.paddingRight}
+            value={emailContentsData.emailContents[index].boxStyle.paddingRight}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>

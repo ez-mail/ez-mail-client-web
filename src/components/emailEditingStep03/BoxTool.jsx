@@ -134,7 +134,7 @@ export default function BoxTool() {
             textAlign: 'left', // 텍스트 정렬 기본값: left(가운데), 가운데: center, 오른쪽: right
           },
           contentStyle: {
-            fontSize: '24px', // 기본값: 24px, 12, 14, 16, 18, 20, 32, 40, 48, 60
+            fontSize: '16px', // 기본값: 16px, 12, 14, 16, 18, 20, 24, 32, 40, 48, 60
             fontFamily:
               'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
           },
