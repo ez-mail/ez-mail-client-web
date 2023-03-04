@@ -109,6 +109,15 @@ export default function TextContainer({ index }) {
             <option value='"nanum myoungjo", 바탕, batang, serif'>명조</option>
           </SelectBox>
         </StyleRow>
+        <StyleRow>
+          <StyleRowText>글자 색상</StyleRowText>
+          <ColorPicker
+            type="color"
+            name="color"
+            value={emailContentsData.emailContents[index].contentStyle.color}
+            onChange={e => handleContentStyleChange(e)}
+          />
+        </StyleRow>
       </StyleBox>
       <StyleBox>
         <StyleRow>
