@@ -32,7 +32,6 @@ export default function BoxTool() {
             paddingLeft: '15px', // 기본값: 15px(보통), 없음: 0px, 좁게: 5px, 넓게: 25px,
             paddingRight: '15px', // paddingLeft 와 동일
             textAlign: 'center', // 버튼정렬 기본값: center(가운데), 왼쪽: left, 오른쪽: right
-            zIndex: 1,
           },
           contentStyle: {
             maxWidth: '100%', // 사용자 조절값 X
@@ -52,7 +51,6 @@ export default function BoxTool() {
             borderColor: '#000000', // 기본값: 검정색
             borderStyle: 'solid', // solid, dotted, dashed
             height: '50px', // 10px ~ 100px
-            zIndex: 1,
           },
         };
         break;
@@ -71,7 +69,6 @@ export default function BoxTool() {
             paddingBottom: '15px', // paddingTop 과 동일
             paddingLeft: '0px', // 기본값: 0px(없음), 좁게: 5px, 보통: 15px, 넓게: 25px,
             paddingRight: '0px', // paddingLeft 와 동일
-            zIndex: 1,
           },
           contentStyle: {
             height: '1px', // 사용자 조절값 X, 스타일 유지를 위한 고정값
@@ -99,7 +96,6 @@ export default function BoxTool() {
             paddingLeft: '0px', // 기본값: 0px(없음), 좁게: 5px, 보통: 15px, 넓게: 25px,
             paddingRight: '0px', // paddingLeft 와 동일
             textAlign: 'center', // 버튼정렬 기본값: center(가운데), 왼쪽: left, 오른쪽: right
-            zIndex: 1,
           },
           contentStyle: {
             display: 'inline-block', // 사용자 조절값 X, 스타일 유지를 위한 고정값
@@ -135,7 +131,6 @@ export default function BoxTool() {
             paddingLeft: '0px', // 기본값: 0px(없음), 좁게: 5px, 보통: 15px, 넓게: 25px,
             paddingRight: '0px', // paddingLeft 와 동일
             textAlign: 'left', // 텍스트 정렬 기본값: left(가운데), 가운데: center, 오른쪽: right
-            zIndex: 1,
           },
           contentStyle: {
             fontSize: '24px', // 기본값: 24px, 12, 14, 16, 18, 20, 32, 40, 48, 60
