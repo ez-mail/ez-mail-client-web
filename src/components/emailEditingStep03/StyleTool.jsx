@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { useRecoilState } from 'recoil';
 import produce from 'immer';
 
@@ -41,7 +40,7 @@ export default function StyleTool() {
             type="color"
             name="backgroundColor"
             value={emailContentsData.emailBodyStyle.backgroundColor}
-            onChange={e => handleEmailBodyStyleChange(e)}
+            onChange={handleEmailBodyStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -50,7 +49,7 @@ export default function StyleTool() {
             type="color"
             name="backgroundColor"
             value={emailContentsData.emailContainerStyle.backgroundColor}
-            onChange={e => handleEmailContainerStyleChange(e)}
+            onChange={handleEmailContainerStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -58,7 +57,7 @@ export default function StyleTool() {
           <SelectBox
             name="borderWidth"
             value={emailContentsData.emailContainerStyle.borderWidth}
-            onChange={e => handleEmailContainerStyleChange(e)}
+            onChange={handleEmailContainerStyleChange}
           >
             <option value="0px solid ">없음</option>
             <option value="1px">얇게</option>
@@ -69,7 +68,7 @@ export default function StyleTool() {
             type="color"
             name="borderColor"
             value={emailContentsData.emailContainerStyle.borderColor}
-            onChange={e => handleEmailContainerStyleChange(e)}
+            onChange={handleEmailContainerStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -77,7 +76,7 @@ export default function StyleTool() {
           <SelectBox
             name="fontFamily"
             value={emailContentsData.emailContainerStyle.fontFamily}
-            onChange={e => handleEmailContainerStyleChange(e)}
+            onChange={handleEmailContainerStyleChange}
           >
             <option value='AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", "dotum", arial, helvetica, sans-serif'>
               고딕

@@ -41,7 +41,7 @@ export default function SpacerContainer({ index }) {
           value={
             emailContentsData.emailContents[index].boxStyle.backgroundColor
           }
-          onChange={e => handleBoxStyleChange(e)}
+          onChange={handleBoxStyleChange}
         />
       </StyleRow>
       <StyleRow>
@@ -49,7 +49,7 @@ export default function SpacerContainer({ index }) {
         <SelectBox
           name="borderWidth"
           value={emailContentsData.emailContents[index].boxStyle.borderWidth}
-          onChange={e => handleBoxStyleChange(e)}
+          onChange={handleBoxStyleChange}
         >
           <option value="0px">없음</option>
           <option value="1px">얇게</option>
@@ -60,7 +60,7 @@ export default function SpacerContainer({ index }) {
           type="color"
           name="borderColor"
           value={emailContentsData.emailContents[index].boxStyle.borderColor}
-          onChange={e => handleBoxStyleChange(e)}
+          onChange={handleBoxStyleChange}
         />
       </StyleRow>
       <StyleRow>
@@ -68,7 +68,7 @@ export default function SpacerContainer({ index }) {
         <SelectBox
           name="borderStyle"
           value={emailContentsData.emailContents[index].boxStyle.borderStyle}
-          onChange={e => handleBoxStyleChange(e)}
+          onChange={handleBoxStyleChange}
         >
           <option value="solid">실선</option>
           <option value="dashed">긴 점선</option>
@@ -83,8 +83,11 @@ export default function SpacerContainer({ index }) {
           min="10"
           max="100"
           step="10"
-          value={emailContentsData.emailContents[index].boxStyle.height}
-          onChange={e => handleInputChange(e)}
+          value={emailContentsData.emailContents[index].boxStyle.height.replace(
+            'px',
+            '',
+          )}
+          onChange={handleInputChange}
         />
         <p>{emailContentsData.emailContents[index].boxStyle.height}</p>
       </StyleRow>
