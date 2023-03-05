@@ -5,6 +5,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
+import { removeProperties } from '../utils/dragAndDrop';
 import { fetchUpdateEmail } from '../api/email';
 import emailTitleAtom from '../recoil/emailTitle/atom';
 import emailTemplateDataAtom from '../recoil/emailTemplate/atom';
@@ -22,8 +23,16 @@ export default function EmailEditingNav() {
   };
 
   const handleSaveButtonClick = async () => {
+    const newEmailTemplateData = { ...emailTemplateData };
+
+    const removedPropertiesEmailContents = removeProperties(
+      emailTemplateData.emailContents,
+    );
+
+    newEmailTemplateData.emailContents = removedPropertiesEmailContents;
+
     const emailTemplateObj = {
-      emailContent: JSON.stringify(emailTemplateData),
+      emailContent: JSON.stringify(newEmailTemplateData),
     };
 
     await fetchUpdateEmail(userId, param.email_id, emailTemplateObj);
@@ -32,8 +41,16 @@ export default function EmailEditingNav() {
   };
 
   const handlePrevButtonClick = async () => {
+    const newEmailTemplateData = { ...emailTemplateData };
+
+    const removedPropertiesEmailContents = removeProperties(
+      emailTemplateData.emailContents,
+    );
+
+    newEmailTemplateData.emailContents = removedPropertiesEmailContents;
+
     const emailTemplateObj = {
-      emailContent: JSON.stringify(emailTemplateData),
+      emailContent: JSON.stringify(newEmailTemplateData),
     };
 
     await fetchUpdateEmail(userId, param.email_id, emailTemplateObj);

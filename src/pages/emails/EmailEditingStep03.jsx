@@ -8,7 +8,7 @@ import { useRecoilValue, useRecoilState } from 'recoil';
 import { useParams } from 'react-router-dom';
 import { fetchEmail } from '../../api/email';
 import { fetchSendingInfo } from '../../api/user';
-import { addProperties, removeProperties } from '../../utils/dragAndDrop';
+import { addProperties } from '../../utils/dragAndDrop';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
 import ContentMovePanel from '../../components/emailEditingStep03/ContentMovePanel';
 import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
