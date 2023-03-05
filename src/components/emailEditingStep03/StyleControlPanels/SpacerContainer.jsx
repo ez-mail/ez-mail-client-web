@@ -14,6 +14,7 @@ export default function SpacerContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const spacerStyle = draft.emailContents[index];
+
         spacerStyle.boxStyle[e.target.name] = e.target.value;
       }),
     );
@@ -23,6 +24,7 @@ export default function SpacerContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const spacerStyle = draft.emailContents[index];
+
         spacerStyle.boxStyle[e.target.name] = `${e.target.value}px`;
       }),
     );

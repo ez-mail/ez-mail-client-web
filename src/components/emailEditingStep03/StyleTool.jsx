@@ -15,6 +15,7 @@ export default function StyleTool() {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const { emailBodyStyle } = draft;
+
         emailBodyStyle[e.target.name] = e.target.value;
       }),
     );
@@ -24,6 +25,7 @@ export default function StyleTool() {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const { emailContainerStyle } = draft;
+
         emailContainerStyle[e.target.name] = e.target.value;
       }),
     );

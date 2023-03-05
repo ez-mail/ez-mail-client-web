@@ -14,6 +14,7 @@ export default function ButtonContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const buttonStyle = draft.emailContents[index];
+
         buttonStyle[e.target.name] =
           e.target.value === '' ? '#' : e.target.value;
       }),
@@ -24,6 +25,7 @@ export default function ButtonContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const buttonStyle = draft.emailContents[index];
+
         buttonStyle.contentStyle[e.target.name] = e.target.value;
       }),
     );
@@ -33,6 +35,7 @@ export default function ButtonContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const buttonStyle = draft.emailContents[index];
+
         buttonStyle.boxStyle[e.target.name] = e.target.value;
       }),
     );

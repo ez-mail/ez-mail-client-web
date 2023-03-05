@@ -14,6 +14,7 @@ export default function DividerContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const dividerStyle = draft.emailContents[index];
+
         dividerStyle.contentStyle[e.target.name] = e.target.value;
       }),
     );
@@ -23,6 +24,7 @@ export default function DividerContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const dividerStyle = draft.emailContents[index];
+
         dividerStyle.boxStyle[e.target.name] = e.target.value;
       }),
     );

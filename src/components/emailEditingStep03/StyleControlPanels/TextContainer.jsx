@@ -26,6 +26,7 @@ export default function TextContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const textStyle = draft.emailContents[index];
+
         textStyle.contentStyle[e.target.name] = e.target.value;
       }),
     );
@@ -35,6 +36,7 @@ export default function TextContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const textStyle = draft.emailContents[index];
+
         textStyle.boxStyle[e.target.name] = e.target.value;
       }),
     );

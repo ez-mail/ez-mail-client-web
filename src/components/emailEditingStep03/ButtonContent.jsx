@@ -1,21 +1,27 @@
 import DOMPurify from 'dompurify';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import produce from 'immer';
 
 import ContentEditable from './ContentEditable';
+import emailTemplateDataAtom from '../../recoil/emailTemplate/atom';
 
-export default function ButtonContent({
-  boxStyle,
-  contentStyle,
-  content,
-  link,
-}) {
+export default function ButtonContent({ boxStyle, contentStyle, link, index }) {
+  const [emailContentsData, setEmailContentsData] = useRecoilState(
+    emailTemplateDataAtom,
+  );
   const [isContentEditable, setIsContentEditable] = useState(false);
-  const [contentHTML, setContentHTML] = useState(content);
   const $editorRef = useRef();
 
   const handleContentChange = e => {
-    setContentHTML(DOMPurify.sanitize(e.target.value));
+    setEmailContentsData(
+      produce(emailContentsData, draft => {
+        const buttonContent = draft.emailContents[index];
+
+        buttonContent.content = DOMPurify.sanitize(e.target.value);
+      }),
+    );
   };
 
   const handleKeyDown = e => {
@@ -35,7 +41,7 @@ export default function ButtonContent({
   return (
     <Box style={boxStyle}>
       <ContentEditable
-        contentHTML={contentHTML}
+        contentHTML={emailContentsData.emailContents[index].content}
         isContentEditable={isContentEditable}
         innerRef={$editorRef}
         onChange={handleContentChange}

@@ -14,6 +14,7 @@ export default function ImageContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const imageStyle = draft.emailContents[index];
+
         imageStyle[e.target.name] =
           e.target.value === '' ? '#' : e.target.value;
       }),
@@ -24,6 +25,7 @@ export default function ImageContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const imageStyle = draft.emailContents[index];
+
         imageStyle.contentStyle[e.target.name] = e.target.value;
       }),
     );
@@ -33,6 +35,7 @@ export default function ImageContainer({ index }) {
     setEmailContentsData(
       produce(emailContentsData, draft => {
         const imageStyle = draft.emailContents[index];
+
         imageStyle.boxStyle[e.target.name] = e.target.value;
       }),
     );

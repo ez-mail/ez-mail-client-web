@@ -301,7 +301,7 @@ export default function EmailEditingStep03() {
           onBlur={handleBlur}
           onDelete={e => handleDelete(e, emailContentData)}
         >
-          {dataToComponent(emailContentData)}
+          {dataToComponent(emailContentData, index)}
           {emailContentData.isActive && (
             <ContentMovePanel
               onDraggable={handleDraggable}
