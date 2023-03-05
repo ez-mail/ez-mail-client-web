@@ -53,7 +53,7 @@ export default function ButtonContainer({ index }) {
                 ? ''
                 : emailContentsData.emailContents[index].link
             }
-            onChange={e => handleButtonDataChange(e)}
+            onChange={handleButtonDataChange}
             placeholder="http://example.com"
           />
         </StyleRow>
@@ -64,7 +64,7 @@ export default function ButtonContainer({ index }) {
             value={
               emailContentsData.emailContents[index].contentStyle.borderRadius
             }
-            onChange={e => handleContentStyleChange(e)}
+            onChange={handleContentStyleChange}
           >
             <option value="3px">사각형</option>
             <option value="500px">원형</option>
@@ -79,7 +79,7 @@ export default function ButtonContainer({ index }) {
               emailContentsData.emailContents[index].contentStyle
                 .backgroundColor
             }
-            onChange={e => handleContentStyleChange(e)}
+            onChange={handleContentStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -89,7 +89,7 @@ export default function ButtonContainer({ index }) {
             value={
               emailContentsData.emailContents[index].contentStyle.borderWidth
             }
-            onChange={e => handleContentStyleChange(e)}
+            onChange={handleContentStyleChange}
           >
             <option value="0px">없음</option>
             <option value="1px">얇게</option>
@@ -103,7 +103,7 @@ export default function ButtonContainer({ index }) {
             type="color"
             name="color"
             value={emailContentsData.emailContents[index].contentStyle.color}
-            onChange={e => handleContentStyleChange(e)}
+            onChange={handleContentStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -111,7 +111,7 @@ export default function ButtonContainer({ index }) {
           <SelectBox
             name="fontSize"
             value={emailContentsData.emailContents[index].contentStyle.fontSize}
-            onChange={e => handleContentStyleChange(e)}
+            onChange={handleContentStyleChange}
           >
             <option value="12px">12px</option>
             <option value="14px">14px</option>
@@ -132,12 +132,24 @@ export default function ButtonContainer({ index }) {
             value={
               emailContentsData.emailContents[index].contentStyle.fontFamily
             }
-            onChange={e => handleContentStyleChange(e)}
+            onChange={handleContentStyleChange}
           >
             <option value='AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", "dotum", arial, helvetica, sans-serif'>
               고딕
             </option>
             <option value='"nanum myoungjo", 바탕, batang, serif'>명조</option>
+          </SelectBox>
+        </StyleRow>
+        <StyleRow>
+          <StyleRowText>정렬</StyleRowText>
+          <SelectBox
+            name="textAlign"
+            value={emailContentsData.emailContents[index].boxStyle.textAlign}
+            onChange={handleBoxStyleChange}
+          >
+            <option value="left">왼쪽</option>
+            <option value="center">가운데</option>
+            <option value="right">오른쪽</option>
           </SelectBox>
         </StyleRow>
       </StyleBox>
@@ -151,7 +163,7 @@ export default function ButtonContainer({ index }) {
             value={
               emailContentsData.emailContents[index].boxStyle.backgroundColor
             }
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -159,7 +171,7 @@ export default function ButtonContainer({ index }) {
           <SelectBox
             name="borderWidth"
             value={emailContentsData.emailContents[index].boxStyle.borderWidth}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="1px">얇게</option>
@@ -170,7 +182,7 @@ export default function ButtonContainer({ index }) {
             type="color"
             name="borderColor"
             value={emailContentsData.emailContents[index].boxStyle.borderColor}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -178,7 +190,7 @@ export default function ButtonContainer({ index }) {
           <SelectBox
             name="borderStyle"
             value={emailContentsData.emailContents[index].boxStyle.borderStyle}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="solid">실선</option>
             <option value="dashed">긴 점선</option>
@@ -190,7 +202,7 @@ export default function ButtonContainer({ index }) {
           <SelectBox
             name="paddingTop"
             value={emailContentsData.emailContents[index].boxStyle.paddingTop}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
@@ -205,7 +217,7 @@ export default function ButtonContainer({ index }) {
             value={
               emailContentsData.emailContents[index].boxStyle.paddingBottom
             }
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
@@ -218,7 +230,7 @@ export default function ButtonContainer({ index }) {
           <SelectBox
             name="paddingLeft"
             value={emailContentsData.emailContents[index].boxStyle.paddingLeft}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
@@ -231,24 +243,12 @@ export default function ButtonContainer({ index }) {
           <SelectBox
             name="paddingRight"
             value={emailContentsData.emailContents[index].boxStyle.paddingRight}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
             <option value="15px">보통</option>
             <option value="25px">넓게</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>정렬</StyleRowText>
-          <SelectBox
-            name="textAlign"
-            value={emailContentsData.emailContents[index].boxStyle.textAlign}
-            onChange={e => handleBoxStyleChange(e)}
-          >
-            <option value="left">왼쪽</option>
-            <option value="center">가운데</option>
-            <option value="right">오른쪽</option>
           </SelectBox>
         </StyleRow>
       </StyleBox>

@@ -150,6 +150,10 @@ export default function EmailEditingStep03() {
   };
 
   const handleDrop = (e, index) => {
+    if (e.target.tagName === 'IMG') {
+      return;
+    }
+
     const newEmailTemplateData = { ...emailContentsData };
     const newEmailContents = [...newEmailTemplateData.emailContents];
 

@@ -53,7 +53,7 @@ export default function ImageContainer({ index }) {
                 ? ''
                 : emailContentsData.emailContents[index].link
             }
-            onChange={e => handleImageDataChange(e)}
+            onChange={handleImageDataChange}
             placeholder="http://example.com"
           />
         </StyleRow>
@@ -62,7 +62,7 @@ export default function ImageContainer({ index }) {
           <SelectBox
             name="width"
             value={emailContentsData.emailContents[index].boxStyle.width}
-            onChange={e => handleContentStyleChange(e)}
+            onChange={handleContentStyleChange}
           >
             <option value="">설정안함</option>
             <option value="100px">100px</option>
@@ -71,6 +71,18 @@ export default function ImageContainer({ index }) {
             <option value="400px">400px</option>
             <option value="500px">500px</option>
             <option value="600px">600px</option>
+          </SelectBox>
+        </StyleRow>
+        <StyleRow>
+          <StyleRowText>정렬</StyleRowText>
+          <SelectBox
+            name="textAlign"
+            value={emailContentsData.emailContents[index].boxStyle.textAlign}
+            onChange={handleBoxStyleChange}
+          >
+            <option value="left">왼쪽</option>
+            <option value="center">가운데</option>
+            <option value="right">오른쪽</option>
           </SelectBox>
         </StyleRow>
       </StyleBox>
@@ -84,7 +96,7 @@ export default function ImageContainer({ index }) {
             value={
               emailContentsData.emailContents[index].boxStyle.backgroundColor
             }
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -92,7 +104,7 @@ export default function ImageContainer({ index }) {
           <SelectBox
             name="borderWidth"
             value={emailContentsData.emailContents[index].boxStyle.borderWidth}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="1px">얇게</option>
@@ -103,7 +115,7 @@ export default function ImageContainer({ index }) {
             type="color"
             name="borderColor"
             value={emailContentsData.emailContents[index].boxStyle.borderColor}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           />
         </StyleRow>
         <StyleRow>
@@ -111,7 +123,7 @@ export default function ImageContainer({ index }) {
           <SelectBox
             name="borderStyle"
             value={emailContentsData.emailContents[index].boxStyle.borderStyle}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="solid">실선</option>
             <option value="dashed">긴 점선</option>
@@ -123,7 +135,7 @@ export default function ImageContainer({ index }) {
           <SelectBox
             name="paddingTop"
             value={emailContentsData.emailContents[index].boxStyle.paddingTop}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
@@ -138,7 +150,7 @@ export default function ImageContainer({ index }) {
             value={
               emailContentsData.emailContents[index].boxStyle.paddingBottom
             }
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
@@ -151,7 +163,7 @@ export default function ImageContainer({ index }) {
           <SelectBox
             name="paddingLeft"
             value={emailContentsData.emailContents[index].boxStyle.paddingLeft}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
@@ -164,24 +176,12 @@ export default function ImageContainer({ index }) {
           <SelectBox
             name="paddingRight"
             value={emailContentsData.emailContents[index].boxStyle.paddingRight}
-            onChange={e => handleBoxStyleChange(e)}
+            onChange={handleBoxStyleChange}
           >
             <option value="0px">없음</option>
             <option value="5px">좁게</option>
             <option value="15px">보통</option>
             <option value="25px">넓게</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>정렬</StyleRowText>
-          <SelectBox
-            name="textAlign"
-            value={emailContentsData.emailContents[index].boxStyle.textAlign}
-            onChange={e => handleBoxStyleChange(e)}
-          >
-            <option value="left">왼쪽</option>
-            <option value="center">가운데</option>
-            <option value="right">오른쪽</option>
           </SelectBox>
         </StyleRow>
       </StyleBox>
