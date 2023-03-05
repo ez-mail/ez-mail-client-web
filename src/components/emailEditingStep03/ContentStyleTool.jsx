@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import DividerContainer from './StyleControlPanels/DividerContainer';
 import ButtonContainer from './StyleControlPanels/ButtonContainer';
@@ -8,7 +7,7 @@ import SpacerContainer from './StyleControlPanels/SpacerContainer';
 import TextContainer from './StyleControlPanels/TextContainer';
 import ImageContainer from './StyleControlPanels/ImageContainer';
 
-export default function ContentStyleTool({ type, setFocusedType }) {
+export default function ContentStyleTool({ type, setFocusedType, index }) {
   let typeText = '';
 
   switch (type) {
@@ -41,11 +40,11 @@ export default function ContentStyleTool({ type, setFocusedType }) {
           </CloseButton>
         </ContentHeader>
         <Divider />
-        {type === 'divider' && <DividerContainer />}
-        {type === 'button' && <ButtonContainer />}
-        {type === 'spacer' && <SpacerContainer />}
-        {type === 'text' && <TextContainer />}
-        {type === 'image' && <ImageContainer />}
+        {type === 'divider' && <DividerContainer index={index} />}
+        {type === 'button' && <ButtonContainer index={index} />}
+        {type === 'spacer' && <SpacerContainer index={index} />}
+        {type === 'text' && <TextContainer index={index} />}
+        {type === 'image' && <ImageContainer index={index} />}
       </StyleBoxContainer>
     </LeftToolContainer>
   );

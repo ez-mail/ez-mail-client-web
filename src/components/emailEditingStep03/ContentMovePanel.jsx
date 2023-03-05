@@ -24,7 +24,7 @@ const ControlBox = styled.div`
   top: 0;
   right: -60px;
   width: 50px;
-  padding: 5px 10px;
+  padding: 10px 10px;
   background-color: #ffffff;
   gap: 8px;
 `;
@@ -36,12 +36,14 @@ const StyledIcon = styled(FontAwesomeIcon)`
   }
   &:nth-child(1) {
     cursor: grab;
+    color: #6f6f6f;
   }
   &:nth-child(2) {
     cursor: pointer;
+    color: #6f6f6f;
   }
   &:nth-child(3) {
     cursor: pointer;
-    color: #f44336;
+    color: #f15656;
   }
 `;

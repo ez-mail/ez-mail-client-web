@@ -1,21 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+import produce from 'immer';
 
-import spacerStyleAtom from '../../../recoil/spacerStyle/atom';
+import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
 
-export default function SpacerContainer() {
-  const [spacerStyle, setSpacerStyle] = useRecoilState(spacerStyleAtom);
+export default function SpacerContainer({ index }) {
+  const [emailContentsData, setEmailContentsData] = useRecoilState(
+    emailTemplateDataAtom,
+  );
 
   const handleBoxStyleChange = e => {
-    const newBoxStyle = {
-      ...spacerStyle,
-      boxStyle: {
-        [e.target.name]: e.target.value,
-      },
-    };
+    setEmailContentsData(
+      produce(emailContentsData, draft => {
+        const spacerStyle = draft.emailContents[index];
 
-    setSpacerStyle(newBoxStyle);
+        spacerStyle.boxStyle[e.target.name] = e.target.value;
+      }),
+    );
+  };
+
+  const handleInputChange = e => {
+    setEmailContentsData(
+      produce(emailContentsData, draft => {
+        const spacerStyle = draft.emailContents[index];
+
+        spacerStyle.boxStyle[e.target.name] = `${e.target.value}px`;
+      }),
+    );
   };
 
   return (
@@ -26,7 +38,9 @@ export default function SpacerContainer() {
         <ColorPicker
           type="color"
           name="backgroundColor"
-          value={spacerStyle.boxStyle.backgroundColor}
+          value={
+            emailContentsData.emailContents[index].boxStyle.backgroundColor
+          }
           onChange={e => handleBoxStyleChange(e)}
         />
       </StyleRow>
@@ -34,7 +48,7 @@ export default function SpacerContainer() {
         <StyleRowText>배경 테두리</StyleRowText>
         <SelectBox
           name="borderWidth"
-          value={spacerStyle.boxStyle.borderWidth}
+          value={emailContentsData.emailContents[index].boxStyle.borderWidth}
           onChange={e => handleBoxStyleChange(e)}
         >
           <option value="0px">없음</option>
@@ -45,7 +59,7 @@ export default function SpacerContainer() {
         <ColorPicker
           type="color"
           name="borderColor"
-          value={spacerStyle.boxStyle.borderColor}
+          value={emailContentsData.emailContents[index].boxStyle.borderColor}
           onChange={e => handleBoxStyleChange(e)}
         />
       </StyleRow>
@@ -53,7 +67,7 @@ export default function SpacerContainer() {
         <StyleRowText>테두리 스타일</StyleRowText>
         <SelectBox
           name="borderStyle"
-          value={spacerStyle.boxStyle.borderStyle}
+          value={emailContentsData.emailContents[index].boxStyle.borderStyle}
           onChange={e => handleBoxStyleChange(e)}
         >
           <option value="solid">실선</option>
@@ -68,10 +82,11 @@ export default function SpacerContainer() {
           type="range"
           min="10"
           max="100"
-          value={spacerStyle.boxStyle.height}
-          onChange={e => handleBoxStyleChange(e)}
+          step="10"
+          value={emailContentsData.emailContents[index].boxStyle.height}
+          onChange={e => handleInputChange(e)}
         />
-        <p>{spacerStyle.boxStyle.height}px</p>
+        <p>{emailContentsData.emailContents[index].boxStyle.height}</p>
       </StyleRow>
     </StyleBox>
   );
@@ -87,6 +102,9 @@ const StyleRow = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  p {
+    width: 50px;
+  }
 `;
 
 const SelectBox = styled.select`

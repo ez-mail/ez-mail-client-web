@@ -1,33 +1,78 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useRecoilState } from 'recoil';
+import produce from 'immer';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBold,
+  faStrikethrough,
+  faUnderline,
+  faItalic,
+} from '@fortawesome/free-solid-svg-icons';
 
-import textStyleAtom from '../../../recoil/textStyle/atom';
+import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
 
-export default function TextContainer() {
-  const [textStyle, setTextStyle] = useRecoilState(textStyleAtom);
+export default function TextContainer({ index }) {
+  const [emailContentsData, setEmailContentsData] = useRecoilState(
+    emailTemplateDataAtom,
+  );
+
+  const underline = useRef();
+  const lineThrough = useRef();
+  const italic = useRef();
+  // const [isBoldChecked, setIsBoldChecked] = useState(false);
 
   const handleContentStyleChange = e => {
-    const newContentStyle = {
-      ...textStyle,
-      contentStyle: {
-        [e.target.name]: e.target.value,
-      },
-    };
+    setEmailContentsData(
+      produce(emailContentsData, draft => {
+        const textStyle = draft.emailContents[index];
 
-    setTextStyle(newContentStyle);
+        textStyle.contentStyle[e.target.name] = e.target.value;
+      }),
+    );
   };
 
   const handleBoxStyleChange = e => {
-    const newBoxStyle = {
-      ...textStyle,
-      boxStyle: {
-        [e.target.name]: e.target.value,
-      },
-    };
+    setEmailContentsData(
+      produce(emailContentsData, draft => {
+        const textStyle = draft.emailContents[index];
 
-    setTextStyle(newBoxStyle);
+        textStyle.boxStyle[e.target.name] = e.target.value;
+      }),
+    );
   };
+
+  // 텍스트 스타일 임시코드
+  // const handleLinkStyleChange = e => {
+  //   if (e.currentTarget.name === 'bold') {
+  //     setIsBoldChecked(!isBoldChecked);
+  //     e.currentTarget.className = `${isBoldChecked ? 'active' : ''}`;
+  //     const newLinkStyle = {
+  //       ...linkStyle,
+  //       fontWeight: `${isBoldChecked ? 'bold' : 'normal'}`,
+  //     };
+
+  //     setLinkStyle(newLinkStyle);
+  //   } else if (e.currentTarget.name === 'underline') {
+  //     lineThrough.current.className = '';
+  //     e.currentTarget.className = 'active';
+  //     const newLinkStyle = {
+  //       ...linkStyle,
+  //       textDecorationLine: e.currentTarget.value,
+  //     };
+
+  //     setLinkStyle(newLinkStyle);
+  //   } else {
+  //     underline.current.className = '';
+  //     e.currentTarget.className = 'active';
+  //     const newLinkStyle = {
+  //       ...linkStyle,
+  //       textDecorationLine: e.currentTarget.value,
+  //     };
+
+  //     setLinkStyle(newLinkStyle);
+  //   }
+  // };
 
   return (
     <>
@@ -36,7 +81,7 @@ export default function TextContainer() {
           <StyleRowText>글자 크기</StyleRowText>
           <SelectBox
             name="fontSize"
-            value={textStyle.contentStyle.fontSize}
+            value={emailContentsData.emailContents[index].contentStyle.fontSize}
             onChange={e => handleContentStyleChange(e)}
           >
             <option value="12px">12px</option>
@@ -44,7 +89,7 @@ export default function TextContainer() {
             <option value="16px">16px</option>
             <option value="18px">18px</option>
             <option value="20px">20px</option>
-            <option value="26px">26px</option>
+            <option value="24px">24px</option>
             <option value="32px">32px</option>
             <option value="40px">40px</option>
             <option value="48px">48px</option>
@@ -55,7 +100,9 @@ export default function TextContainer() {
           <StyleRowText>폰트</StyleRowText>
           <SelectBox
             name="fontFamily"
-            value={textStyle.contentStyle.fontFamily}
+            value={
+              emailContentsData.emailContents[index].contentStyle.fontFamily
+            }
             onChange={e => handleContentStyleChange(e)}
           >
             <option value='AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", "dotum", arial, helvetica, sans-serif'>
@@ -63,6 +110,56 @@ export default function TextContainer() {
             </option>
             <option value='"nanum myoungjo", 바탕, batang, serif'>명조</option>
           </SelectBox>
+        </StyleRow>
+        <StyleRow>
+          <StyleRowText>글자 색상</StyleRowText>
+          <ColorPicker
+            type="color"
+            name="color"
+            value={emailContentsData.emailContents[index].contentStyle.color}
+            onChange={e => handleContentStyleChange(e)}
+          />
+        </StyleRow>
+      </StyleBox>
+      <StyleBox>
+        <StyleRow>
+          <StyleRowText>스타일</StyleRowText>
+          <LinkStyleBox>
+            <button
+              type="button"
+              name="bold"
+              // onClick={e => handleLinkStyleChange(e)}
+            >
+              <StyledFontAwesomeIcon icon={faBold} />
+            </button>
+            <button
+              type="button"
+              name="underline"
+              value="underline"
+              ref={underline}
+              // onClick={e => handleLinkStyleChange(e)}
+            >
+              <StyledFontAwesomeIcon icon={faUnderline} />
+            </button>
+            <button
+              type="button"
+              name="line-through"
+              value="line-through"
+              ref={lineThrough}
+              // onClick={e => handleLinkStyleChange(e)}
+            >
+              <StyledFontAwesomeIcon icon={faStrikethrough} />
+            </button>
+            <button
+              type="button"
+              name="italic"
+              value="italic"
+              ref={italic}
+              // onClick={e => handleLinkStyleChange(e)}
+            >
+              <StyledFontAwesomeIcon icon={faItalic} />
+            </button>
+          </LinkStyleBox>
         </StyleRow>
       </StyleBox>
       <StyleBox>
@@ -72,7 +169,9 @@ export default function TextContainer() {
           <ColorPicker
             type="color"
             name="backgroundColor"
-            value={textStyle.boxStyle.backgroundColor}
+            value={
+              emailContentsData.emailContents[index].boxStyle.backgroundColor
+            }
             onChange={e => handleBoxStyleChange(e)}
           />
         </StyleRow>
@@ -80,7 +179,7 @@ export default function TextContainer() {
           <StyleRowText>배경 테두리</StyleRowText>
           <SelectBox
             name="borderWidth"
-            value={textStyle.boxStyle.borderWidth}
+            value={emailContentsData.emailContents[index].boxStyle.borderWidth}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -91,7 +190,7 @@ export default function TextContainer() {
           <ColorPicker
             type="color"
             name="borderColor"
-            value={textStyle.boxStyle.borderColor}
+            value={emailContentsData.emailContents[index].boxStyle.borderColor}
             onChange={e => handleBoxStyleChange(e)}
           />
         </StyleRow>
@@ -99,7 +198,7 @@ export default function TextContainer() {
           <StyleRowText>테두리 스타일</StyleRowText>
           <SelectBox
             name="borderStyle"
-            value={textStyle.boxStyle.borderStyle}
+            value={emailContentsData.emailContents[index].boxStyle.borderStyle}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="solid">실선</option>
@@ -111,7 +210,7 @@ export default function TextContainer() {
           <StyleRowText>내부 여백 상단</StyleRowText>
           <SelectBox
             name="paddingTop"
-            value={textStyle.boxStyle.paddingTop}
+            value={emailContentsData.emailContents[index].boxStyle.paddingTop}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -124,7 +223,9 @@ export default function TextContainer() {
           <StyleRowText>내부 여백 하단</StyleRowText>
           <SelectBox
             name="paddingBottom"
-            value={textStyle.boxStyle.paddingBottom}
+            value={
+              emailContentsData.emailContents[index].boxStyle.paddingBottom
+            }
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -137,7 +238,7 @@ export default function TextContainer() {
           <StyleRowText>내부 여백 좌측</StyleRowText>
           <SelectBox
             name="paddingLeft"
-            value={textStyle.boxStyle.paddingLeft}
+            value={emailContentsData.emailContents[index].boxStyle.paddingLeft}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -150,7 +251,7 @@ export default function TextContainer() {
           <StyleRowText>내부 여백 우측</StyleRowText>
           <SelectBox
             name="paddingRight"
-            value={textStyle.boxStyle.paddingRight}
+            value={emailContentsData.emailContents[index].boxStyle.paddingRight}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="0px">없음</option>
@@ -163,13 +264,12 @@ export default function TextContainer() {
           <StyleRowText>정렬</StyleRowText>
           <SelectBox
             name="textAlign"
-            value={textStyle.boxStyle.textAlign}
+            value={emailContentsData.emailContents[index].boxStyle.textAlign}
             onChange={e => handleBoxStyleChange(e)}
           >
             <option value="left">왼쪽</option>
             <option value="center">가운데</option>
             <option value="right">오른쪽</option>
-            <option value="block">채우기</option>
           </SelectBox>
         </StyleRow>
       </StyleBox>
@@ -219,4 +319,46 @@ const StyleRowText = styled.div`
 const BoxHeading = styled.h3`
   margin: 15px 0 5px 0;
   font-size: 1.1rem;
+`;
+
+const LinkStyleBox = styled.div`
+  display: flex;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  button {
+    padding: 5px 8px;
+    &:nth-child(1) {
+      border-radius: 5px 0 0 5px;
+      border-right: 1px solid #bdbdbd;
+      background-color: ${props => props.color || '#ffffff'};
+      &.active {
+        background-color: #ffdf2b;
+      }
+    }
+    &:nth-child(2) {
+      border-right: 1px solid #bdbdbd;
+      background-color: ${props => props.color || '#ffffff'};
+      &.active {
+        background-color: #ffdf2b;
+      }
+    }
+    &:nth-child(3) {
+      border-right: 1px solid #bdbdbd;
+      background-color: ${props => props.color || '#ffffff'};
+      &.active {
+        background-color: #ffdf2b;
+      }
+    }
+    &:nth-child(4) {
+      border-radius: 0 5px 5px 0;
+      background-color: ${props => props.color || '#ffffff'};
+      &.active {
+        background-color: #ffdf2b;
+      }
+    }
+  }
+`;
+
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+  font-size: 1rem;
 `;

@@ -23,19 +23,19 @@ export default function BoxTool() {
           link: '#',
           imageSrc: '',
           boxStyle: {
-            backgroundColor: '#FFFFFF', // 기본값: 흰색
-            borderWidth: '0px', // 기본값: 0px, 얇게: 1px, 보통: 2px, 두껍게: 3px
-            borderColor: '#000000', // 기본값: 검정색
-            borderStyle: 'solid', // solid, dotted, dashed
-            paddingTop: '15px', // 기본값: 15px(보통), 없음: 0px, 좁게: 5px, 넓게: 25px,
-            paddingBottom: '15px', // paddingTop 과 동일
-            paddingLeft: '15px', // 기본값: 15px(보통), 없음: 0px, 좁게: 5px, 넓게: 25px,
-            paddingRight: '15px', // paddingLeft 와 동일
-            textAlign: 'center', // 버튼정렬 기본값: center(가운데), 왼쪽: left, 오른쪽: right
+            backgroundColor: '#FFFFFF',
+            borderWidth: '0px',
+            borderColor: '#000000',
+            borderStyle: 'solid',
+            paddingTop: '15px',
+            paddingBottom: '15px',
+            paddingLeft: '15px',
+            paddingRight: '15px',
+            textAlign: 'center',
           },
           contentStyle: {
-            maxWidth: '100%', // 사용자 조절값 X
-            width: '', // 처음엔 설정 안되어있어서 이미지 본연의 크기로 나오고 100, 200 ~ 600 으로 100px 단위로 설정 가능
+            maxWidth: '100%',
+            width: '',
           },
         };
         break;
@@ -46,11 +46,11 @@ export default function BoxTool() {
           isDraggable: false,
           type: 'spacer',
           boxStyle: {
-            backgroundColor: '#FFFFFF', // 기본값: 흰색
-            borderWidth: '0px', // 기본값: 0px, 얇게: 1px, 보통: 2px, 두껍게: 3px
-            borderColor: '#000000', // 기본값: 검정색
-            borderStyle: 'solid', // solid, dotted, dashed
-            height: '50px', // 10px ~ 100px
+            backgroundColor: '#FFFFFF',
+            borderWidth: '0px',
+            borderColor: '#000000',
+            borderStyle: 'solid',
+            height: '50px',
           },
         };
         break;
@@ -61,20 +61,20 @@ export default function BoxTool() {
           isDraggable: false,
           type: 'divider',
           boxStyle: {
-            backgroundColor: '#FFFFFF', // 기본값: 흰색
-            borderWidth: '0px', // 기본값: 0px, 얇게: 1px, 보통: 2px, 두껍게: 3px
-            borderColor: '#000000', // 기본값: 검정색
-            borderStyle: 'solid', // solid, dotted, dashed
-            paddingTop: '15px', // 기본값: 15px(보통), 없음: 0px, 좁게: 5px, 넓게: 25px,
-            paddingBottom: '15px', // paddingTop 과 동일
-            paddingLeft: '0px', // 기본값: 0px(없음), 좁게: 5px, 보통: 15px, 넓게: 25px,
-            paddingRight: '0px', // paddingLeft 와 동일
+            backgroundColor: '#FFFFFF',
+            borderWidth: '0px',
+            borderColor: '#000000',
+            borderStyle: 'solid',
+            paddingTop: '15px',
+            paddingBottom: '15px',
+            paddingLeft: '0px',
+            paddingRight: '0px',
           },
           contentStyle: {
-            height: '1px', // 사용자 조절값 X, 스타일 유지를 위한 고정값
-            borderTopWidth: '2px', // 기본값: 2px(보통), 얇게: 1px, 굵게: 3px
-            borderTopStyle: 'solid', // 기본값: solid(직선), 짧은 점선: dotted, 긴 점선: dashed
-            borderTopColor: '#000000', // 기본값: 검정색
+            height: '1px',
+            borderTopWidth: '2px',
+            borderTopStyle: 'solid',
+            borderTopColor: '#000000',
           },
         };
         break;
@@ -87,29 +87,29 @@ export default function BoxTool() {
           link: '#',
           content: '버튼 이름',
           boxStyle: {
-            backgroundColor: '#FFFFFF', // 기본값: 흰색
-            borderWidth: '0px', // 기본값: 0px, 얇게: 1px, 보통: 2px, 두껍게: 3px
-            borderColor: '#000000', // 기본값: 검정색
-            borderStyle: 'solid', // solid, dotted, dashed
-            paddingTop: '15px', // 기본값: 15px(보통), 없음: 0px, 좁게: 5px, 넓게: 25px,
-            paddingBottom: '15px', // paddingTop 과 동일
-            paddingLeft: '0px', // 기본값: 0px(없음), 좁게: 5px, 보통: 15px, 넓게: 25px,
-            paddingRight: '0px', // paddingLeft 와 동일
-            textAlign: 'center', // 버튼정렬 기본값: center(가운데), 왼쪽: left, 오른쪽: right
+            backgroundColor: '#FFFFFF',
+            borderWidth: '0px',
+            borderColor: '#000000',
+            borderStyle: 'solid',
+            paddingTop: '15px',
+            paddingBottom: '15px',
+            paddingLeft: '0px',
+            paddingRight: '0px',
+            textAlign: 'center',
           },
           contentStyle: {
-            display: 'inline-block', // 사용자 조절값 X, 스타일 유지를 위한 고정값
-            paddingTop: '16px', // 사용자 조절값 X, 스타일 유지를 위한 고정값
-            paddingBottom: '16px', // 사용자 조절값 X, 스타일 유지를 위한 고정값
-            paddingLeft: '18px', // 사용자 조절값 X, 스타일 유지를 위한 고정값
-            paddingRight: '18px', // 사용자 조절값 X, 스타일 유지를 위한 고정값
-            backgroundColor: '#ffdf2b', // 버튼색상 기본값: 시그니처 노랑
-            color: '#000000', // 글자색상 기본값: 검정
-            borderWidth: '0px', // 버튼 테두리 기본값: 0px(없음), 얇게: 1px, 보통: 2px, 굵게: 3px
-            borderStyle: 'solid', // 사용자 조절값 X, 스타일 유지를 위한 고정값
-            borderRadius: '3px', // 버튼 모양 기본값 사각형, 원형: 500px
-            fontSize: '16px', // 글자 크기 기본값 16px, 12, 14, 18, 20, 26, 32, 40, 48, 60
-            textDecoration: 'none', // 사용자 조절값 X
+            display: 'inline-block',
+            paddingTop: '16px',
+            paddingBottom: '16px',
+            paddingLeft: '18px',
+            paddingRight: '18px',
+            backgroundColor: '#ffdf2b',
+            color: '#000000',
+            borderWidth: '0px',
+            borderStyle: 'solid',
+            borderRadius: '3px',
+            fontSize: '16px',
+            textDecoration: 'none',
             fontFamily:
               'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
           },
@@ -123,18 +123,19 @@ export default function BoxTool() {
           type: 'text',
           content: '여기에 내용을 입력하세요.',
           boxStyle: {
-            backgroundColor: '#FFFFFF', // 기본값: 흰색
-            borderWidth: '0px', // 기본값: 0px, 얇게: 1px, 보통: 2px, 두껍게: 3px
-            borderColor: '#000000', // 기본값: 검정색
-            borderStyle: 'solid', // solid, dotted, dashed
-            paddingTop: '15px', // 기본값: 15px(보통), 없음: 0px, 좁게: 5px, 넓게: 25px,
-            paddingBottom: '15px', // paddingTop 과 동일
-            paddingLeft: '0px', // 기본값: 0px(없음), 좁게: 5px, 보통: 15px, 넓게: 25px,
-            paddingRight: '0px', // paddingLeft 와 동일
-            textAlign: 'left', // 텍스트 정렬 기본값: left(가운데), 가운데: center, 오른쪽: right
+            backgroundColor: '#FFFFFF',
+            borderWidth: '0px',
+            borderColor: '#000000',
+            borderStyle: 'solid',
+            paddingTop: '15px',
+            paddingBottom: '15px',
+            paddingLeft: '0px',
+            paddingRight: '0px',
+            textAlign: 'left',
           },
           contentStyle: {
-            fontSize: '24px', // 기본값: 24px, 12, 14, 16, 18, 20, 32, 40, 48, 60
+            fontSize: '16px',
+            color: '#000000',
             fontFamily:
               'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
           },

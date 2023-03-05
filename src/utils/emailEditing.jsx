@@ -7,7 +7,7 @@ import ImageContent from '../components/emailEditingStep03/ImageContent';
 import SpacerContent from '../components/emailEditingStep03/SpacerContent';
 import TextContent from '../components/emailEditingStep03/TextContent';
 
-export function dataToComponent(data) {
+export function dataToComponent(data, index) {
   switch (data.type) {
     case 'spacer':
       return <SpacerContent boxStyle={data.boxStyle} />;
@@ -33,7 +33,7 @@ export function dataToComponent(data) {
           boxStyle={data.boxStyle}
           contentStyle={data.contentStyle}
           link={data.link}
-          content={data.content}
+          index={index}
         />
       );
     case 'text':
@@ -41,7 +41,7 @@ export function dataToComponent(data) {
         <TextContent
           boxStyle={data.boxStyle}
           contentStyle={data.contentStyle}
-          content={data.content}
+          index={index}
         />
       );
     default:

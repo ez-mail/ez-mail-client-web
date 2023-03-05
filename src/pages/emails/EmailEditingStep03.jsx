@@ -1,8 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { useQuery } from '@tanstack/react-query';
+import { useRecoilValue, useRecoilState } from 'recoil';
 
+import { useParams } from 'react-router-dom';
+import { fetchEmail } from '../../api/email';
+import { fetchSendingInfo } from '../../api/user';
 import { addProperties, removeProperties } from '../../utils/dragAndDrop';
 import LeftNav from '../../components/emailEditingStep03/LeftNav';
 import ContentMovePanel from '../../components/emailEditingStep03/ContentMovePanel';
@@ -10,162 +15,73 @@ import ContentWrapper from '../../components/emailEditingStep03/contentWrapper';
 import { dataToComponent } from '../../utils/emailEditing';
 import FooterContent from '../../components/emailEditingStep03/FooterContent';
 import ContentStyleTool from '../../components/emailEditingStep03/ContentStyleTool';
-
-const emailTemplateData = {
-  emailBodyStyle: { backgroundColor: '#f5f5f5' },
-  emailContainerStyle: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: '0px',
-    borderColor: '#000000',
-    borderStyle: 'solid',
-    fontFamily:
-      'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
-  },
-  emailFooter: {
-    companyOrUserName: '바닐라코딩',
-    contact: '010-1234-5678',
-    address: '서울시 강남구 태해란로 어쩌구 저쩌구',
-    boxStyle: {
-      paddingTop: '25px',
-      paddingBottom: '25px',
-      textAlign: 'center',
-      fontSize: '12px',
-      color: '#757575',
-      lineHeight: '24px',
-    },
-  },
-  emailContents: [
-    {
-      id: 'asdf1',
-      type: 'spacer',
-      boxStyle: {
-        backgroundColor: '#2DD500',
-        borderWidth: '1px',
-        borderColor: '#000000',
-        borderStyle: 'solid',
-        height: '50px',
-      },
-    },
-    {
-      id: 'asdf2',
-      type: 'divider',
-      boxStyle: {
-        backgroundColor: '#FFEC00',
-        borderWidth: '0px',
-        borderColor: '#000000',
-        borderStyle: 'solid',
-        paddingTop: '15px',
-        paddingBottom: '15px',
-        paddingLeft: '10px',
-        paddingRight: '10px',
-      },
-      contentStyle: {
-        height: '1px',
-        borderTopWidth: '3px',
-        borderTopColor: '#000000',
-        borderTopStyle: 'solid',
-      },
-    },
-    {
-      id: 'asdf3',
-      type: 'image',
-      link: 'https://beta.reactjs.org/',
-      imageSrc:
-        'https://images.unsplash.com/photo-1504194104404-433180773017?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80',
-      boxStyle: {
-        backgroundColor: '#FFEC00',
-        borderWidth: '0px',
-        borderColor: 'black',
-        borderStyle: 'solid',
-        paddingTop: '15px',
-        paddingBottom: '15px',
-        paddingLeft: '0px',
-        paddingRight: '0px',
-        textAlign: 'center',
-      },
-      contentStyle: {
-        maxWidth: '100%',
-        width: '',
-      },
-    },
-    {
-      id: 'asdf4',
-      type: 'spacer',
-      boxStyle: {
-        height: '20px',
-        backgroundColor: '#ffffff',
-        borderWidth: '0px',
-        borderColor: '#000000',
-        borderStyle: 'solid',
-      },
-    },
-    {
-      id: 'text123',
-      type: 'text',
-      content:
-        '텍스트 에디터<div><br></div><div><b>이것은</b> <del>가로줄</del> <i>테스트</i> <u>글자</u></div>',
-      boxStyle: {
-        paddingTop: '15px',
-        paddingBottom: '15px',
-        paddingLeft: '0px',
-        paddingRight: '0px',
-        textAlign: 'center',
-      },
-      contentStyle: {
-        fontSize: '24px',
-        fontFamily:
-          'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
-      },
-    },
-    {
-      id: 'asdf5',
-      type: 'button',
-      link: 'https://beta.reactjs.org/',
-      content: '길지 버튼',
-      boxStyle: {
-        backgroundColor: '#FFA600',
-        borderWidth: '1px',
-        borderColor: '#000000',
-        borderStyle: 'solid',
-        paddingTop: '15px',
-        paddingBottom: '15px',
-        paddingLeft: '15px',
-        paddingRight: '15px',
-        textAlign: 'center',
-      },
-      contentStyle: {
-        display: 'inline-block',
-        backgroundColor: '#ffdf2b',
-        borderWidth: '0px',
-        borderColor: '#000000',
-        borderStyle: 'solid',
-        borderRadius: '3px',
-        padding: '16px 18px',
-        color: '#000000',
-        fontSize: '16px',
-        textDecoration: 'none',
-        fontFamily:
-          'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", dotum, arial, helvetica, sans-serif',
-      },
-    },
-  ],
-};
+import userIdAtom from '../../recoil/userId/atom';
+import Loading from '../../components/Loading';
+import Error from '../../components/Error';
+import emailTemplateAtom from '../../recoil/emailTemplate/atom';
 
 export default function EmailEditingStep03() {
-  const [emailContentsData, setEmailContentsData] = useState([]);
+  const userId = useRecoilValue(userIdAtom);
+  const [emailContentsData, setEmailContentsData] =
+    useRecoilState(emailTemplateAtom);
+  const param = useParams();
   const $dragItemRef = useRef();
   const $dragOverItemRef = useRef();
   const $dragItemIndexRef = useRef();
   const $dragOverItemIndexRef = useRef();
   const [focusedType, setFocusedType] = useState(null);
+  const [focusedIndex, setFocusedIndex] = useState('');
 
-  useEffect(() => {
-    setEmailContentsData(addProperties(emailTemplateData.emailContents));
-  }, []);
+  const { data: senderData } = useQuery({
+    queryKey: ['senderData', userId],
+    queryFn: async () => {
+      const result = await fetchSendingInfo(userId);
+
+      return result;
+    },
+  });
+
+  const { isLoading, error } = useQuery({
+    queryKey: ['emailContentsData', userId, param.email_id, senderData],
+    queryFn: async () => {
+      const result = await fetchEmail(userId, param.email_id);
+
+      return result;
+    },
+    onSuccess: emailTemplateData => {
+      const { userName, companyName, address, contact } = senderData;
+
+      const parsedEmailData = JSON.parse(emailTemplateData.emailContent);
+
+      const addedPropertiesEmailContents = addProperties(
+        parsedEmailData.emailContents,
+      );
+
+      parsedEmailData.emailContents = addedPropertiesEmailContents;
+      parsedEmailData.emailFooter.companyOrUserName = companyName || userName;
+      parsedEmailData.emailFooter.contact =
+        contact || '발신자 설정페이지에서 전화번호를 설정해주세요';
+      parsedEmailData.emailFooter.address =
+        address || '발신자 설정페이지에서 주소를 설정해주세요';
+
+      setEmailContentsData(parsedEmailData);
+    },
+    enabled: !!senderData,
+    refetchOnWindowFocus: false,
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error>error</Error>;
+  }
 
   const handleDraggable = e => {
+    const newEmailTemplateData = { ...emailContentsData };
     const targetId = e.currentTarget.parentNode.parentNode.id;
-    const newEmailContents = emailContentsData.map(item => {
+    const newEmailContents = emailContentsData.emailContents.map(item => {
       if (item.id === targetId) {
         return { ...item, isDraggable: true };
       }
@@ -173,11 +89,14 @@ export default function EmailEditingStep03() {
       return item;
     });
 
-    setEmailContentsData(newEmailContents);
+    newEmailTemplateData.emailContents = newEmailContents;
+
+    setEmailContentsData(newEmailTemplateData);
   };
 
-  const handleFocus = e => {
-    const newEmailContents = emailContentsData.map(item => {
+  const handleFocus = (e, index) => {
+    const newEmailTemplateData = { ...emailContentsData };
+    const newEmailContents = emailContentsData.emailContents.map(item => {
       if (item.id === e.target.id) {
         setFocusedType(item.type);
 
@@ -187,15 +106,22 @@ export default function EmailEditingStep03() {
       return item;
     });
 
-    setEmailContentsData(newEmailContents);
+    newEmailTemplateData.emailContents = newEmailContents;
+
+    setFocusedIndex(index);
+
+    setEmailContentsData(newEmailTemplateData);
   };
 
   const handleBlur = e => {
-    const newEmailContents = emailContentsData.map(item => {
+    const newEmailTemplateData = { ...emailContentsData };
+    const newEmailContents = emailContentsData.emailContents.map(item => {
       return { ...item, isActive: false };
     });
 
-    setEmailContentsData(newEmailContents);
+    newEmailTemplateData.emailContents = newEmailContents;
+
+    setEmailContentsData(newEmailTemplateData);
   };
 
   const handleDragStart = (e, index) => {
@@ -213,15 +139,20 @@ export default function EmailEditingStep03() {
   };
 
   const handleDragEnd = e => {
-    const newEmailContents = emailContentsData.map(item => {
+    const newEmailTemplateData = { ...emailContentsData };
+    const newEmailContents = emailContentsData.emailContents.map(item => {
       return { ...item, isDraggable: false };
     });
 
-    setEmailContentsData(newEmailContents);
+    newEmailTemplateData.emailContents = newEmailContents;
+
+    setEmailContentsData(newEmailTemplateData);
   };
 
   const handleDrop = (e, index) => {
-    const newEmailContents = [...emailContentsData];
+    const newEmailTemplateData = { ...emailContentsData };
+    const newEmailContents = [...newEmailTemplateData.emailContents];
+
     const rect = e.currentTarget.getBoundingClientRect();
     const contentHeight = e.currentTarget.offsetHeight / 2;
     const middleOfContent = rect.top + contentHeight;
@@ -296,7 +227,9 @@ export default function EmailEditingStep03() {
     $dragOverItemIndexRef.current = null;
     $dragOverItemRef.current.style.boxShadow = 'none';
 
-    setEmailContentsData(newEmailContents);
+    newEmailTemplateData.emailContents = newEmailContents;
+
+    setEmailContentsData(newEmailTemplateData);
   };
 
   const handleDragOver = e => {
@@ -319,7 +252,8 @@ export default function EmailEditingStep03() {
   };
 
   const handleCopy = (e, index, element) => {
-    const newEmailContents = [...emailContentsData];
+    const newEmailTemplateData = { ...emailContentsData };
+    const newEmailContents = [...newEmailTemplateData.emailContents];
     const newContent = { ...element };
 
     newContent.id = crypto.randomUUID();
@@ -327,48 +261,58 @@ export default function EmailEditingStep03() {
 
     newEmailContents.splice(index, 0, newContent);
 
-    setEmailContentsData(newEmailContents);
+    newEmailTemplateData.emailContents = newEmailContents;
+
+    setEmailContentsData(newEmailTemplateData);
   };
 
   const handleDelete = (e, element) => {
-    if (emailContentsData.length <= 1) {
+    const newEmailTemplateData = { ...emailContentsData };
+
+    if (newEmailTemplateData.emailContents.length <= 1) {
       return alert('마지막 요소는 삭제 할 수 없습니다.');
     }
 
-    const newEmailContents = emailContentsData.filter(
+    const newEmailContents = emailContentsData.emailContents.filter(
       item => item.id !== element.id,
     );
 
-    setEmailContentsData(newEmailContents);
+    newEmailTemplateData.emailContents = newEmailContents;
+
+    setFocusedType(null);
+
+    setEmailContentsData(newEmailTemplateData);
   };
 
-  const contents = emailContentsData.map((emailContentData, index) => {
-    return (
-      <ContentWrapper
-        key={emailContentData.id}
-        id={emailContentData.id}
-        isDraggable={emailContentData.isDraggable}
-        onDragStart={e => handleDragStart(e, index)}
-        onDragEnter={e => handleDragEnter(e, index)}
-        onDragOver={handleDragOver}
-        onDragEnd={handleDragEnd}
-        onDragLeave={handleDragLeave}
-        onDrop={e => handleDrop(e, index)}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        onDelete={e => handleDelete(e, emailContentData)}
-      >
-        {dataToComponent(emailContentData)}
-        {emailContentData.isActive && (
-          <ContentMovePanel
-            onDraggable={handleDraggable}
-            onCopy={e => handleCopy(e, index, emailContentData)}
-            onDelete={e => handleDelete(e, emailContentData)}
-          />
-        )}
-      </ContentWrapper>
-    );
-  });
+  const contents = emailContentsData.emailContents.map(
+    (emailContentData, index) => {
+      return (
+        <ContentWrapper
+          key={emailContentData.id}
+          id={emailContentData.id}
+          isDraggable={emailContentData.isDraggable}
+          onDragStart={e => handleDragStart(e, index)}
+          onDragEnter={e => handleDragEnter(e, index)}
+          onDragOver={handleDragOver}
+          onDragEnd={handleDragEnd}
+          onDragLeave={handleDragLeave}
+          onDrop={e => handleDrop(e, index)}
+          onFocus={e => handleFocus(e, index)}
+          onBlur={handleBlur}
+          onDelete={e => handleDelete(e, emailContentData)}
+        >
+          {dataToComponent(emailContentData, index)}
+          {emailContentData.isActive && (
+            <ContentMovePanel
+              onDraggable={handleDraggable}
+              onCopy={e => handleCopy(e, index, emailContentData)}
+              onDelete={e => handleDelete(e, emailContentData)}
+            />
+          )}
+        </ContentWrapper>
+      );
+    },
+  );
 
   return (
     <>
@@ -384,20 +328,21 @@ export default function EmailEditingStep03() {
           <ContentStyleTool
             type={focusedType}
             setFocusedType={setFocusedType}
+            index={focusedIndex}
           />
         ) : (
           <LeftNav />
         )}
-        <EmailBackground style={emailTemplateData.emailBodyStyle}>
-          <EmailContentsList style={emailTemplateData.emailContainerStyle}>
+        <EmailBackground style={emailContentsData.emailBodyStyle}>
+          <EmailContentsList style={emailContentsData.emailContainerStyle}>
             {contents}
             <FooterContent
-              style={emailTemplateData.emailFooter.boxStyle}
+              style={emailContentsData.emailFooter.boxStyle}
               companyOrUserName={
-                emailTemplateData.emailFooter.companyOrUserName
+                emailContentsData.emailFooter.companyOrUserName
               }
-              address={emailTemplateData.emailFooter.address}
-              contact={emailTemplateData.emailFooter.contact}
+              address={emailContentsData.emailFooter.address}
+              contact={emailContentsData.emailFooter.contact}
             />
           </EmailContentsList>
         </EmailBackground>

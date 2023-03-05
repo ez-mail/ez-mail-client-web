@@ -43,6 +43,7 @@ const Wrapper = styled.div`
   }
 
   &:focus {
+    z-index: 1;
     outline: 2px solid #ffdf2b;
   }
 `;
