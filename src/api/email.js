@@ -94,3 +94,18 @@ export async function fetchUpdateEmail(userId, emailId, emailData) {
 
   return res.status;
 }
+
+export async function fetchSendEmail(userId, emailId) {
+  const FETCH_URL = `${config.serverOrigin}/users/${userId}/email-templates/${emailId}`;
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    credentials: 'include',
+  };
+
+  const res = await fetch(FETCH_URL, options);
+
+  return res.status;
+}
