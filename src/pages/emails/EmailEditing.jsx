@@ -9,13 +9,13 @@ export default function EmailEditing() {
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
 
-  // useEffect(() => {
-  //   if (!userId) {
-  //     alert('로그인이 필요합니다!');
+  useEffect(() => {
+    if (!userId) {
+      alert('로그인이 필요합니다!');
 
-  //     navigate('/');
-  //   }
-  // }, []);
+      navigate('/');
+    }
+  }, []);
 
   return (
     <>
