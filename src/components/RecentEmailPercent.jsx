@@ -46,12 +46,12 @@ export default function RecentEmailPercent() {
         <PercentTitleText>발송성공</PercentTitleText>
         <PercentNumberText>{getSuccessPercentage(emailData)}</PercentNumberText>
       </LeftPercentBox>
-      <RightPercentBox>
+      {/* <RightPercentBox>
         <PercentTitleText>오픈</PercentTitleText>
         <PercentNumberText inputColor="#ffdf2b">
           {getOpenMailPercentage(emailData)}
         </PercentNumberText>
-      </RightPercentBox>
+      </RightPercentBox> */}
     </PercentInfoBox>
   );
 }

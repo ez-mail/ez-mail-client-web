@@ -15,6 +15,7 @@ import {
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
+import { getKoreaDateString } from '../../utils/dashboard';
 
 export default function Emails() {
   const navigate = useNavigate();
@@ -91,7 +92,8 @@ export default function Emails() {
             >
               <EmailTemplateTitle>{item.emailTitle}</EmailTemplateTitle>
               <LastEditDate>
-                마지막 편집일 <Dates>{item.updatedAt}</Dates>
+                마지막 편집일{' '}
+                <Dates>{getKoreaDateString(item.updatedAt)}</Dates>
               </LastEditDate>
             </EmailTemplateData>
             <RightContent>
@@ -116,7 +118,7 @@ export default function Emails() {
           >
             <EmailTemplateTitle>{item.emailTitle}</EmailTemplateTitle>
             <LastEditDate>
-              마지막 편집일 <Dates>{item.updatedAt}</Dates>
+              마지막 편집일 <Dates>{getKoreaDateString(item.updatedAt)}</Dates>
             </LastEditDate>
           </EmailTemplateData>
           <RightContent>

@@ -83,12 +83,12 @@ export default function EmailsDashboard() {
               {getSuccessPercentage(emailData)}
             </PercentNumberText>
           </LeftPercentBox>
-          <RightPercentBox>
+          {/* <RightPercentBox>
             <PercentTitleText>오픈</PercentTitleText>
             <PercentNumberText inputColor="#ffdf2b">
               {getOpenMailPercentage(emailData)}
             </PercentNumberText>
-          </RightPercentBox>
+          </RightPercentBox> */}
         </PercentInfoBox>
       </MainContainer>
       <Outlet />
