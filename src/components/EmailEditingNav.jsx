@@ -10,6 +10,7 @@ import { fetchSendEmail, fetchUpdateEmail } from '../api/email';
 import emailTitleAtom from '../recoil/emailTitle/atom';
 import emailTemplateDataAtom from '../recoil/emailTemplate/atom';
 import userIdAtom from '../recoil/userId/atom';
+import { getEmailHtml } from '../utils/emailEditing';
 
 export default function EmailEditingNav() {
   const emailTitle = useRecoilValue(emailTitleAtom);
@@ -28,7 +29,7 @@ export default function EmailEditingNav() {
     newEmailTemplateData.emailContents = removedPropertiesEmailContents;
 
     const updatedEmailData = {
-      emailContent: JSON.stringify(newEmailTemplateData),
+      emailContent: getEmailHtml(newEmailTemplateData),
       editingStep: '04',
     };
 
