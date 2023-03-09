@@ -28,7 +28,9 @@ export default function StyleTool() {
         emailContainerStyle[e.target.name] = e.target.value;
 
         for (let i = 0; i < emailContents.length; i += 1) {
-          emailContents[i].boxStyle[e.target.name] = e.target.value;
+          if (e.target.name === 'backgroundColor') {
+            emailContents[i].boxStyle[e.target.name] = e.target.value;
+          }
         }
       }),
     );
