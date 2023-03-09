@@ -26,6 +26,7 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleLoginClick = async () => {
     const response = await requestLogin(userInput.email, userInput.password);
 
@@ -37,10 +38,18 @@ export default function Login() {
 
       navigate('/dashboard');
     } else {
-      alert('문제 발생(에러 처리 나중에)');
+      alert('이메일 또는 비밀번호를 다시 확인해주세요.');
 
       setUserInput({ email: '', password: '' });
     }
+  };
+
+  const handlePasswordKeyDown = e => {
+    if (e.keyCode !== 13) {
+      return;
+    }
+
+    handleLoginClick();
   };
 
   return (
@@ -61,6 +70,7 @@ export default function Login() {
         type="password"
         inputValue={userInput.password}
         onChange={handleUserInput}
+        onKeyDown={handlePasswordKeyDown}
       >
         비밀번호
       </LoginInput>

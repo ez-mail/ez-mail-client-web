@@ -6,6 +6,7 @@ export default function LoginInput({
   id,
   inputValue,
   onChange,
+  onKeyDown,
   type = 'text',
 }) {
   return (
@@ -17,6 +18,7 @@ export default function LoginInput({
         type={type}
         value={inputValue}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </Container>
   );
