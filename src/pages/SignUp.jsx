@@ -38,10 +38,25 @@ export default function SignUp() {
     );
 
     if (status === 201) {
-      navigate('/login');
+      alert('환영합니다!');
+
+      navigate('/login', {
+        state: {
+          userEmail: userInput.email,
+          userPassword: userInput.password,
+        },
+      });
     } else {
-      alert('에러 발생(에러처리 나중에)');
+      alert('회원가입에 실패했습니다.');
     }
+  };
+
+  const handlePasswordKeyDown = e => {
+    if (e.keyCode !== 13) {
+      return;
+    }
+
+    handleSignUpClick();
   };
 
   return (
@@ -69,6 +84,7 @@ export default function SignUp() {
         type="password"
         inputValue={userInput.password}
         onChange={handleUserInput}
+        onKeyDown={handlePasswordKeyDown}
       >
         비밀번호
       </SignUpInput>

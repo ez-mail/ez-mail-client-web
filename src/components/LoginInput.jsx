@@ -6,6 +6,7 @@ export default function LoginInput({
   id,
   inputValue,
   onChange,
+  onKeyDown,
   type = 'text',
 }) {
   return (
@@ -17,6 +18,7 @@ export default function LoginInput({
         type={type}
         value={inputValue}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </Container>
   );
@@ -37,4 +39,5 @@ const Input = styled.input`
   height: 50px;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
+  padding: 0 10px;
 `;
