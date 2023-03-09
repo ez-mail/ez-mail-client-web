@@ -2,16 +2,15 @@ import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
+import { useRecoilState } from 'recoil';
 
 import { setImageUrl } from '../../utils/dragAndDrop';
+import emailTemplateDataAtom from '../../recoil/emailTemplate/atom';
 
-export default function ImageContent({
-  boxStyle,
-  imageSrc,
-  link,
-  contentStyle,
-}) {
-  const [imgSrc, setImgSrc] = useState(imageSrc);
+export default function ImageContent({ boxStyle, link, contentStyle, index }) {
+  const [emailContentsData, setEmailContentsData] = useRecoilState(
+    emailTemplateDataAtom,
+  );
   const inputRef = useRef();
 
   const handleAddPhotoClick = () => {
@@ -19,12 +18,22 @@ export default function ImageContent({
   };
 
   const handleInputChange = e => {
-    setImageUrl(e.target.files[0], setImgSrc);
+    setImageUrl(
+      e.target.files[0],
+      emailContentsData,
+      setEmailContentsData,
+      index,
+    );
   };
 
   const handleImgDrop = e => {
     e.preventDefault();
-    setImageUrl(e.dataTransfer.files[0], setImgSrc);
+    setImageUrl(
+      e.dataTransfer.files[0],
+      emailContentsData,
+      setEmailContentsData,
+      index,
+    );
   };
 
   const handleDragOver = e => {
@@ -37,7 +46,7 @@ export default function ImageContent({
 
   return (
     <div style={boxStyle}>
-      {imgSrc ? (
+      {emailContentsData.emailContents[index].imageSrc ? (
         <div
           onClick={handleAddPhotoClick}
           onDrop={handleImgDrop}
@@ -49,7 +58,11 @@ export default function ImageContent({
             rel="noreferrer"
             onClick={handleImageClick}
           >
-            <img src={imgSrc} alt="이미지" style={contentStyle} />
+            <img
+              src={emailContentsData.emailContents[index].imageSrc}
+              alt="이미지"
+              style={contentStyle}
+            />
           </a>
           <PhotoInput
             ref={inputRef}
