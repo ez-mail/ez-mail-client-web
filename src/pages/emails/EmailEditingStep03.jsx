@@ -150,7 +150,7 @@ export default function EmailEditingStep03() {
   };
 
   const handleDrop = (e, index) => {
-    if (e.target.tagName === 'IMG') {
+    if (e.target.tagName === 'IMG' || e.dataTransfer.effectAllowed === 'all') {
       return;
     }
 
@@ -238,6 +238,10 @@ export default function EmailEditingStep03() {
 
   const handleDragOver = e => {
     e.preventDefault();
+
+    if (e.dataTransfer.effectAllowed === 'all') {
+      return;
+    }
 
     const rect = e.currentTarget.getBoundingClientRect();
     const contentHeight = e.currentTarget.offsetHeight / 2;

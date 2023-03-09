@@ -145,6 +145,7 @@ export default function BoxTool() {
         console.log('해당타입이 없습니다.');
     }
     e.dataTransfer.setData('content', JSON.stringify(contentType));
+    e.dataTransfer.effectAllowed = 'copy';
   };
   return (
     <ToolBoxContainer>
