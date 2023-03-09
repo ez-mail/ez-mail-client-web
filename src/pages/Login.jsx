@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 
@@ -13,6 +13,16 @@ export default function Login() {
   const navigate = useNavigate();
   const [userId, setUserId] = useRecoilState(userIdAtom);
   const [userInput, setUserInput] = useState({ email: '', password: '' });
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state) {
+      setUserInput({
+        email: location.state.userEmail,
+        password: location.state.userPassword,
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (userId) {

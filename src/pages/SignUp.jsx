@@ -40,7 +40,12 @@ export default function SignUp() {
     if (status === 201) {
       alert('환영합니다!');
 
-      navigate('/login');
+      navigate('/login', {
+        state: {
+          userEmail: userInput.email,
+          userPassword: userInput.password,
+        },
+      });
     } else {
       alert('회원가입에 실패했습니다.');
     }
