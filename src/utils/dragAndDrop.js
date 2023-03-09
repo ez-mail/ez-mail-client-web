@@ -3,6 +3,10 @@ import produce from 'immer';
 export function setImageUrl(file, emailContentsData, setState, index) {
   const reader = new FileReader();
 
+  if (!file) {
+    return;
+  }
+
   reader.readAsDataURL(file);
   reader.onload = e => {
     setState(

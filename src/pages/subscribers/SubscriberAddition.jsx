@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilValue } from 'recoil';
@@ -10,6 +11,7 @@ import CommonButton from '../../components/CommonButton';
 import userIdAtom from '../../recoil/userId/atom';
 
 export default function SubscriberAddition() {
+  const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
   const [inputs, setInputs] = useState([
     { email: '', name: '', adAgreement: false, id: 0 },
@@ -45,6 +47,8 @@ export default function SubscriberAddition() {
 
     if (result === 201) {
       alert('구독자 추가 성공');
+
+      navigate(`/subscribers`);
     } else {
       alert('문제발생');
     }

@@ -23,9 +23,13 @@ export default function StyleTool() {
   const handleEmailContainerStyleChange = e => {
     setEmailContentsData(
       produce(emailContentsData, draft => {
-        const { emailContainerStyle } = draft;
+        const { emailContainerStyle, emailContents } = draft;
 
         emailContainerStyle[e.target.name] = e.target.value;
+
+        for (let i = 0; i < emailContents.length; i += 1) {
+          emailContents[i].boxStyle[e.target.name] = e.target.value;
+        }
       }),
     );
   };
