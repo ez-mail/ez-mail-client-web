@@ -1,9 +1,17 @@
-export function setImageUrl(file, setState) {
+import produce from 'immer';
+
+export function setImageUrl(file, emailContentsData, setState, index) {
   const reader = new FileReader();
 
   reader.readAsDataURL(file);
   reader.onload = e => {
-    setState(e.target.result);
+    setState(
+      produce(emailContentsData, draft => {
+        const imageContent = draft.emailContents[index];
+
+        imageContent.imageSrc = e.target.result;
+      }),
+    );
   };
 }
 

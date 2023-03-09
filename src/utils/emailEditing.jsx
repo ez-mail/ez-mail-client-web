@@ -25,6 +25,7 @@ export function dataToComponent(data, index) {
           contentStyle={data.contentStyle}
           link={data.link}
           imageSrc={data.imageSrc}
+          index={index}
         />
       );
     case 'button':
