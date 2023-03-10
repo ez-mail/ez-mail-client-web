@@ -83,10 +83,9 @@ export default function SpacerContainer({ index }) {
           min="10"
           max="100"
           step="10"
-          value={emailContentsData.emailContents[index].boxStyle.height.replace(
-            'px',
-            '',
-          )}
+          value={emailContentsData.emailContents[
+            index
+          ].boxStyle.height?.replace('px', '')}
           onChange={handleInputChange}
         />
         <p>{emailContentsData.emailContents[index].boxStyle.height}</p>
