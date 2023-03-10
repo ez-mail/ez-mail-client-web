@@ -122,7 +122,7 @@ export default function TextContainer({ index }) {
         </StyleRow>
       </StyleBox>
       <StyleBox>
-        <StyleRow>
+        {/* <StyleRow>
           <StyleRowText>스타일</StyleRowText>
           <LinkStyleBox>
             <button
@@ -160,7 +160,7 @@ export default function TextContainer({ index }) {
               <StyledFontAwesomeIcon icon={faItalic} />
             </button>
           </LinkStyleBox>
-        </StyleRow>
+        </StyleRow> */}
         <StyleRow>
           <StyleRowText>정렬</StyleRowText>
           <SelectBox
