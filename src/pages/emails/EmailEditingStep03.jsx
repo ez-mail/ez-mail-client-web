@@ -151,6 +151,8 @@ export default function EmailEditingStep03() {
 
   const handleDrop = (e, index) => {
     if (e.target.tagName === 'IMG' || e.dataTransfer.effectAllowed === 'all') {
+      $dragOverItemRef.current.style.boxShadow = 'none';
+
       return;
     }
 
