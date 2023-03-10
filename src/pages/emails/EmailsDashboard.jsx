@@ -60,16 +60,16 @@ export default function EmailsDashboard() {
         <EmailInfoContainer>
           <EmailInfoTitle>이메일 제목</EmailInfoTitle>
           <EmailInfoContent>{emailData.emailTitle}</EmailInfoContent>
-          <EmailInfoTitle>이메일 URL</EmailInfoTitle>
-          <EmailInfoContent>https://ez-mail.com/ABCd</EmailInfoContent>
+          {/* <EmailInfoTitle>이메일 URL</EmailInfoTitle>
+          <EmailInfoContent>https://ez-mail.com/ABCd</EmailInfoContent> */}
           <EmailInfoTitle>발신자 이름</EmailInfoTitle>
           <EmailInfoContent>{emailData.sender}</EmailInfoContent>
           <EmailInfoTitle>발송시작일</EmailInfoTitle>
           <EmailInfoContent>
             {getKoreaDateString(emailData.startSendDate)}
           </EmailInfoContent>
-          <EmailInfoTitle>발신자 이메일 주소</EmailInfoTitle>
-          <EmailInfoContent>abcd@abcd.com</EmailInfoContent>
+          {/* <EmailInfoTitle>발신자 이메일 주소</EmailInfoTitle>
+          <EmailInfoContent>abcd@abcd.com</EmailInfoContent> */}
           <EmailInfoTitle>발송완료일</EmailInfoTitle>
           <EmailInfoContent>
             {getKoreaDateString(emailData.endSendDate)}
@@ -128,7 +128,7 @@ const EmailInfoContainer = styled.main`
   grid-template-columns: 1fr 1fr 1fr 1fr;
   align-items: center;
   width: 100%;
-  height: 296px;
+  height: 226px;
   margin-bottom: 50px;
   padding: 30px;
   border: 1px solid #bdbdbd;
