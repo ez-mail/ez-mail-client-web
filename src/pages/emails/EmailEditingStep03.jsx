@@ -56,13 +56,14 @@ export default function EmailEditingStep03() {
       const addedPropertiesEmailContents = addProperties(
         parsedEmailData.emailContents,
       );
-
-      parsedEmailData.emailContents = addedPropertiesEmailContents;
-      parsedEmailData.emailFooter.companyOrUserName = companyName || userName;
-      parsedEmailData.emailFooter.contact =
-        contact || '발신자 설정페이지에서 전화번호를 설정해주세요';
-      parsedEmailData.emailFooter.address =
-        address || '발신자 설정페이지에서 주소를 설정해주세요';
+      if (parsedEmailData) {
+        parsedEmailData.emailContents = addedPropertiesEmailContents;
+        parsedEmailData.emailFooter.companyOrUserName = companyName || userName;
+        parsedEmailData.emailFooter.contact =
+          contact || '발신자 설정페이지에서 전화번호를 설정해주세요';
+        parsedEmailData.emailFooter.address =
+          address || '발신자 설정페이지에서 주소를 설정해주세요';
+      }
 
       setEmailContentsData(parsedEmailData);
     },
