@@ -56,6 +56,7 @@ export default function EmailEditingStep03() {
       const addedPropertiesEmailContents = addProperties(
         parsedEmailData.emailContents,
       );
+
       if (parsedEmailData) {
         parsedEmailData.emailContents = addedPropertiesEmailContents;
         parsedEmailData.emailFooter.companyOrUserName = companyName || userName;
