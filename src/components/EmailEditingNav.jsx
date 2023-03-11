@@ -82,6 +82,7 @@ export default function EmailEditingNav() {
     newEmailTemplateData.emailContents = removedPropertiesEmailContents;
 
     const updatedEmailData = {
+      emailTitle,
       emailContent: JSON.stringify(newEmailTemplateData),
     };
 
