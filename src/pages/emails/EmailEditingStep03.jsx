@@ -130,6 +130,8 @@ export default function EmailEditingStep03() {
     e.dataTransfer.effectAllowed = 'move';
     const img = new Image();
 
+    setFocusedType(null);
+
     e.dataTransfer.setDragImage(img, 0, 0);
   };
 
@@ -157,7 +159,11 @@ export default function EmailEditingStep03() {
     }
 
     const newEmailTemplateData = { ...emailContentsData };
-    const newEmailContents = [...newEmailTemplateData.emailContents];
+    const newEmailContents = emailContentsData.emailContents.map(item => {
+      return { ...item, isActive: false };
+    });
+
+    $dragItemRef.current.blur();
 
     const rect = e.currentTarget.getBoundingClientRect();
     const contentHeight = e.currentTarget.offsetHeight / 2;
