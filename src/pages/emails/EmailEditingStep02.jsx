@@ -13,12 +13,14 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
 import emailTitleAtom from '../../recoil/emailTitle/atom';
+import senderAtom from '../../recoil/sender/atom';
 
 export default function EmailEditingStep02() {
   const navigate = useNavigate();
   const param = useParams();
   const userId = useRecoilValue(userIdAtom);
   const setNavEmailTitle = useSetRecoilState(emailTitleAtom);
+  const setSender = useSetRecoilState(senderAtom);
   const [sendingInfo, setSendingInfo] = useState({
     emailTitle: '',
     sender: '',
@@ -86,6 +88,9 @@ export default function EmailEditingStep02() {
 
     if (e.target.name === 'emailTitle') {
       setNavEmailTitle(e.target.value);
+    }
+    if (e.target.name === 'sender') {
+      setSender(e.target.value);
     }
 
     setSendingInfo(newSendingInfo);

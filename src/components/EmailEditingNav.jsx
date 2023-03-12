@@ -8,12 +8,14 @@ import { useRecoilValue } from 'recoil';
 import { removeProperties } from '../utils/dragAndDrop';
 import { fetchSendEmail, fetchUpdateEmail } from '../api/email';
 import emailTitleAtom from '../recoil/emailTitle/atom';
+import senderAtom from '../recoil/sender/atom';
 import emailTemplateDataAtom from '../recoil/emailTemplate/atom';
 import userIdAtom from '../recoil/userId/atom';
 import { getEmailHtml } from '../utils/emailEditing';
 
 export default function EmailEditingNav() {
   const emailTitle = useRecoilValue(emailTitleAtom);
+  const sender = useRecoilValue(senderAtom);
   const userId = useRecoilValue(userIdAtom);
   const param = useParams();
   const emailTemplateData = useRecoilValue(emailTemplateDataAtom);
@@ -82,6 +84,8 @@ export default function EmailEditingNav() {
     newEmailTemplateData.emailContents = removedPropertiesEmailContents;
 
     const updatedEmailData = {
+      emailTitle,
+      sender,
       emailContent: JSON.stringify(newEmailTemplateData),
     };
 
