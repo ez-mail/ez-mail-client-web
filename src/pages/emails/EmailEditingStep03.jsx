@@ -57,14 +57,12 @@ export default function EmailEditingStep03() {
         parsedEmailData.emailContents,
       );
 
-      if (parsedEmailData) {
-        parsedEmailData.emailContents = addedPropertiesEmailContents;
-        parsedEmailData.emailFooter.companyOrUserName = companyName || userName;
-        parsedEmailData.emailFooter.contact =
-          contact || '발신자 설정페이지에서 전화번호를 설정해주세요';
-        parsedEmailData.emailFooter.address =
-          address || '발신자 설정페이지에서 주소를 설정해주세요';
-      }
+      parsedEmailData.emailContents = addedPropertiesEmailContents;
+      parsedEmailData.emailFooter.companyOrUserName = companyName || userName;
+      parsedEmailData.emailFooter.contact =
+        contact || '발신자 설정페이지에서 전화번호를 설정해주세요';
+      parsedEmailData.emailFooter.address =
+        address || '발신자 설정페이지에서 주소를 설정해주세요';
 
       setEmailContentsData(parsedEmailData);
     },
@@ -165,8 +163,6 @@ export default function EmailEditingStep03() {
       return { ...item, isActive: false };
     });
 
-    $dragItemRef.current.blur();
-
     const rect = e.currentTarget.getBoundingClientRect();
     const contentHeight = e.currentTarget.offsetHeight / 2;
     const middleOfContent = rect.top + contentHeight;
@@ -175,6 +171,8 @@ export default function EmailEditingStep03() {
     );
 
     if (e.dataTransfer.effectAllowed === 'move') {
+      $dragItemRef.current.blur();
+
       if (
         (absolute === 1 &&
           e.clientY > middleOfContent &&

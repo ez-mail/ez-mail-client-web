@@ -28,7 +28,11 @@ export default function EmailEditingStep01() {
     [],
   );
 
-  const { isLoading: isEmailLoading, error: isEmailError } = useQuery({
+  const {
+    isLoading: isEmailLoading,
+    error: isEmailError,
+    data: emailData,
+  } = useQuery({
     queryKey: ['userEmailTemplate', userId, param.email_id],
     queryFn: async () => {
       const result = await fetchEmail(userId, param.email_id);
@@ -39,6 +43,7 @@ export default function EmailEditingStep01() {
       setNavEmailTitle(emailTemplateData.emailTitle);
     },
   });
+  const recipients = emailData?.recipients;
 
   const { isLoading: isSubscribersLoading, error: isSubscribersError } =
     useQuery({
@@ -49,10 +54,23 @@ export default function EmailEditingStep01() {
         return result;
       },
       onSuccess: subscribersData => {
-        setAddedIsCheckedSubscribers(
-          addIsCheckedProperty(subscribersData.subscribers),
-        );
+        const addedProperty = addIsCheckedProperty(subscribersData.subscribers);
+
+        const checkedSubscribers = addedProperty.map(subscriber => {
+          const prevChecked = recipients.find(
+            recipient => recipient._id === subscriber._id,
+          );
+
+          if (prevChecked && prevChecked._id === subscriber._id) {
+            return { ...subscriber, isChecked: true };
+          }
+
+          return { ...subscriber };
+        });
+
+        setAddedIsCheckedSubscribers(checkedSubscribers);
       },
+      enabled: !!recipients,
     });
 
   if (isEmailLoading || isSubscribersLoading) {
