@@ -56,6 +56,10 @@ export default function Sender() {
     });
   };
 
+  const handleOriginButtonClick = () => {
+    navigate('/sender/origin');
+  };
+
   const handleModifyButtonClick = () => {
     setIsEditMode(true);
   };
@@ -136,6 +140,9 @@ export default function Sender() {
       <MainContainer>
         <Title>발신자 설정</Title>
         <ButtonContainer>
+          <CodeButton onClick={handleOriginButtonClick}>
+            오리진 추가하기
+          </CodeButton>
           <CodeButton onClick={handleCodeButtonClick}>코드 내보내기</CodeButton>
           <EditButton onClick={handleModifyButtonClick}>수정하기</EditButton>
         </ButtonContainer>
