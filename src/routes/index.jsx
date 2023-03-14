@@ -17,6 +17,7 @@ import SubscriberAddition from '../pages/subscribers/SubscriberAddition';
 import EmailsDashboard from '../pages/emails/EmailsDashboard';
 import EmailRecipientsModal from '../pages/emails/EmailRecipientsModal';
 import CdnCodeModal from '../pages/CdnCodeModal';
+import OriginModal from '../pages/OriginModal';
 import EmailEditing from '../pages/emails/EmailEditing';
 
 const router = createBrowserRouter([
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
           {
             path: 'cdnCode',
             element: <CdnCodeModal />,
+          },
+          {
+            path: 'origin',
+            element: <OriginModal />,
           },
         ],
       },

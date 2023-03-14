@@ -5,6 +5,7 @@ export default function CommonButton({
   children,
   alignSelf,
   padding,
+  margin,
   color,
   backgroundColor,
   fontSize,
@@ -15,6 +16,7 @@ export default function CommonButton({
     <Button
       alignSelf={alignSelf}
       padding={padding}
+      margin={margin}
       color={color}
       backgroundColor={backgroundColor}
       fontSize={fontSize}
@@ -29,6 +31,7 @@ export default function CommonButton({
 const Button = styled.button`
   display: ${props => props.display || 'block'};
   padding: ${props => props.padding || '10px 14px'};
+  margin: ${props => props.margin || '0'};
   border-radius: 5px;
   background-color: ${props => props.backgroundColor || '#ffdf2b'};
   font-size: ${props => props.fontSize || '14px'};
