@@ -62,10 +62,10 @@ export default function OriginModal() {
         <CommonButton margin="0 auto" onClick={handleAddOriginClick}>
           추가하기
         </CommonButton>
-        <OriginList>
+        <RegisteredOrigin>
           <Title>등록된 Origin</Title>
           <OriginData>{origin}</OriginData>
-        </OriginList>
+        </RegisteredOrigin>
       </OriginContainer>
     </Modal>
   );
@@ -75,7 +75,7 @@ const OriginContainer = styled.div`
   padding: 20px;
 `;
 
-const OriginList = styled.div`
+const RegisteredOrigin = styled.div`
   margin-top: 50px;
 `;
 
