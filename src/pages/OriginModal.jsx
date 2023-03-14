@@ -54,20 +54,26 @@ export default function OriginModal() {
   };
 
   return (
-    <Modal title="코드를 붙여넣을 홈페이지 Origin을 입력해주세요" border="none">
-      <InputText onChange={handleOriginChange} width="400px">
-        Origin
-      </InputText>
-      <CommonButton margin="0 auto" onClick={handleAddOriginClick}>
-        추가하기
-      </CommonButton>
-      <OriginList>
-        <Title>등록된 Origin 목록</Title>
-        <OriginData>{origin}</OriginData>
-      </OriginList>
+    <Modal title="코드를 붙여넣을 홈페이지 Origin을 입력해주세요">
+      <OriginContainer>
+        <InputText onChange={handleOriginChange} width="380px">
+          Origin
+        </InputText>
+        <CommonButton margin="0 auto" onClick={handleAddOriginClick}>
+          추가하기
+        </CommonButton>
+        <OriginList>
+          <Title>등록된 Origin</Title>
+          <OriginData>{origin}</OriginData>
+        </OriginList>
+      </OriginContainer>
     </Modal>
   );
 }
+
+const OriginContainer = styled.div`
+  padding: 20px;
+`;
 
 const OriginList = styled.div`
   margin-top: 50px;

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-export default function Modal({ title, children, border }) {
+export default function Modal({ title, children }) {
   const navigate = useNavigate();
 
   const handleCloseButtonClick = () => {
@@ -13,7 +13,7 @@ export default function Modal({ title, children, border }) {
     <ModalBackground>
       <ModalContainer>
         <Title>{title}</Title>
-        <Content border={border}>{children}</Content>
+        <Content>{children}</Content>
         <CloseButton onClick={handleCloseButtonClick}>닫기</CloseButton>
       </ModalContainer>
     </ModalBackground>
@@ -50,7 +50,7 @@ const Content = styled.div`
   width: 426px;
   height: 450px;
   margin-bottom: 30px;
-  border: ${props => props.border || '1px solid black'};
+  border: 1px solid black;
 `;
 
 const CloseButton = styled.button`
