@@ -11,9 +11,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
-import StyleControlPanelRow from '../DesignedComponents/StyleControlPanelRow';
-import StyleControlPanelSelectBox from '../DesignedComponents/StyleControlPanelSelectBox';
-import StyleControlPanelColorPicker from '../DesignedComponents/StyleControlPanelColorPicker';
+import StyleControlPanelRow from '../../DesignedComponents/StyleControlPanelRow';
+import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPanelSelectBox';
+import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 
 export default function TextContainer({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(

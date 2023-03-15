@@ -4,10 +4,10 @@ import { useRecoilState } from 'recoil';
 import produce from 'immer';
 
 import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
-import StyleControlPanelRow from '../DesignedComponents/StyleControlPanelRow';
-import StyleControlPanelSelectBox from '../DesignedComponents/StyleControlPanelSelectBox';
-import StyleControlPanelColorPicker from '../DesignedComponents/StyleControlPanelColorPicker';
-import StyleControlPanelLinkInput from '../DesignedComponents/StyleControlPanelLinkInput';
+import StyleControlPanelRow from '../../DesignedComponents/StyleControlPanelRow';
+import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPanelSelectBox';
+import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
+import StyleControlPanelLinkInput from '../../DesignedComponents/StyleControlPanelLinkInput';
 
 export default function ImageContainer({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(

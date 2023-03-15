@@ -4,10 +4,10 @@ import { useRecoilState } from 'recoil';
 import produce from 'immer';
 
 import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
-import StyleControlPanelRow from '../DesignedComponents/StyleControlPanelRow';
-import StyleControlPanelSelectBox from '../DesignedComponents/StyleControlPanelSelectBox';
-import StyleControlPanelColorPicker from '../DesignedComponents/StyleControlPanelColorPicker';
-import StyleControlPanelInputRange from '../DesignedComponents/StyleControlPanelInputRange';
+import StyleControlPanelRow from '../../DesignedComponents/StyleControlPanelRow';
+import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPanelSelectBox';
+import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
+import StyleControlPanelInputRange from '../../DesignedComponents/StyleControlPanelInputRange';
 
 export default function SpacerContainer({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
