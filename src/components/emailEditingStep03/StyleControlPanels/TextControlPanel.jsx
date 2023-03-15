@@ -11,6 +11,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
+import StyleControlPanelRow from '../../DesignedComponents/StyleControlPanelRow';
+import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPanelSelectBox';
+import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 
 export default function TextContainer({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
@@ -77,51 +80,103 @@ export default function TextContainer({ index }) {
   return (
     <>
       <StyleBox>
-        <StyleRow>
-          <StyleRowText>글자 크기</StyleRowText>
-          <SelectBox
+        <StyleControlPanelRow title="글자 크기">
+          <StyleControlPanelSelectBox
             name="fontSize"
             value={emailContentsData.emailContents[index].contentStyle.fontSize}
             onChange={handleContentStyleChange}
-          >
-            <option value="12px">12px</option>
-            <option value="14px">14px</option>
-            <option value="16px">16px</option>
-            <option value="18px">18px</option>
-            <option value="20px">20px</option>
-            <option value="24px">24px</option>
-            <option value="32px">32px</option>
-            <option value="40px">40px</option>
-            <option value="48px">48px</option>
-            <option value="60px">60px</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>폰트</StyleRowText>
-          <SelectBox
+            options={[
+              {
+                value: '12px',
+                expression: '12px',
+              },
+              {
+                value: '14px',
+                expression: '14px',
+              },
+              {
+                value: '16px',
+                expression: '16px',
+              },
+              {
+                value: '18px',
+                expression: '18px',
+              },
+              {
+                value: '20px',
+                expression: '20px',
+              },
+              {
+                value: '26px',
+                expression: '26px',
+              },
+              {
+                value: '32px',
+                expression: '32px',
+              },
+              {
+                value: '40px',
+                expression: '40px',
+              },
+              {
+                value: '48px',
+                expression: '48px',
+              },
+              {
+                value: '60px',
+                expression: '60px',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="폰트">
+          <StyleControlPanelSelectBox
             name="fontFamily"
             value={
               emailContentsData.emailContents[index].contentStyle.fontFamily
             }
             onChange={handleContentStyleChange}
-          >
-            <option value='AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", "dotum", arial, helvetica, sans-serif'>
-              고딕
-            </option>
-            <option value='"nanum myoungjo", 바탕, batang, serif'>명조</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>글자 색상</StyleRowText>
-          <ColorPicker
-            type="color"
+            options={[
+              {
+                value:
+                  'AppleSDGothic, "apple sd gothic neo", "noto sans korean", "noto sans korean regular", "noto sans cjk kr", "noto sans cjk", "nanum gothic", "malgun gothic", "dotum", arial, helvetica, sans-serif',
+                expression: '고딕',
+              },
+              {
+                value: '"nanum myoungjo", 바탕, batang, serif',
+                expression: '명조',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="글자 색상">
+          <StyleControlPanelColorPicker
             name="color"
             value={emailContentsData.emailContents[index].contentStyle.color}
             onChange={handleContentStyleChange}
           />
-        </StyleRow>
-      </StyleBox>
-      <StyleBox>
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="정렬">
+          <StyleControlPanelSelectBox
+            name="textAlign"
+            value={emailContentsData.emailContents[index].boxStyle.textAlign}
+            onChange={handleBoxStyleChange}
+            options={[
+              {
+                value: 'left',
+                expression: '왼쪽',
+              },
+              {
+                value: 'center',
+                expression: '가운데',
+              },
+              {
+                value: 'right',
+                expression: '오른쪽',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
         {/* <StyleRow>
           <StyleRowText>스타일</StyleRowText>
           <LinkStyleBox>
@@ -161,117 +216,171 @@ export default function TextContainer({ index }) {
             </button>
           </LinkStyleBox>
         </StyleRow> */}
-        <StyleRow>
-          <StyleRowText>정렬</StyleRowText>
-          <SelectBox
-            name="textAlign"
-            value={emailContentsData.emailContents[index].boxStyle.textAlign}
-            onChange={handleBoxStyleChange}
-          >
-            <option value="left">왼쪽</option>
-            <option value="center">가운데</option>
-            <option value="right">오른쪽</option>
-          </SelectBox>
-        </StyleRow>
       </StyleBox>
       <StyleBox>
         <BoxHeading>상자</BoxHeading>
-        <StyleRow>
-          <StyleRowText>배경 색상</StyleRowText>
-          <ColorPicker
-            type="color"
+        <StyleControlPanelRow title="배경 색상">
+          <StyleControlPanelColorPicker
             name="backgroundColor"
             value={
               emailContentsData.emailContents[index].boxStyle.backgroundColor
             }
             onChange={handleBoxStyleChange}
           />
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>배경 테두리</StyleRowText>
-          <SelectBox
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="배경 테두리">
+          <StyleControlPanelSelectBox
             name="borderWidth"
             value={emailContentsData.emailContents[index].boxStyle.borderWidth}
             onChange={handleBoxStyleChange}
-          >
-            <option value="0px">없음</option>
-            <option value="1px">얇게</option>
-            <option value="2px">보통</option>
-            <option value="3px">굵게</option>
-          </SelectBox>
-          <ColorPicker
-            type="color"
+            options={[
+              {
+                value: '0px',
+                expression: '없음',
+              },
+              {
+                value: '1px',
+                expression: '얇게',
+              },
+              {
+                value: '2px',
+                expression: '보통',
+              },
+              {
+                value: '3px',
+                expression: '굵게',
+              },
+            ]}
+          />
+          <StyleControlPanelColorPicker
             name="borderColor"
             value={emailContentsData.emailContents[index].boxStyle.borderColor}
             onChange={handleBoxStyleChange}
           />
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>테두리 스타일</StyleRowText>
-          <SelectBox
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="테두리 스타일">
+          <StyleControlPanelSelectBox
             name="borderStyle"
             value={emailContentsData.emailContents[index].boxStyle.borderStyle}
             onChange={handleBoxStyleChange}
-          >
-            <option value="solid">실선</option>
-            <option value="dashed">긴 점선</option>
-            <option value="dotted">짧은 점선</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>내부 여백 상단</StyleRowText>
-          <SelectBox
+            options={[
+              {
+                value: 'solid',
+                expression: '실선',
+              },
+              {
+                value: 'dashed',
+                expression: '긴 점선',
+              },
+              {
+                value: 'dotted',
+                expression: '짧은 점선',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="내부 여백 상단">
+          <StyleControlPanelSelectBox
             name="paddingTop"
             value={emailContentsData.emailContents[index].boxStyle.paddingTop}
             onChange={handleBoxStyleChange}
-          >
-            <option value="0px">없음</option>
-            <option value="5px">좁게</option>
-            <option value="15px">보통</option>
-            <option value="25px">넓게</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>내부 여백 하단</StyleRowText>
-          <SelectBox
+            options={[
+              {
+                value: '0px',
+                expression: '없음',
+              },
+              {
+                value: '5px',
+                expression: '좁게',
+              },
+              {
+                value: '15px',
+                expression: '보통',
+              },
+              {
+                value: '25px',
+                expression: '넓게',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="내부 여백 하단">
+          <StyleControlPanelSelectBox
             name="paddingBottom"
             value={
               emailContentsData.emailContents[index].boxStyle.paddingBottom
             }
             onChange={handleBoxStyleChange}
-          >
-            <option value="0px">없음</option>
-            <option value="5px">좁게</option>
-            <option value="15px">보통</option>
-            <option value="25px">넓게</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>내부 여백 좌측</StyleRowText>
-          <SelectBox
+            options={[
+              {
+                value: '0px',
+                expression: '없음',
+              },
+              {
+                value: '5px',
+                expression: '좁게',
+              },
+              {
+                value: '15px',
+                expression: '보통',
+              },
+              {
+                value: '25px',
+                expression: '넓게',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="내부 여백 좌측">
+          <StyleControlPanelSelectBox
             name="paddingLeft"
             value={emailContentsData.emailContents[index].boxStyle.paddingLeft}
             onChange={handleBoxStyleChange}
-          >
-            <option value="0px">없음</option>
-            <option value="5px">좁게</option>
-            <option value="15px">보통</option>
-            <option value="25px">넓게</option>
-          </SelectBox>
-        </StyleRow>
-        <StyleRow>
-          <StyleRowText>내부 여백 우측</StyleRowText>
-          <SelectBox
+            options={[
+              {
+                value: '0px',
+                expression: '없음',
+              },
+              {
+                value: '5px',
+                expression: '좁게',
+              },
+              {
+                value: '15px',
+                expression: '보통',
+              },
+              {
+                value: '25px',
+                expression: '넓게',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
+        <StyleControlPanelRow title="내부 여백 우측">
+          <StyleControlPanelSelectBox
             name="paddingRight"
             value={emailContentsData.emailContents[index].boxStyle.paddingRight}
             onChange={handleBoxStyleChange}
-          >
-            <option value="0px">없음</option>
-            <option value="5px">좁게</option>
-            <option value="15px">보통</option>
-            <option value="25px">넓게</option>
-          </SelectBox>
-        </StyleRow>
+            options={[
+              {
+                value: '0px',
+                expression: '없음',
+              },
+              {
+                value: '5px',
+                expression: '좁게',
+              },
+              {
+                value: '15px',
+                expression: '보통',
+              },
+              {
+                value: '25px',
+                expression: '넓게',
+              },
+            ]}
+          />
+        </StyleControlPanelRow>
       </StyleBox>
     </>
   );

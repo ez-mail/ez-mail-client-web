@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import DividerContainer from './StyleControlPanels/DividerContainer';
-import ButtonContainer from './StyleControlPanels/ButtonContainer';
-import SpacerContainer from './StyleControlPanels/SpacerContainer';
-import TextContainer from './StyleControlPanels/TextContainer';
-import ImageContainer from './StyleControlPanels/ImageContainer';
+import DividerContainer from './StyleControlPanels/DividerControlPanel';
+import ButtonContainer from './StyleControlPanels/ButtonControlPanel';
+import SpacerContainer from './StyleControlPanels/SpacerControlPanel';
+import TextContainer from './StyleControlPanels/TextControlPanel';
+import ImageContainer from './StyleControlPanels/ImageControlPanel';
 
 export default function ContentStyleTool({ type, setFocusedType, index }) {
   let typeText = '';

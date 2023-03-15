@@ -4,6 +4,10 @@ import { useRecoilState } from 'recoil';
 import produce from 'immer';
 
 import emailTemplateDataAtom from '../../../recoil/emailTemplate/atom';
+import StyleControlPanelRow from '../../DesignedComponents/StyleControlPanelRow';
+import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPanelSelectBox';
+import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
+import StyleControlPanelInputRange from '../../DesignedComponents/StyleControlPanelInputRange';
 
 export default function SpacerContainer({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
@@ -33,64 +37,77 @@ export default function SpacerContainer({ index }) {
   return (
     <StyleBox>
       <BoxHeading>상자</BoxHeading>
-      <StyleRow>
-        <StyleRowText>배경 색상</StyleRowText>
-        <ColorPicker
-          type="color"
+      <StyleControlPanelRow title="배경 색상">
+        <StyleControlPanelColorPicker
           name="backgroundColor"
           value={
             emailContentsData.emailContents[index].boxStyle.backgroundColor
           }
           onChange={handleBoxStyleChange}
         />
-      </StyleRow>
-      <StyleRow>
-        <StyleRowText>배경 테두리</StyleRowText>
-        <SelectBox
+      </StyleControlPanelRow>
+      <StyleControlPanelRow title="배경 테두리">
+        <StyleControlPanelSelectBox
           name="borderWidth"
           value={emailContentsData.emailContents[index].boxStyle.borderWidth}
           onChange={handleBoxStyleChange}
-        >
-          <option value="0px">없음</option>
-          <option value="1px">얇게</option>
-          <option value="2px">보통</option>
-          <option value="3px">굵게</option>
-        </SelectBox>
-        <ColorPicker
-          type="color"
+          options={[
+            {
+              value: '0px',
+              expression: '없음',
+            },
+            {
+              value: '1px',
+              expression: '얇게',
+            },
+            {
+              value: '2px',
+              expression: '보통',
+            },
+            {
+              value: '3px',
+              expression: '굵게',
+            },
+          ]}
+        />
+        <StyleControlPanelColorPicker
           name="borderColor"
           value={emailContentsData.emailContents[index].boxStyle.borderColor}
           onChange={handleBoxStyleChange}
         />
-      </StyleRow>
-      <StyleRow>
-        <StyleRowText>테두리 스타일</StyleRowText>
-        <SelectBox
+      </StyleControlPanelRow>
+      <StyleControlPanelRow title="테두리 스타일">
+        <StyleControlPanelSelectBox
           name="borderStyle"
           value={emailContentsData.emailContents[index].boxStyle.borderStyle}
           onChange={handleBoxStyleChange}
-        >
-          <option value="solid">실선</option>
-          <option value="dashed">긴 점선</option>
-          <option value="dotted">짧은 점선</option>
-        </SelectBox>
-      </StyleRow>
-      <StyleRow>
-        <StyleRowText>높이</StyleRowText>
-        <input
-          name="height"
-          type="range"
-          min="10"
-          max="100"
-          step="10"
+          options={[
+            {
+              value: 'solid',
+              expression: '실선',
+            },
+            {
+              value: 'dashed',
+              expression: '긴 점선',
+            },
+            {
+              value: 'dotted',
+              expression: '짧은 점선',
+            },
+          ]}
+        />
+      </StyleControlPanelRow>
+      <StyleControlPanelRow title="높이">
+        <StyleControlPanelInputRange
           value={emailContentsData.emailContents[index].boxStyle.height.replace(
             'px',
             '',
           )}
           onChange={handleInputChange}
-        />
-        <p>{emailContentsData.emailContents[index].boxStyle.height}</p>
-      </StyleRow>
+        >
+          {emailContentsData.emailContents[index].boxStyle.height}
+        </StyleControlPanelInputRange>
+      </StyleControlPanelRow>
     </StyleBox>
   );
 }
@@ -99,42 +116,6 @@ const StyleBox = styled.section`
   display: flex;
   flex-direction: column;
   gap: 10px;
-`;
-
-const StyleRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  p {
-    width: 50px;
-  }
-`;
-
-const SelectBox = styled.select`
-  width: 80px;
-  height: 24px;
-  padding: 0 5px;
-  margin-left: auto;
-  border: 1px solid #bdbdbd;
-  border-radius: 5px;
-`;
-
-const ColorPicker = styled.input`
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin-left: 10px;
-  border: 1px solid #bdbdbd;
-  border-radius: 5px;
-  background-color: transparent;
-  cursor: pointer;
-  &::-webkit-color-swatch {
-    border-radius: 3px;
-  }
-`;
-
-const StyleRowText = styled.div`
-  font-size: 1rem;
 `;
 
 const BoxHeading = styled.h3`

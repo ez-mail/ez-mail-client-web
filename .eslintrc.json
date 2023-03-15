@@ -28,6 +28,7 @@
     "jsx-a11y/anchor-is-valid": "warn",
     "jsx-a11y/click-events-have-key-events": "warn",
     "react/jsx-props-no-spreading": "warn",
-    "jsx-a11y/no-static-element-interactions": "warn"
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "react/no-array-index-key": "warn"
   }
 }
