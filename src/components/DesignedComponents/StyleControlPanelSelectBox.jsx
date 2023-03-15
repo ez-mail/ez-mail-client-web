@@ -7,9 +7,9 @@ export default function StyleControlPanelSelectBox({
   onChange,
   options,
 }) {
-  const selectOptions = options.map(option => {
+  const selectOptions = options.map((option, index) => {
     return (
-      <option key={crypto.randomUUID()} value={option.value}>
+      <option key={index} value={option.value}>
         {option.expression}
       </option>
     );
