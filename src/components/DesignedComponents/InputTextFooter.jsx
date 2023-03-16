@@ -22,7 +22,6 @@ const Container = styled.div`
 const InputText = styled.input`
   position: relative;
   left: -5px;
-  top: -2px;
   width: 380px;
   height: 18.6px;
   padding: 0 7px;

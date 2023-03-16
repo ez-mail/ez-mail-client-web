@@ -37,11 +37,3 @@ const InputText = styled.input`
     outline: 1px solid #3e81f6;
   }
 `;
-
-const SenderNameInput = styled.input`
-  position: relative;
-  left: -4px;
-  width: 50%;
-  height: 18px;
-  font-size: 1rem;
-`;
