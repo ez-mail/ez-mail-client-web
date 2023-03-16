@@ -9,7 +9,7 @@ import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPan
 import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 import StyleControlPanelInputRange from '../../DesignedComponents/StyleControlPanelInputRange';
 
-export default function SpacerContainer({ index }) {
+export default function SpacerControlPanel({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
     emailTemplateDataAtom,
   );

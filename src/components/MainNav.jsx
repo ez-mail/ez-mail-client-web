@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import navLogo from '../assets/nav-logo.png';
+import YellowButtonBig from './DesignedComponents/YellowButtonBig';
 
 export default function MainNav() {
   const handleLogoClick = () => {
@@ -19,7 +20,7 @@ export default function MainNav() {
           <Login>로그인</Login>
         </Link>
         <Link to="/sign-up">
-          <SignUp>회원가입</SignUp>
+          <YellowButtonBig>회원가입</YellowButtonBig>
         </Link>
       </div>
     </Nav>
@@ -43,12 +44,6 @@ const Img = styled.img`
   cursor: pointer;
 `;
 
-const Login = styled.span`
+const Login = styled.button`
   padding: 10px 14px;
-`;
-
-const SignUp = styled.span`
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
 `;

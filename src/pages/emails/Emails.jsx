@@ -16,6 +16,7 @@ import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
 import { getKoreaDateString } from '../../utils/dashboard';
+import YellowButton from '../../components/DesignedComponents/YellowButton';
 
 export default function Emails() {
   const navigate = useNavigate();
@@ -136,9 +137,9 @@ export default function Emails() {
       <MainContainer>
         <Title>이메일</Title>
         <ContainerNav>
-          <NewEmailButton onClick={handleNewEmailButtonClick}>
+          <YellowButton onClick={handleNewEmailButtonClick}>
             새로 만들기
-          </NewEmailButton>
+          </YellowButton>
         </ContainerNav>
         <ContentRows>{emailTemplatesList}</ContentRows>
       </MainContainer>
@@ -172,14 +173,6 @@ const ContainerNav = styled.div`
   align-items: center;
   padding-bottom: 10px;
   border-bottom: 2px solid #b5acac;
-`;
-
-const NewEmailButton = styled.button`
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
-  font-size: 14px;
-  font-weight: 500;
 `;
 
 const ContentRow = styled.li`

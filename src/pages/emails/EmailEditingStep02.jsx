@@ -8,7 +8,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { fetchEmail, fetchUpdateEmail } from '../../api/email';
 import EmailBottomButton from '../../components/EmailBottomButton';
-import InputText from '../../components/InputText';
+import InputTextStep02 from '../../components/DesignedComponents/InputTextStep02';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
@@ -108,34 +108,20 @@ export default function EmailEditingStep02() {
       <section>
         <MainContainer>
           <Title>발송정보를 입력하세요</Title>
-          <InputText
+          <InputTextStep02
             id="emailTitle"
-            paddingBottom="50px"
-            width="520px"
-            inputValue={sendingInfo.emailTitle}
+            name="emailTitle"
+            label="이메일 제목"
+            value={sendingInfo.emailTitle}
             onChange={handleInputChange}
-          >
-            이메일 제목
-          </InputText>
-          <InputText
+          />
+          <InputTextStep02
             id="sender"
-            inputValue={sendingInfo.sender}
+            name="sender"
+            label="발신자 이름"
+            value={sendingInfo.sender}
             onChange={handleInputChange}
-            paddingBottom="50px"
-            width="520px"
-          >
-            발신자 이름
-          </InputText>
-          {/* <InputText
-            id="emailPreviewText"
-            inputValue={sendingInfo.emailPreviewText}
-            onChange={handleInputChange}
-            paddingBottom="50px"
-            width="520px"
-            placeholder="빈값일시 콘텐츠 일부가 자동으로 보여집니다."
-          >
-            미리보기 텍스트
-          </InputText> */}
+          />
         </MainContainer>
       </section>
       <BottomButtons>

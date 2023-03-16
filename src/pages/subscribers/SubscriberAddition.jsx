@@ -6,30 +6,25 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useRecoilValue } from 'recoil';
 
 import { fetchAddSubscribers } from '../../api/subscriber';
-import InputText from '../../components/InputText';
-import CommonButton from '../../components/CommonButton';
+import InputTextAddSubscriber from '../../components/DesignedComponents/InputTextAddSubscriber';
+import YellowButton from '../../components/DesignedComponents/YellowButton';
 import userIdAtom from '../../recoil/userId/atom';
 
 export default function SubscriberAddition() {
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
-  const [inputs, setInputs] = useState([
-    { email: '', name: '', adAgreement: false, id: 0 },
-  ]);
+  const [inputs, setInputs] = useState([{ email: '', name: '', id: 0 }]);
 
   const handleAddRowClick = () => {
-    setInputs([
-      ...inputs,
-      { email: '', name: '', adAgreement: false, id: inputs.length },
-    ]);
+    setInputs([...inputs, { email: '', name: '', id: inputs.length }]);
   };
 
-  const handleInputChange = (e, id, field) => {
+  const handleInputChange = (e, id) => {
     const newInputs = inputs.map(input => {
       if (input.id === id) {
         return {
           ...input,
-          [field]: e.target.value,
+          [e.target.name]: e.target.value,
         };
       }
 
@@ -63,40 +58,20 @@ export default function SubscriberAddition() {
   const subscribersRow = inputs.map(input => {
     return (
       <InputContainer key={input.id}>
-        <InputText
+        <InputTextAddSubscriber
           id="email"
           name="email"
+          label="이메일 주소"
           value={input.email}
-          onChange={e => handleInputChange(e, input.id, 'email')}
-          paddingBottom="20px"
-          width="200px"
-          labelFontSize="16px"
-        >
-          이메일 주소
-        </InputText>
-        <InputText
+          onChange={e => handleInputChange(e, input.id)}
+        />
+        <InputTextAddSubscriber
           id="name"
           name="name"
+          label="이름"
           value={input.name}
-          onChange={e => handleInputChange(e, input.id, 'name')}
-          paddingBottom="20px"
-          width="170px"
-          labelFontSize="16px"
-        >
-          이름
-        </InputText>
-        <SelectContainer>
-          <Label htmlFor="adAgreement">광고성 정보 수신 동의</Label>
-          <SelectAdAgreement
-            name="adAgreement"
-            id="adAgreement"
-            value={input.adAgreement}
-            onChange={e => handleInputChange(e, input.id, 'adAgreement')}
-          >
-            <option value={false}>동의하지 않음</option>
-            <option value>동의</option>
-          </SelectAdAgreement>
-        </SelectContainer>
+          onChange={e => handleInputChange(e, input.id)}
+        />
         {input.id !== 0 && (
           <DeleteButtonBox onClick={() => handleDeleteRowClick(input.id)}>
             <DeleteRowButton icon={faTrash} />
@@ -109,15 +84,14 @@ export default function SubscriberAddition() {
   return (
     <section>
       <MainContainer>
-        <Title>구독자 추가</Title>
+        <Title>구독자를 추가해보세요</Title>
         {subscribersRow}
-        <AddRow onClick={handleAddRowClick}>+ 행추가</AddRow>
-        <CommonButton
-          alignSelf="flex-start"
-          onClick={handleAddSubscribersButtonClick}
-        >
-          추가하기
-        </CommonButton>
+        <AddRow onClick={handleAddRowClick}>+ 여러명 추가하기</AddRow>
+        <div>
+          <YellowButton onClick={handleAddSubscribersButtonClick}>
+            저장하기
+          </YellowButton>
+        </div>
       </MainContainer>
     </section>
   );
@@ -127,7 +101,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 1000px;
-  margin: auto;
+  margin: 0 auto;
   padding: 0 0 50px 0;
 `;
 
@@ -137,10 +111,10 @@ const Title = styled.span`
   font-weight: 500;
 `;
 
-const InputContainer = styled.ul`
+const InputContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  gap: 15px;
+  gap: 20px;
 `;
 
 const AddRow = styled.div`
@@ -163,21 +137,4 @@ const DeleteButtonBox = styled.button`
   border: 1px solid #bdbdbd;
   border-radius: 5px;
   background-color: #f5f5f5;
-`;
-
-const SelectContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const SelectAdAgreement = styled.select`
-  width: 170px;
-  height: 30px;
-  padding: 0 5px;
-  border: 1px solid #bdbdbd;
-  border-radius: 5px;
-`;
-
-const Label = styled.label`
-  padding-bottom: 8px;
 `;

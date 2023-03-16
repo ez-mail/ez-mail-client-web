@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function LoginInput({
+export default function InputTextAuth({
   children,
   id,
   inputValue,

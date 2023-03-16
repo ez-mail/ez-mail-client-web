@@ -9,6 +9,11 @@ import userIdAtom from '../recoil/userId/atom';
 import Loading from '../components/Loading';
 import Error from '../components/Error';
 
+import InputTextSenderName from '../components/DesignedComponents/InputTextSenderName';
+import InputTextFooter from '../components/DesignedComponents/InputTextFooter';
+import YellowButton from '../components/DesignedComponents/YellowButton';
+import BlackButton from '../components/DesignedComponents/BlackButton';
+
 export default function Sender() {
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
@@ -92,12 +97,11 @@ export default function Sender() {
         <MainContainer>
           <Title>발신자 설정</Title>
           <ButtonContainer>
-            <SaveButton onClick={handleSaveButtonClick}>저장하기</SaveButton>
+            <BlackButton onClick={handleSaveButtonClick}>저장하기</BlackButton>
           </ButtonContainer>
           <SenderInfoContainer>
             <SenderNameTitle>발신자 이름</SenderNameTitle>
-            <SenderNameInput
-              type="text"
+            <InputTextSenderName
               id="userName"
               name="userName"
               value={senderInfo.userName}
@@ -106,24 +110,21 @@ export default function Sender() {
             <Spacer />
             <EmailFooterTitle>이메일 푸터 정보</EmailFooterTitle>
             <EmailFooterItemTitle>- 회사명 또는 이름</EmailFooterItemTitle>
-            <FooterInput
-              type="text"
+            <InputTextFooter
               id="companyName"
               name="companyName"
               value={senderInfo.companyName}
               onChange={handleInputChange}
             />
             <EmailFooterItemTitle>- 주소</EmailFooterItemTitle>
-            <FooterInput
-              type="text"
+            <InputTextFooter
               id="address"
               name="address"
               value={senderInfo.address}
               onChange={handleInputChange}
             />
             <EmailFooterItemTitle>- 전화번호</EmailFooterItemTitle>
-            <FooterInput
-              type="text"
+            <InputTextFooter
               id="contact"
               name="contact"
               value={senderInfo.contact}
@@ -140,11 +141,15 @@ export default function Sender() {
       <MainContainer>
         <Title>발신자 설정</Title>
         <ButtonContainer>
-          <CodeButton onClick={handleOriginButtonClick}>
+          <YellowButton onClick={handleOriginButtonClick}>
             오리진 추가하기
-          </CodeButton>
-          <CodeButton onClick={handleCodeButtonClick}>코드 내보내기</CodeButton>
-          <EditButton onClick={handleModifyButtonClick}>수정하기</EditButton>
+          </YellowButton>
+          <YellowButton onClick={handleCodeButtonClick}>
+            코드 내보내기
+          </YellowButton>
+          <YellowButton onClick={handleModifyButtonClick}>
+            수정하기
+          </YellowButton>
         </ButtonContainer>
         <SenderInfoContainer>
           <SenderNameTitle>발신자 이름</SenderNameTitle>
@@ -181,34 +186,10 @@ const Title = styled.span`
 `;
 
 const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
   padding-bottom: 10px;
-  text-align: end;
-`;
-
-const CodeButton = styled.button`
-  margin-right: 10px;
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
-  font-size: 14px;
-  font-weight: 500;
-`;
-
-const EditButton = styled.button`
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
-  font-size: 0.875rem;
-  font-weight: 500;
-`;
-
-const SaveButton = styled.button`
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: black;
-  color: #ffdf2b;
-  font-size: 0.875rem;
-  font-weight: 500;
+  gap: 10px;
 `;
 
 const SenderInfoContainer = styled.main`
@@ -253,21 +234,4 @@ const EmailFooterItemTitle = styled.div`
 const EmailFooterItemContent = styled.div`
   font-size: 0.875rem;
   font-weight: 400;
-`;
-
-const SenderNameInput = styled.input`
-  position: relative;
-  left: -4px;
-  width: 50%;
-  height: 18px;
-  font-size: 1rem;
-`;
-
-const FooterInput = styled.input`
-  position: relative;
-  top: 1px;
-  left: -4px;
-  width: 50%;
-  height: 16px;
-  font-size: 0.875rem;
 `;

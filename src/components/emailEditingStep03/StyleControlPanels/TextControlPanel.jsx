@@ -15,7 +15,7 @@ import StyleControlPanelRow from '../../DesignedComponents/StyleControlPanelRow'
 import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPanelSelectBox';
 import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 
-export default function TextContainer({ index }) {
+export default function TextControlPanel({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
     emailTemplateDataAtom,
   );

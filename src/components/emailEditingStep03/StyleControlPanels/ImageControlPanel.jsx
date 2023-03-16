@@ -9,7 +9,7 @@ import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPan
 import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 import StyleControlPanelLinkInput from '../../DesignedComponents/StyleControlPanelLinkInput';
 
-export default function ImageContainer({ index }) {
+export default function ImageControlPanel({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
     emailTemplateDataAtom,
   );
