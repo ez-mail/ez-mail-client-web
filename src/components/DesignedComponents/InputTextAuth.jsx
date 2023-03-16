@@ -37,7 +37,15 @@ const Label = styled.label`
 const Input = styled.input`
   width: 355px;
   height: 50px;
-  border: 1px solid #bdbdbd;
+  outline: 1px solid #bdbdbd;
+  border: none;
   border-radius: 5px;
   padding: 0 10px;
+  &:focus {
+    outline: 1px solid #3e81f6;
+    box-shadow: 0 0 5px #3e81f6;
+  }
+  &:hover {
+    outline: 1px solid #3e81f6;
+  }
 `;

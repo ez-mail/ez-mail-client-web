@@ -23,7 +23,7 @@ const InputText = styled.input`
   position: relative;
   left: -5px;
   width: 380px;
-  height: 25px;
+  height: 20px;
   padding: 0 7px;
   border: none;
   border-radius: 5px;

@@ -75,7 +75,7 @@ const StyleBoxContainer = styled.div`
 `;
 
 const BoxHeading = styled.h3`
-  font-size: 1.3rem;
+  font-size: 1.25rem;
 `;
 
 const Divider = styled.div`

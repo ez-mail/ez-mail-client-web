@@ -144,5 +144,7 @@ const StyleRowText = styled.div`
 
 const BoxHeading = styled.h3`
   margin: 15px 0 5px 0;
-  font-size: 1.1rem;
+  font-size: 1.125rem;
+  margin-top: 40px;
+  margin-bottom: 10px;
 `;

@@ -212,6 +212,7 @@ const SenderNameTitle = styled.div`
 const SenderNameContent = styled.div`
   font-size: 1rem;
   font-weight: 400;
+  height: 20px;
 `;
 
 const Spacer = styled.div`
@@ -234,4 +235,5 @@ const EmailFooterItemTitle = styled.div`
 const EmailFooterItemContent = styled.div`
   font-size: 0.875rem;
   font-weight: 400;
+  height: 20px;
 `;

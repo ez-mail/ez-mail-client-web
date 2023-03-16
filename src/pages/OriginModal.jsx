@@ -75,20 +75,21 @@ export default function OriginModal() {
 }
 
 const OriginContainer = styled.div`
+  margin-top: 50px;
   padding: 20px;
 `;
 
 const RegisteredOrigin = styled.div`
-  margin-top: 50px;
+  margin-top: 70px;
 `;
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 1.25rem;
   margin-bottom: 20px;
 `;
 
 const OriginData = styled.span`
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 400;
 `;
 

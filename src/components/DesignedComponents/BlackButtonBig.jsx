@@ -6,7 +6,7 @@ export default function BlackButtonBig({ children, onClick }) {
 }
 
 const Button = styled.button`
-  padding: 10px 14px;
+  padding: 12px 14px;
   border-radius: 5px;
   background-color: #000000;
   color: #ffdf2b;

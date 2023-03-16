@@ -293,6 +293,6 @@ const StyleBox = styled.section`
 `;
 
 const BoxHeading = styled.h3`
-  margin: 15px 0 5px 0;
-  font-size: 1.1rem;
+  margin: 40px 0 10px 0;
+  font-size: 1.125rem;
 `;
