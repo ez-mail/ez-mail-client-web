@@ -5,7 +5,8 @@ import styled from 'styled-components';
 
 import { requestSignUp } from '../api/auth';
 import logo from '../assets/login-logo.png';
-import SignUpInput from '../components/LoginInput';
+import InputTextAuth from '../components/DesignedComponents/InputTextAuth';
+import YellowButtonAuth from '../components/DesignedComponents/YellowButtonAuth';
 import userIdAtom from '../recoil/userId/atom';
 
 export default function SignUp() {
@@ -65,21 +66,21 @@ export default function SignUp() {
         <Logo src={logo} alt="login-logo" />
       </Link>
       <Hello>환영해요!</Hello>
-      <SignUpInput
+      <InputTextAuth
         id="email"
         inputValue={userInput.email}
         onChange={handleUserInput}
       >
         이메일 주소
-      </SignUpInput>
-      <SignUpInput
+      </InputTextAuth>
+      <InputTextAuth
         id="name"
         inputValue={userInput.name}
         onChange={handleUserInput}
       >
         이름
-      </SignUpInput>
-      <SignUpInput
+      </InputTextAuth>
+      <InputTextAuth
         id="password"
         type="password"
         inputValue={userInput.password}
@@ -87,8 +88,8 @@ export default function SignUp() {
         onKeyDown={handlePasswordKeyDown}
       >
         비밀번호
-      </SignUpInput>
-      <LoginButton onClick={handleSignUpClick}>회원가입</LoginButton>
+      </InputTextAuth>
+      <YellowButtonAuth onClick={handleSignUpClick}>회원가입</YellowButtonAuth>
       <Link to="/login">
         <NeedLogin>이미 가입 하셨나요?</NeedLogin>
       </Link>
@@ -115,15 +116,6 @@ const Logo = styled.img`
 const Hello = styled.span`
   padding-bottom: 60px;
   font-size: 24px;
-  font-weight: 500;
-`;
-
-const LoginButton = styled.button`
-  width: 100%;
-  padding: 14px 0px 14px 0px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
-  text-align: center;
   font-weight: 500;
 `;
 

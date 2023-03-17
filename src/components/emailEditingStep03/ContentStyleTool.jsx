@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import DividerContainer from './StyleControlPanels/DividerControlPanel';
-import ButtonContainer from './StyleControlPanels/ButtonControlPanel';
-import SpacerContainer from './StyleControlPanels/SpacerControlPanel';
-import TextContainer from './StyleControlPanels/TextControlPanel';
-import ImageContainer from './StyleControlPanels/ImageControlPanel';
+import DividerControlPanel from './StyleControlPanels/DividerControlPanel';
+import ButtonControlPanel from './StyleControlPanels/ButtonControlPanel';
+import SpacerControlPanel from './StyleControlPanels/SpacerControlPanel';
+import TextControlPanel from './StyleControlPanels/TextControlPanel';
+import ImageControlPanel from './StyleControlPanels/ImageControlPanel';
+import GrayButton from '../DesignedComponents/GrayButton';
 
 export default function ContentStyleTool({ type, setFocusedType, index }) {
   let typeText = '';
@@ -35,16 +36,16 @@ export default function ContentStyleTool({ type, setFocusedType, index }) {
       <StyleBoxContainer>
         <ContentHeader>
           <BoxHeading>{typeText}</BoxHeading>
-          <CloseButton type="button" onClick={() => setFocusedType(null)}>
+          <GrayButton type="button" onClick={() => setFocusedType(null)}>
             닫기
-          </CloseButton>
+          </GrayButton>
         </ContentHeader>
         <Divider />
-        {type === 'divider' && <DividerContainer index={index} />}
-        {type === 'button' && <ButtonContainer index={index} />}
-        {type === 'spacer' && <SpacerContainer index={index} />}
-        {type === 'text' && <TextContainer index={index} />}
-        {type === 'image' && <ImageContainer index={index} />}
+        {type === 'divider' && <DividerControlPanel index={index} />}
+        {type === 'button' && <ButtonControlPanel index={index} />}
+        {type === 'spacer' && <SpacerControlPanel index={index} />}
+        {type === 'text' && <TextControlPanel index={index} />}
+        {type === 'image' && <ImageControlPanel index={index} />}
       </StyleBoxContainer>
     </LeftToolContainer>
   );
@@ -55,14 +56,6 @@ const ContentHeader = styled.div`
   align-items: center;
   padding: 15px 0px 10px 0px;
   justify-content: space-between;
-`;
-
-const CloseButton = styled.button`
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: #dfe0e4;
-  font-size: 0.875rem;
-  align-self: flex-end;
 `;
 
 const LeftToolContainer = styled.div`
@@ -82,7 +75,7 @@ const StyleBoxContainer = styled.div`
 `;
 
 const BoxHeading = styled.h3`
-  font-size: 1.3rem;
+  font-size: 1.25rem;
 `;
 
 const Divider = styled.div`

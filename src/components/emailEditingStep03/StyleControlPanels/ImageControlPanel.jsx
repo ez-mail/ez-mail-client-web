@@ -9,7 +9,7 @@ import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPan
 import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 import StyleControlPanelLinkInput from '../../DesignedComponents/StyleControlPanelLinkInput';
 
-export default function ImageContainer({ index }) {
+export default function ImageControlPanel({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
     emailTemplateDataAtom,
   );
@@ -293,6 +293,6 @@ const StyleBox = styled.section`
 `;
 
 const BoxHeading = styled.h3`
-  margin: 15px 0 5px 0;
-  font-size: 1.1rem;
+  margin: 40px 0 10px 0;
+  font-size: 1.125rem;
 `;

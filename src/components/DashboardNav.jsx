@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { requestLogout } from '../api/auth';
 import navLogo from '../assets/nav-logo.png';
 import userIdAtom from '../recoil/userId/atom';
+import YellowButtonBig from './DesignedComponents/YellowButtonBig';
 
 export default function DashboardNav() {
   const location = useLocation();
@@ -54,7 +55,7 @@ export default function DashboardNav() {
           </NavItem>
         </Link>
       </LeftContainer>
-      <Logout onClick={handleLogoutClick}>로그아웃</Logout>
+      <YellowButtonBig onClick={handleLogoutClick}>로그아웃</YellowButtonBig>
     </Nav>
   );
 }
@@ -91,10 +92,4 @@ const NavItem = styled.span`
   &:hover {
     color: #ffdf2b;
   }
-`;
-
-const Logout = styled.button`
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
 `;

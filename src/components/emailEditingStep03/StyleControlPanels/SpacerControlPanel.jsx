@@ -9,7 +9,7 @@ import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPan
 import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 import StyleControlPanelInputRange from '../../DesignedComponents/StyleControlPanelInputRange';
 
-export default function SpacerContainer({ index }) {
+export default function SpacerControlPanel({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
     emailTemplateDataAtom,
   );
@@ -119,6 +119,6 @@ const StyleBox = styled.section`
 `;
 
 const BoxHeading = styled.h3`
-  margin: 15px 0 5px 0;
-  font-size: 1.1rem;
+  margin: 5px 0 5px 0;
+  font-size: 1.125rem;
 `;

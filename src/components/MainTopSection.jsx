@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import mailWoman from '../assets/main-mail-woman.png';
+import YellowButtonMainPage from './DesignedComponents/YellowButtonMainPage';
 
 export default function MainTopSection() {
   return (
@@ -20,7 +21,9 @@ export default function MainTopSection() {
             ez-mail 로 누구나 쉽게 뉴스레터를 발행할 수 있습니다.
           </Description>
           <Link to="/sign-up">
-            <StartNow>지금 시작하기</StartNow>
+            <ButtonContainer>
+              <YellowButtonMainPage>지금 시작하기</YellowButtonMainPage>
+            </ButtonContainer>
           </Link>
         </InnerText>
         <MailWoman src={mailWoman} alt="mail-woman" />
@@ -55,13 +58,6 @@ const MailWoman = styled.img`
   height: 370px;
 `;
 
-const StartNow = styled.span`
-  padding: 12px 16px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
-  text-align: center;
-`;
-
 const Title = styled.h1`
   padding-bottom: 24px;
   line-height: 60px;
@@ -70,4 +66,9 @@ const Title = styled.h1`
 const Description = styled.span`
   padding-bottom: 24px;
   line-height: 24px;
+`;
+
+const ButtonContainer = styled.div`
+  position: relative;
+  top: -8px;
 `;

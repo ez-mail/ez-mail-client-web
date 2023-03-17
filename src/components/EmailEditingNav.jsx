@@ -12,6 +12,8 @@ import senderAtom from '../recoil/sender/atom';
 import emailTemplateDataAtom from '../recoil/emailTemplate/atom';
 import userIdAtom from '../recoil/userId/atom';
 import { getEmailHtml } from '../utils/emailEditing';
+import YellowButtonBig from './DesignedComponents/YellowButtonBig';
+import BlackButtonBig from './DesignedComponents/BlackButtonBig';
 
 export default function EmailEditingNav() {
   const emailTitle = useRecoilValue(emailTitleAtom);
@@ -100,8 +102,14 @@ export default function EmailEditingNav() {
         <StyledFaAngleLeft icon={faAngleLeft} />
       </Prev>
       <EmailTitle>{emailTitle}</EmailTitle>
-      <Save onClick={handleSaveButtonClick}>저장하기</Save>
-      <Send onClick={handleSendButtonClick}>발송하기</Send>
+      <ButtonContainer>
+        <BlackButtonBig onClick={handleSaveButtonClick}>
+          저장하기
+        </BlackButtonBig>
+        <YellowButtonBig onClick={handleSendButtonClick}>
+          발송하기
+        </YellowButtonBig>
+      </ButtonContainer>
     </Nav>
   );
 }
@@ -127,19 +135,10 @@ const EmailTitle = styled.span`
   flex: 1;
 `;
 
-const Save = styled.button`
-  margin-right: 10px;
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: black;
-  color: #ffdf2b;
-`;
-
-const Send = styled.button`
+const ButtonContainer = styled.div`
+  display: flex;
   margin-right: 34px;
-  padding: 10px 14px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
+  gap: 10px;
 `;
 
 const StyledFaAngleLeft = styled(FontAwesomeIcon)`

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import YellowButtonModalClose from './DesignedComponents/YellowButtonModalClose';
+
 export default function Modal({ title, children }) {
   const navigate = useNavigate();
 
@@ -14,7 +16,9 @@ export default function Modal({ title, children }) {
       <ModalContainer>
         <Title>{title}</Title>
         <Content>{children}</Content>
-        <CloseButton onClick={handleCloseButtonClick}>닫기</CloseButton>
+        <YellowButtonModalClose onClick={handleCloseButtonClick}>
+          닫기
+        </YellowButtonModalClose>
       </ModalContainer>
     </ModalBackground>
   );
@@ -51,14 +55,4 @@ const Content = styled.div`
   height: 450px;
   margin-bottom: 30px;
   border: 1px solid black;
-`;
-
-const CloseButton = styled.button`
-  width: 80px;
-  height: 40px;
-  border-radius: 5px;
-  background-color: #ffdf2b;
-  font-size: 0.875rem;
-  font-weight: 500;
-  text-align: center;
 `;

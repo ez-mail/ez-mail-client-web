@@ -4,8 +4,8 @@ import { useRecoilValue } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
 
 import Modal from '../components/Modal';
-import InputText from '../components/InputText';
-import CommonButton from '../components/CommonButton';
+import YellowButton from '../components/DesignedComponents/YellowButton';
+import InputTextOrigin from '../components/DesignedComponents/InputTextOrigin';
 import { fetchOrigin, fetchAddOrigin } from '../api/user';
 import userIdAtom from '../recoil/userId/atom';
 import Loading from '../components/Loading';
@@ -56,12 +56,15 @@ export default function OriginModal() {
   return (
     <Modal title="코드를 붙여넣을 홈페이지 Origin을 입력해주세요">
       <OriginContainer>
-        <InputText onChange={handleOriginChange} width="380px">
-          Origin
-        </InputText>
-        <CommonButton margin="0 auto" onClick={handleAddOriginClick}>
-          추가하기
-        </CommonButton>
+        <InputTextOrigin
+          id="origin"
+          name="origin"
+          label="Origin"
+          onChange={handleOriginChange}
+        />
+        <ButtonContainer>
+          <YellowButton onClick={handleAddOriginClick}>추가하기</YellowButton>
+        </ButtonContainer>
         <RegisteredOrigin>
           <Title>등록된 Origin</Title>
           <OriginData>{origin}</OriginData>
@@ -72,19 +75,24 @@ export default function OriginModal() {
 }
 
 const OriginContainer = styled.div`
+  margin-top: 50px;
   padding: 20px;
 `;
 
 const RegisteredOrigin = styled.div`
-  margin-top: 50px;
+  margin-top: 70px;
 `;
 
 const Title = styled.div`
-  font-size: 20px;
+  font-size: 1.25rem;
   margin-bottom: 20px;
 `;
 
 const OriginData = styled.span`
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 400;
+`;
+
+const ButtonContainer = styled.div`
+  text-align: center;
 `;

@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useQuery } from '@tanstack/react-query';
 import { useRecoilValue } from 'recoil';
 
-import CommonButton from '../../components/CommonButton';
 import {
   addIsCheckedProperty,
   removeIsCheckedProperty,
@@ -13,6 +12,7 @@ import { fetchSubscribers, fetchDeleteSubscribers } from '../../api/subscriber';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import userIdAtom from '../../recoil/userId/atom';
+import YellowButton from '../../components/DesignedComponents/YellowButton';
 
 export default function Subscribers() {
   const navigate = useNavigate();
@@ -125,12 +125,12 @@ export default function Subscribers() {
       <MainContainer>
         <Title>구독자 설정</Title>
         <ContainerNav>
-          <CommonButton onClick={handleDeleteSubscriberButtonClick}>
+          <YellowButton onClick={handleDeleteSubscriberButtonClick}>
             삭제하기
-          </CommonButton>
-          <CommonButton onClick={handleNewSubscriberButtonClick}>
+          </YellowButton>
+          <YellowButton onClick={handleNewSubscriberButtonClick}>
             구독자 추가하기
-          </CommonButton>
+          </YellowButton>
         </ContainerNav>
         <SubscriberTable>
           <table>

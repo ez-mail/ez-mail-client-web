@@ -15,7 +15,7 @@ import StyleControlPanelRow from '../../DesignedComponents/StyleControlPanelRow'
 import StyleControlPanelSelectBox from '../../DesignedComponents/StyleControlPanelSelectBox';
 import StyleControlPanelColorPicker from '../../DesignedComponents/StyleControlPanelColorPicker';
 
-export default function TextContainer({ index }) {
+export default function TextControlPanel({ index }) {
   const [emailContentsData, setEmailContentsData] = useRecoilState(
     emailTemplateDataAtom,
   );
@@ -392,42 +392,9 @@ const StyleBox = styled.section`
   gap: 10px;
 `;
 
-const StyleRow = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const SelectBox = styled.select`
-  width: 80px;
-  height: 24px;
-  padding: 0 5px;
-  margin-left: auto;
-  border: 1px solid #bdbdbd;
-  border-radius: 5px;
-`;
-
-const ColorPicker = styled.input`
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin-left: 10px;
-  border: 1px solid #bdbdbd;
-  border-radius: 5px;
-  background-color: transparent;
-  cursor: pointer;
-  &::-webkit-color-swatch {
-    border-radius: 3px;
-  }
-`;
-
-const StyleRowText = styled.div`
-  font-size: 1rem;
-`;
-
 const BoxHeading = styled.h3`
-  margin: 15px 0 5px 0;
-  font-size: 1.1rem;
+  margin: 40px 0 10px 0;
+  font-size: 1.125rem;
 `;
 
 const LinkStyleBox = styled.div`
