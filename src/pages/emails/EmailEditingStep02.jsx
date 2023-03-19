@@ -43,6 +43,7 @@ export default function EmailEditingStep02() {
         emailPreviewText,
       });
       setNavEmailTitle(emailTitle);
+      setSender(sender);
     },
   });
 
