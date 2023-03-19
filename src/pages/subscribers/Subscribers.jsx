@@ -99,7 +99,6 @@ export default function Subscribers() {
       </td>
       <td>이메일주소</td>
       <td>이름</td>
-      <td>광고성 정보 수신 동의</td>
     </tr>
   );
 
@@ -115,7 +114,6 @@ export default function Subscribers() {
         </td>
         <td>{item.email}</td>
         <td>{item.name}</td>
-        <td>{item.adAgreement ? '동의' : '거부'}</td>
       </tr>
     );
   });
@@ -174,13 +172,10 @@ const SubscriberTable = styled.div`
             width: 6%;
           }
           &:nth-child(2) {
-            width: 30%;
+            width: 40%;
           }
           &:nth-child(3) {
-            width: 20%;
-          }
-          &:nth-child(4) {
-            width: 44%;
+            width: 30%;
           }
         }
       }
@@ -200,13 +195,10 @@ const SubscriberTable = styled.div`
             width: 6%;
           }
           &:nth-child(2) {
-            width: 30%;
+            width: 40%;
           }
           &:nth-child(3) {
-            width: 20%;
-          }
-          &:nth-child(4) {
-            width: 44%;
+            width: 30%;
           }
         }
       }
