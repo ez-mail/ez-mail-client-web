@@ -12,9 +12,6 @@ export default function EmailRecipientsModal() {
       <Li key={recipient._id}>
         <EmailData>{recipient.email}</EmailData>
         <NameData>{recipient.name}</NameData>
-        <AddressAgreementData>
-          {recipient.adAgreement ? '동의' : '거부'}
-        </AddressAgreementData>
       </Li>
     );
   });
@@ -24,7 +21,6 @@ export default function EmailRecipientsModal() {
       <Nav>
         <EmailHeader>이메일 주소</EmailHeader>
         <NameHeader>이름</NameHeader>
-        <AddressAgreementHeader>광고성 정보 수신 동의</AddressAgreementHeader>
       </Nav>
       <Ul>{recipients}</Ul>
     </Modal>
@@ -49,12 +45,6 @@ const EmailHeader = styled.span`
 `;
 
 const NameHeader = styled.span`
-  flex-grow: 2;
-  font-size: 0.875rem;
-  font-weight: 400;
-`;
-
-const AddressAgreementHeader = styled.span`
   flex-grow: 2;
   font-size: 0.875rem;
   font-weight: 400;
@@ -85,13 +75,6 @@ const EmailData = styled.span`
 
 const NameData = styled.span`
   flex-basis: 15%;
-  font-size: 0.875rem;
-  font-weight: 400;
-`;
-
-const AddressAgreementData = styled.span`
-  position: relative;
-  left: 80px;
   font-size: 0.875rem;
   font-weight: 400;
 `;
