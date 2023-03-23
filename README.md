@@ -3,10 +3,13 @@
 
 ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달해 주는 뉴스레터 서비스입니다. 드래그 앤 드롭으로 쉽고 빠르게 디자인된 이메일 탬플릿을 만들어 나의 구독자들에게 발송할 수 있고, 간편하게 구독자를 관리할 수 있습니다.
 
+<br/>
 
 # 📖 Contents
 * [🙂 ez-mail](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-ez-mail)
 * [🔥 Motivation](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-motivation)
+* [🗓 Schedule](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-schedule)
+* 🎬 Preview
 * 🚘 Features
 * [🏋️ Challenges](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#%EF%B8%8F-challenges)
   * [1. 이메일 웹빌더 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#1-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EC%9B%B9%EB%B9%8C%EB%8D%94-%EA%B5%AC%ED%98%84)
@@ -16,11 +19,27 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
     * [4) 버튼, 텍스트 블록에 사용되는 텍스트 에디터 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#4-%EB%B2%84%ED%8A%BC-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%B8%94%EB%A1%9D%EC%97%90-%EC%82%AC%EC%9A%A9%EB%90%98%EB%8A%94-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%97%90%EB%94%94%ED%84%B0-%EA%B5%AC%ED%98%84)
   * [2. 메일 서버 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#2-%EB%A9%94%EC%9D%BC-%EC%84%9C%EB%B2%84-%EA%B5%AC%ED%98%84)
   * [3. CDN 적용 및 CORS 문제 해결](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#3-cdn-%EC%A0%81%EC%9A%A9)
+* 🛠 Tech Stacks
 
+<br/>
 
 # 🔥 Motivation
 이번 팀 프로젝트의 메인 목표는 부트 캠프에서 프론트엔드와 백엔드 교육 기간 동안 공부했던 지식들을 다듬으며 현업과 유사한 기술 스택을 사용하며 실력 향상을 도모하기였습니다. 이 메인 목표에 맞는 프로젝트 아이디어를 고민하다 우연히 제가 관심 있게 본 기업에서 뉴스레터를 구독하는 창의 주소가 해당 기업 주소가 아닌 다른 기업의 주소인 것을 발견했습니다. 메일 보내는 건 간단한 작업이라 생각했는데 이런 서비스가 따로 있다는 것이 신기해 해당 서비스들에 대한 조사를 시작했습니다. 그 결과 메일 보내는 게 서버에서 꽤나 자원이 드는 일이었고, 여러 클라이언트에서 호환되는 디자인 이메일 템플릿을 만드는 것도 꽤나 번거로운 일이라 많은 기업이 비슷한 뉴스레터 서비스를 사용 중이었습니다. 해당 서비스를 직접 만든다면 서비스 이용자가 디자인 이메일 템플릿을 쉽게 만들 수 있도록 이메일 웹 빌더도 제공하고, 구독자 관리, 메일 전송 등 프론트엔드와 백엔드에 챌린지 요소들이 골고루 있었고, 그 과정에서 팀 프로젝트의 메인 목표도 이룰 수 있을 것이라 판단해 이러한 뉴스레터 서비스를 만들게 되었습니다.
 
+<br/>
+
+# 🗓 Schedule
+### 프로젝트 기간 : 2023.01.30(월) ~ 2023.03.10(금) / 6주 / 하루 평균 8시간
+<details>
+<summary>1 ~ 2 주차 : 기획 및 설계</summary>
+
+- 아이디어 수집 및 계획
+- 기술 스택 선정
+- Mockup 작업
+- 칸반 작성
+</details>
+
+<br/>
 
 # 🏋️ Challenges
 ## 1. 이메일 웹빌더 구현
@@ -136,7 +155,7 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 
 위의 문제를 해결하기 위해 `ContentEditable` 이라는 컴포넌트를 만들어 사용자가 해당 컴포넌트를 사용할 땐 마치 제어 컴포넌트 내의 `<input>` 태그처럼 `onChange`, `contentHTML`, `style` 등을 `props` 로 받게 만들었고 내부적으로는 비제어 컴포넌트로써 작용해 한글도 문제없이 써지도록 했습니다. `ContentEditable` 컴포넌트 내부에선 `input` 이벤트를 밖에서 `onChange` 이벤트처럼 다룰 수 있게 만들고, `innerHTML` 값은 state 가 아닌 지역변수로써 관리해 매번 렌더링이 일어나지 않도록 했습니다. 그리고 `memo` 를 사용해 혹시라도 유저가 작성 중인 글과 데이터가 일치하지 않을 때나 스타일이 바뀌었을 때만 리렌더링이 일어나도록 해 모든 문제들을 해결할 수 있었습니다. 추가적으로 브라우저마다 `contentEditable` 요소가 `innerHTML` 을 다루는 방식이 조금씩 달라 모두 동일한 데이터로 저장되도록 `normalizeHtml` 유틸 함수를 만들어 적용했고, 크로스 사이트 스크립팅 공격을 예방하기 위해 [DOMPurify](https://www.npmjs.com/package/dompurify) 를 이용하여 `innerHTML` 데이터를 살균 후 저장했습니다.
 
-결과적으로 마치 라이브러리처럼 사용자는 내부 구조를 몰라도 리액트에서 쉽게 `contentEditable` 요소를 관리할 수 있도록 `ContentEditable` 컴포넌트를 만들었고, 해당 컴포넌트를 사용해 쉽게 버튼과 텍스트 블록을 만들고 사용자가 편집한 내용을 데이터로 관리할 수 있었습니다.
+결과적으로 마치 라이브러리처럼 사용자는 내부 구조를 몰라도 리액트에서 쉽게 `contentEditable` 요소를 관리할 수 있도록 `ContentEditable` 컴포넌트를 만들었고, 해당 컴포넌트를 사용해 쉽게 버튼과 텍스트 블록을 만들고 사용자가 편집한 내용을 데이터로 관리할 수 있었습니다. 또 [mailtrap](https://mailtrap.io/)에서 최종적으로 발송된 이메일 템플릿의 호환성을 테스트한 결과 96%라는 수치로 시중의 웬만한 이메일 클라이언트는 모두 호환되는 이메일 템플릿을 생성할 수 있었습니다.
 
 ## 2. 메일 서버 구현
 일반적으로 클라이언트에서 메일 서버에 요청을 할 때는 SMTP 프로토콜을 사용하고, 메일 서버에서 클라이언트로 메일을 수신할 때는 POP3 혹은 IMAP 프로토콜을 사용합니다. 그리고 메일 서버 간 요청할 때는 SMTP 프로토콜을 사용합니다. 이중에서 저희 메일 서버는 백엔드 서버에서 메일 발송을 SMTP 프로토콜로 요청을 받아 해당 메일 주소에 맞는 메일 서버로 SMTP 프로토콜로 메일 전송을 요청하는 역할을 해야 했습니다. 조사를 더 해보니 해당 기능들을 구현하기 위해 도메인과 고정 IP 도 필요하였고, 또 다른 도메인 메일 서버로 보내기 위한 보안 절차도 생각보다 까다롭다는 것을 알게 되었습니다.
