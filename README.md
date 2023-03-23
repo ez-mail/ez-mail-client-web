@@ -33,10 +33,13 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 <details>
 <summary>1 ~ 2 주차 : 기획 및 설계</summary>
 
-- 아이디어 수집 및 계획
+- 아이디어 수집
 - 기술 스택 선정
-- Mockup 작업
-- 칸반 작성
+- Git 작업 플로우 결정
+- 코드 컨벤션, 커밋 룰 등 팀 협업 규칙 정립
+- Figma를 사용한 Mockup 제작
+- MongoDb를 이용한 DB Schema 설계
+- Notion을 이용한 칸반 작성
 </details>
 
 <br/>
