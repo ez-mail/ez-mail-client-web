@@ -6,8 +6,8 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 <br/>
 
 # 📖 Contents
-- [🙂 ez-mail](#_🙂_ez-mail)
-- [🔥 Motivation](🔥_Motivation)
+- [🙂 ez-mail](#-🙂-ez-mail)
+- [🔥 Motivation](🔥-Motivation)
 - [🗓 Schedule](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-schedule)
 - 🎬 Preview
 - 🚘 Features
