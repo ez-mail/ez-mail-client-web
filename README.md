@@ -6,20 +6,20 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 <br/>
 
 # 📖 Contents
-* [🙂 ez-mail](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-ez-mail)
-* [🔥 Motivation](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-motivation)
-* [🗓 Schedule](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-schedule)
-* 🎬 Preview
-* 🚘 Features
-* [🏋️ Challenges](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#%EF%B8%8F-challenges)
+- [🙂 ez-mail](#_🙂_ez-mail)
+- [🔥 Motivation](🔥_Motivation)
+- [🗓 Schedule](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-schedule)
+- 🎬 Preview
+- 🚘 Features
+- [🏋️ Challenges](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#%EF%B8%8F-challenges)
   * [1. 이메일 웹빌더 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#1-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EC%9B%B9%EB%B9%8C%EB%8D%94-%EA%B5%AC%ED%98%84)
-    * [1) 이메일 템플릿 태그들](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#1-%EC%9D%B4%EB%A9%94%EC%9D%BC-%ED%83%AC%ED%94%8C%EB%A6%BF-%ED%83%9C%EA%B7%B8)
-    * [2) 이메일 템플릿화 및 데이터 구조](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#2-%EC%9D%B4%EB%A9%94%EC%9D%BC-%ED%85%9C%ED%94%8C%EB%A6%BF%ED%99%94-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B5%AC%EC%A1%B0)
-    * [3) 드래그앤 드롭](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#3-%EB%93%9C%EB%9E%98%EA%B7%B8%EC%95%A4-%EB%93%9C%EB%A1%AD)
-    * [4) 버튼, 텍스트 블록에 사용되는 텍스트 에디터 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#4-%EB%B2%84%ED%8A%BC-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%B8%94%EB%A1%9D%EC%97%90-%EC%82%AC%EC%9A%A9%EB%90%98%EB%8A%94-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%97%90%EB%94%94%ED%84%B0-%EA%B5%AC%ED%98%84)
+    + [1) 이메일 템플릿 태그들](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#1-%EC%9D%B4%EB%A9%94%EC%9D%BC-%ED%83%AC%ED%94%8C%EB%A6%BF-%ED%83%9C%EA%B7%B8)
+    + [2) 이메일 템플릿화 및 데이터 구조](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#2-%EC%9D%B4%EB%A9%94%EC%9D%BC-%ED%85%9C%ED%94%8C%EB%A6%BF%ED%99%94-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B5%AC%EC%A1%B0)
+    + [3) 드래그앤 드롭](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#3-%EB%93%9C%EB%9E%98%EA%B7%B8%EC%95%A4-%EB%93%9C%EB%A1%AD)
+    + [4) 버튼, 텍스트 블록에 사용되는 텍스트 에디터 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#4-%EB%B2%84%ED%8A%BC-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%B8%94%EB%A1%9D%EC%97%90-%EC%82%AC%EC%9A%A9%EB%90%98%EB%8A%94-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%97%90%EB%94%94%ED%84%B0-%EA%B5%AC%ED%98%84)
   * [2. 메일 서버 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#2-%EB%A9%94%EC%9D%BC-%EC%84%9C%EB%B2%84-%EA%B5%AC%ED%98%84)
   * [3. CDN 적용 및 CORS 문제 해결](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#3-cdn-%EC%A0%81%EC%9A%A9)
-* 🛠 Tech Stacks
+- 🛠 Tech Stacks
 
 <br/>
 
