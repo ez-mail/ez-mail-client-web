@@ -1,46 +1,29 @@
 # 🙂 ez-mail
-![login-logo](https://user-images.githubusercontent.com/98013867/227068947-1bd52e17-8abb-4af6-85a2-c47ffb0b6e55.png)
+
+![고고화질](https://user-images.githubusercontent.com/98013867/227664946-6d8abc55-aaf1-4bd9-ac12-87e28df83804.png)
 
 ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달해 주는 뉴스레터 서비스입니다. 드래그 앤 드롭으로 쉽고 빠르게 디자인된 이메일 탬플릿을 만들어 나의 구독자들에게 발송할 수 있고, 간편하게 구독자를 관리할 수 있습니다.
 
 <br/>
 
-# 📖 Contents
-- [🙂 ez-mail](#-🙂-ez-mail)
-- [🔥 Motivation](🔥-Motivation)
-- [🗓 Schedule](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#-schedule)
-- 🎬 Preview
-- 🚘 Features
-- [🏋️ Challenges](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#%EF%B8%8F-challenges)
-  * [1. 이메일 웹빌더 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#1-%EC%9D%B4%EB%A9%94%EC%9D%BC-%EC%9B%B9%EB%B9%8C%EB%8D%94-%EA%B5%AC%ED%98%84)
-    + [1) 이메일 템플릿 태그들](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#1-%EC%9D%B4%EB%A9%94%EC%9D%BC-%ED%83%AC%ED%94%8C%EB%A6%BF-%ED%83%9C%EA%B7%B8)
-    + [2) 이메일 템플릿화 및 데이터 구조](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#2-%EC%9D%B4%EB%A9%94%EC%9D%BC-%ED%85%9C%ED%94%8C%EB%A6%BF%ED%99%94-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B5%AC%EC%A1%B0)
-    + [3) 드래그앤 드롭](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#3-%EB%93%9C%EB%9E%98%EA%B7%B8%EC%95%A4-%EB%93%9C%EB%A1%AD)
-    + [4) 버튼, 텍스트 블록에 사용되는 텍스트 에디터 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#4-%EB%B2%84%ED%8A%BC-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EB%B8%94%EB%A1%9D%EC%97%90-%EC%82%AC%EC%9A%A9%EB%90%98%EB%8A%94-%ED%85%8D%EC%8A%A4%ED%8A%B8-%EC%97%90%EB%94%94%ED%84%B0-%EA%B5%AC%ED%98%84)
-  * [2. 메일 서버 구현](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#2-%EB%A9%94%EC%9D%BC-%EC%84%9C%EB%B2%84-%EA%B5%AC%ED%98%84)
-  * [3. CDN 적용 및 CORS 문제 해결](https://github.com/ez-mail/ez-mail-client-web/edit/feature/readme-edit/README.md#3-cdn-%EC%A0%81%EC%9A%A9)
-- 🛠 Tech Stacks
+# 📖 Table of contents
+- [🙂 ez-mail](#-ez-mail)
+- [🔥 Motivation](#-motivation)
+- [🏋️ Challenges](#-challenges)
+  * [1. 이메일 웹빌더 구현](#1-이메일-웹빌더-구현)
+    + [1) 이메일 템플릿 태그들](#1-이메일-템플릿-태그들)
+    + [2) 이메일 템플릿화 및 데이터 구조](#2-이메일-템플릿화-및-데이터-구조)
+    + [3) 드래그앤 드롭](#3-드래그앤-드롭)
+    + [4) 텍스트 에디터 ](#4-텍스트-에디터-구현)
+  * [2. 메일 서버 구현](#2-메일-서버-구현)
+  * [3. CDN 적용 및 CORS 문제 해결](#3-cdn-적용-및-cors-문제-해결)
+- [🗓 Schedule](#-schedule)
+- [🛠 Tech Stacks](#-tech-stacks)
 
 <br/>
 
 # 🔥 Motivation
 이번 팀 프로젝트의 메인 목표는 부트 캠프에서 프론트엔드와 백엔드 교육 기간 동안 공부했던 지식들을 다듬으며 현업과 유사한 기술 스택을 사용하며 실력 향상을 도모하기였습니다. 이 메인 목표에 맞는 프로젝트 아이디어를 고민하다 우연히 제가 관심 있게 본 기업에서 뉴스레터를 구독하는 창의 주소가 해당 기업 주소가 아닌 다른 기업의 주소인 것을 발견했습니다. 메일 보내는 건 간단한 작업이라 생각했는데 이런 서비스가 따로 있다는 것이 신기해 해당 서비스들에 대한 조사를 시작했습니다. 그 결과 메일 보내는 게 서버에서 꽤나 자원이 드는 일이었고, 여러 클라이언트에서 호환되는 디자인 이메일 템플릿을 만드는 것도 꽤나 번거로운 일이라 많은 기업이 비슷한 뉴스레터 서비스를 사용 중이었습니다. 해당 서비스를 직접 만든다면 서비스 이용자가 디자인 이메일 템플릿을 쉽게 만들 수 있도록 이메일 웹 빌더도 제공하고, 구독자 관리, 메일 전송 등 프론트엔드와 백엔드에 챌린지 요소들이 골고루 있었고, 그 과정에서 팀 프로젝트의 메인 목표도 이룰 수 있을 것이라 판단해 이러한 뉴스레터 서비스를 만들게 되었습니다.
-
-<br/>
-
-# 🗓 Schedule
-### 프로젝트 기간 : 2023.01.30(월) ~ 2023.03.10(금) / 6주 / 하루 평균 8시간
-<details>
-<summary>1 ~ 2 주차 : 기획 및 설계</summary>
-
-- 아이디어 수집
-- 기술 스택 선정
-- Git 작업 플로우 결정
-- 코드 컨벤션, 커밋 룰 등 팀 협업 규칙 정립
-- Figma를 사용한 Mockup 제작
-- MongoDb를 이용한 DB Schema 설계
-- Notion을 이용한 칸반 작성
-</details>
 
 <br/>
 
@@ -144,7 +127,7 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 ### 3) 드래그앤 드롭
 저희가 만든 웹 빌더는 결국 블록 데이터들이 모여있는 배열을 컴포넌트가 그 순서에 맞춰 보여주는 식이었습니다. 그러므로 사용자가 드래그 앤 드롭한 요소를 배열에서 올바른 위치로 바꿔주기만 하면 리액트 컴포넌트가 배열 데이터를 기반으로 리렌더링 되므로 사용자 입장에선 해당 요소를 드래그 앤 드롭해 줬더니 해당 요소가 이동했다고 느낄 것이라 생각했습니다. 그래서 실제 로직도 드래그를 시작한 요소의 인덱스, 끝난 위치의 인덱스를 기준으로 배열 데이터의 순서를 바꿔주는 식으로 구현을 했습니다. 이때 사용자가 블록을 드롭할 위치를 직관적으로 느낄 수 있도록 현재 마우스가 있는 블록을 기준으로 그 블록의 높이의 반보다 커서가 위에 있으면 해당 블록 위에 들어가는 위치가 표시되도록 했고, 그 블록의 높이의 반보다 커서가 아래에 있으면 해당 블록 아래에 들어가는 위치가 표시되도록 했습니다.
 
-### 4) 버튼, 텍스트 블록에 사용되는 텍스트 에디터 구현
+### 4) 텍스트 에디터 구현
 다른 블록들과 달리 버튼, 텍스트 블록에는 사용자가 텍스트를 입력하고 글자 크기나 색상 등을 자유롭게 조절해야 하므로 텍스트 에디터 구현이 필요했습니다. `<textarea>` 같이 단순히 텍스트를 받는 태그보다는 우리가 버튼으로 쓸 `<a>` 태그나 텍스트 상자로 쓸 `<div>` 태그 자체를 텍스트 에디터로 쓰길 원해서 조사해 보니 `contenteditable` 이라는 html 속성을 사용하면 원하는 html 요소를 쉽게 웹 에디터로 변경할 수 있었습니다. 그런데 `contenteditable` 을 리액트에서 사용하려니 input 과 동작 방식이 달라 몇 가지 문제들이 있었습니다.
 * 텍스트 입력시 `change event` 가 아니라 `input event` 가 동작합니다.
 * `input` 이 아니라 `value` 값이 없습니다.
@@ -177,3 +160,23 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 기존에 구현해놓은 구독자 추가 API는 서비스 사용자가 로그인하면 서버에서 제공하는 세션 토큰을 기반으로 validate를 한 후 구독자를 추가해 주는 방식이었기 때문에 cdn으로 인한 외부 구독자 추가 요청에 이 세션 토큰을 줄 수 없어 해당 API를 사용하는 게 불가능했습니다. 그래서 외부 구독자 추가 API를 따로 만들어 줬고 CDN 코드를 제공할 때 라우터의 매개변수로 전달한 `access_token` 을 통해 validation을 하도록 했습니다. 그렇게 `access_token` 이 적합하면 응답 헤더에 유저에게 받은 오리진을 넣어주는 식으로 cors 문제를 해결하고자 했습니다. 그런데 해당 방식으로 기능을 구현해놨는데도 여전히 cors 에러가 발생했습니다.
 
 원인을 찾아보니 preflight라고 본 요청을 보내기 전 `OPTIONS` 메서드를 통해 먼저 서버가 잘못된 요청에 대한 대비가 되어있는지 확인하는 요청이 있었는데 해당 요청에 대한 오리진 설정을 안 해줘서 생긴 문제였습니다. 그래서 기존과 같은 방식으로 응답 헤더에 `OPTIONS` 메서드에 대한 오리진을 등록해 주는 식으로 해결하려 했으나 preflight 요청은 서버의 데이터를 보호하기 위해 서버 앞쪽에서 대비가 안 되어있다면 요청이 아예 뒤쪽까지 요청이 넘어가지 않게 하는 방식으로 되어있었습니다. 그래서 `OPTIONS` 요청에 대한 오리진은 모두 열어두고, 본 요청인 `POST` 요청이 들어왔을 때 DB에 접근 전에 해당 요청 오리진이 화이트리스트에 등록된 오리진이 맞는지 확인하는 로직을 추가하여 cors 에러도 해결하고 잘못된 요청이 들어왔을 때 DB가 의도치 않게 변경되는 것에 대한 대비까지 할 수 있었습니다.
+
+<br/>
+
+# 🗓 Schedule
+### 프로젝트 기간 : 2023.01.30(월) ~ 2023.03.10(금) / 6주 / 하루 평균 8시간
+<details>
+<summary>1 ~ 2 주차 : 기획 및 설계</summary>
+
+- 아이디어 수집
+- 기술 스택 선정
+- Git 작업 플로우 결정
+- 코드 컨벤션, 커밋 룰 등 팀 협업 규칙 정립
+- Figma를 사용한 Mockup 제작
+- MongoDb를 이용한 DB Schema 설계
+- Notion을 이용한 칸반 작성
+</details>
+
+<br/>
+
+# 🛠 Tech Stacks
