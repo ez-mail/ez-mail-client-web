@@ -30,9 +30,9 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 
 이번 팀 프로젝트의 메인 목표는 '**부트 캠프 교육 기간 동안 배웠던 지식들을 다듬고 현업과 유사한 기술 스택을 사용하며 개발 실력을 증진하자**'였습니다.
 
-이 목표에 적합한 아이디어를 고민하다 우연히 제가 관심 있게 보던 기업 홈페이지에서 뉴스레터를 구독하는 창의 주소가 해당 기업 도메인이 아닌 것을 발견했습니다. 메일 보내는 건 간단한 작업이라 생각했는데 해당 기업이 직접 보내지 않고 메일 발송 서비스를 따로 사용하고 있는 것에 호기심이 생겨 해당 서비스들에 대한 조사를 시작했습니다. 그 결과 메일 전송이 서버에서 자원이 많이 드는 작업이고, 여러 클라이언트에서 호환되는 디자인 이메일 템플릿을 만드는 것도 번거로운 일이라 많은 기업들이 뉴스레터 서비스를 사용하고 있다는 것을 알게 됐습니다.
+이 목표에 적합한 아이디어를 고민하다 우연히 제가 관심 있게 보던 회사의 홈페이지에서 뉴스레터를 구독하는 창의 주소가 해당 기업 도메인이 아닌 것을 발견했습니다. 메일 보내는 건 간단한 작업이라 생각했는데 해당 기업이 직접 보내지 않고 메일 발송 서비스를 따로 사용하고 있는 것에 호기심이 생겨 해당 서비스들에 대한 조사를 시작했습니다. 그 결과 메일 전송이 서버에서 자원이 많이 드는 작업이고, 여러 클라이언트에서 호환되는 디자인 이메일 템플릿을 만드는 것도 번거로운 일이라 많은 기업들이 뉴스레터 서비스를 사용하고 있다는 것을 알게 됐습니다.
 
-이러한 뉴스레터 서비스들은 이용자가 디자인 이메일 템플릿을 쉽게 만들 수 있는 이메일 웹 빌더, 자신의 홈페이지에 구독자 추가 폼 기능 제공, 메일 전송 기능을 제공하고 있었습니다. 이를 직접 구현하면 프론트엔드와 백엔드에 있는 챌린지 요소들을 해결하며 자연스럽게 메인 목표도 달성될 것이라 판단해 이러한 서비스를 만들게 됐습니다.
+이러한 뉴스레터 서비스들은 이용자가 디자인 이메일 템플릿을 쉽게 만들 수 있는 이메일 웹 빌더, 자신의 홈페이지에 구독자 추가 폼 기능 제공, 메일 전송 기능을 제공하고 있었습니다. 이를 직접 구현해 보면 프론트엔드와 백엔드에 있는 챌린지 요소들을 해결하며 자연스럽게 메인 목표도 달성될 것이라 판단해 이러한 서비스를 만들게 됐습니다.
 
 <br>
 <br>
@@ -110,6 +110,8 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 </table>
 ```
 
+<br>
+
 이렇게 이메일 템플릿의 하위 호환성을 고려하면 필요 이상의 태그들을 사용하게 되는데 이를 그대로 웹 빌더에 사용하면 코드가 너무 복잡해지고 유지 보수성도 떨어진다고 판단했습니다.
 
 그래서 위의 태그들을 그대로 사용하는 대신 웹 빌더에는 우리에게 익숙한 `<div>` 태그들을 최종적으로 보내질 이메일과 같은 결과가 보이도록 최소한으로 사용하고, 이메일 전송 시에 위의 태그들로 변환을 해 보내기로 했습니다.
@@ -124,11 +126,13 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 
 그 결과 공식문서에서 [Server React DOM APIs](https://react.dev/reference/react-dom/server)의 [renderToStaticMarkup](https://react.dev/reference/react-dom/server/renderToStaticMarkup)라는 것을 발견하였고, 해당 API를 이용하여 아래 그림처럼 평소에는 이메일 빌더 컴포넌트에 데이터를 넣어서 `html dom object` 로 변환해 사용자가 편집하는 화면을 보여주고, 메일 발송을 할 때는 이메일 컴포넌트에 해당 데이터를 넣어서 `html string` 으로 변환을 방식으로 구현할 수 있었습니다.
 
-<p align="center"><img width="743" alt="data-to-component" src="https://user-images.githubusercontent.com/98013867/227705291-607ddd87-cd3d-4c4b-a604-47bd90bd6a2c.jpeg"></p>
+<p align="center"><img width="743" alt="data-to-component" src="https://user-images.githubusercontent.com/98013867/227749574-7c834d71-4310-4996-b8c8-16167e461630.jpeg"></p>
+
+<br>
 
 이제 남은 것은 구체적인 데이터 형식을 정하는 것 이였습니다.
 
-저희가 만드는 이메일 빌더는 결국 버튼 상자, 텍스트 상자 등 각 상자들이 나열되는 형태라 전체 데이터는 아래와 같이 각 도구 상자 타입에 맞는 블록 데이터들이 들어있는 배열로 만들었습니다.
+저희가 만드는 이메일 빌더는 결국 버튼 상자, 텍스트 상자 등 각 상자들이 나열되는 형태라 전체 데이터는 아래와 같이 각 도구 상자 타입에 맞는 블록 데이터들이 들어있는 배열이 적합하다 생각했습니다.
 
 ```javascript
 [
@@ -138,15 +142,17 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 ]
 ```
 
+<br>
+
 그리고 각 도구 상자에 맞는 데이터를 담을 수 있도록 블록 데이터를 구성했습니다. 아래에 버튼 상자 데이터를 예시로 들었습니다.
 
 ```javascript
 {
   id: "asdf",
-  type: "button",
-  link: "#",
-  content: "버튼 이름",
-  boxStyle: {
+  type: "button", // 버튼 데이터를 버튼 컴포넌트로 바꾸는데 사용
+  link: "#", // 버튼의 링크 데이터를 저장하는데 사용
+  content: "버튼 이름", // 버튼 내부 텍스트를 저장하는데 사용
+  boxStyle: { // 버튼 블록 전체의 스타일 데이터를 저장하는데 사용
     backgroundColor: "#FFFFFF",
     borderWidth: "0px",
     borderColor: "#000000",
@@ -157,7 +163,7 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
     paddingRight: "0px",
     textAlign: "center",
   },
-  contentStyle: {
+  contentStyle: { // 버튼 그 자체의 스타일 데이터를 저장하는데 사용
     display: "inline-block",
     paddingTop: "16px",
     paddingBottom: "16px",
@@ -174,7 +180,56 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 }
 ```
 
-마지막으로 위와 같은 데이터들이 어떤 컴포넌트에 들어가도 같은 디자인으로 보일 수 있도록 적절한 위치에 데이터를 사용해 줌으로써 문제를 해결할 수 있었습니다.
+<br>
+
+마지막으로 위와 같은 데이터들이 어떤 컴포넌트에 들어가도 같은 디자인으로 보일 수 있도록 테스트를 하며 데이터들의 적절한 위치를 찾았습니다. 아래는 위의 버튼 블록 데이터가 실제로 사용되는 코드의 일부분입니다.
+
+```javascript
+// 이메일 에디터 컴포넌트의 버튼 상자 JSX
+return (
+  <Box style={boxStyle}> // 버튼 블록 데이터의 boxStyle
+    <ContentEditable
+      contentHTML={emailContentsData.emailContents[index].content} // 버튼 블록 데이터의 content
+      isContentEditable={isContentEditable}
+      innerRef={$editorRef}
+      onChange={handleContentChange}
+      style={contentStyle} // 버튼 블록 데이터의 contentStyle
+      onKeyDown={handleKeyDown}
+      tagName="a"
+      link={link} // 버튼 블록 데이터의 link
+      onBlur={handleEditorBlur}
+      onClick={handleEditorClick}
+    />
+  </Box>
+);
+ 
+ // 이메일 템플릿 컴포넌트의 버튼 상자 JSX
+ return (
+  <tr>
+    <td align="center" valign="top">
+      <table
+        border="0"
+        cellPadding="0"
+        cellSpacing="0"
+        width="100%"
+        style={data.boxStyle} // 버튼 블록 데이터의 boxStyle
+      >
+        <tr>
+          <td valign="top">
+            <a href={data.link} style={data.contentStyle}> // 버튼 블록 데이터의 link, contentStyle, content
+              {data.content} // 버튼 블록 데이터의 content
+            </a>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+);
+```
+
+<br>
+
+그 결과 데이터가 어떤 컴포넌트에 들어가냐에 따라 실제로 변환되는 태그의 종류는 다르더라도 같은 디자인의 이메일 템플릿으로 보이도록 만들 수 있었습니다.
 
 <br>
 
