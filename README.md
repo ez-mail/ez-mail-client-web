@@ -473,4 +473,4 @@ return (
 
 # 🧑‍💻 Member
 - [길지문](https://github.com/roadzmoon76) : roadzmoon76@gmail.com
-- [이정진](https://github.com/pinomad)
+- [이정진](https://github.com/pinomad) : roptimizer@gmail.com
