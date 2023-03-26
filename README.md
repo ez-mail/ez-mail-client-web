@@ -433,7 +433,7 @@ return (
 - Notion을 이용한 칸반 작성
 </details>
 <details>
-<summary>3 ~ 6 주차 : 기능 개발</summary>
+<summary>3 ~ 6 주차 : 기능 개발 및 발표</summary>
 
 - 웹 사이트 구현
 - 백엔드 서버 구현
@@ -441,6 +441,7 @@ return (
 - cdn 추가
 - 전체적인 리팩토링 및 버그 수정
 - 테스트 코드 일부 작성
+- 팀 프로젝트 발표 준비 및 
 </details>
 
 <br>
