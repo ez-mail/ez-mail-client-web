@@ -33,6 +33,7 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
     * [4) CORS DEEP DIVE](#4-cors-deep-dive)
 - [🗓 Schedule](#-schedule)
 - [🛠 Tech Stacks](#-tech-stacks)
+- [🧑‍💻 Member](#-member)
 
 <br>
 <br>
@@ -466,3 +467,10 @@ return (
 - MongoDB Atlas / Mongoose
 - ESLint
 - jsDeliver
+
+<br>
+<br>
+
+# 🧑‍💻 Member
+- [길지문](https://github.com/roadzmoon76) : roadzmoon76@gmail.com
+- [이정진](https://github.com/pinomad)
