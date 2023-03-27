@@ -41,7 +41,7 @@ export default function OriginModal() {
     const result = await fetchAddOrigin(userId, { origin: inputOrigin });
 
     if (result === 201) {
-      alert('정상적으로 추가되었습니다.');
+      alert('정상적으로 추가되었습니다 🙂');
     } else {
       alert('origin 전송 요청을 실패했습니다. 잠시후에 다시 시도해주세요.');
     }
