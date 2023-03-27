@@ -35,6 +35,7 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
     * [4) CORS DEEP DIVE](#4-cors-deep-dive)
 - [🗓 Schedule](#-schedule)
 - [🛠 Tech Stacks](#-tech-stacks)
+- [🔗 Repository Link](#-repository-link)
 - [🧑‍💻 Member](#-member)
 
 <br>
@@ -469,6 +470,14 @@ return (
 - MongoDB Atlas / Mongoose
 - ESLint
 - jsDeliver
+
+<br>
+<br>
+
+# 🔗 Repository Link
+* [Backend server](https://github.com/ez-mail/ez-mail-server)
+* [Mail server](https://github.com/ez-mail/ez-mail-mail-server)
+* [CDN](https://github.com/ez-mail/ez-mail-cdn)
 
 <br>
 <br>
