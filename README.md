@@ -475,8 +475,8 @@ return (
 <br>
 
 # 🔗 Repository Link
-* [Backend server](https://github.com/ez-mail/ez-mail-server)
-* [Mail server](https://github.com/ez-mail/ez-mail-mail-server)
+* [Backend Server](https://github.com/ez-mail/ez-mail-server)
+* [Mail Server](https://github.com/ez-mail/ez-mail-mail-server)
 * [CDN](https://github.com/ez-mail/ez-mail-cdn)
 
 <br>
