@@ -73,7 +73,7 @@ export default function Sender() {
     const status = await updateSendingInfo(userId, senderInfo);
 
     if (status === 200) {
-      alert('성공적으로 수정');
+      alert('성공적으로 수정했습니다 🙂');
 
       setIsEditMode(false);
       setUpdateCount(updateCount + 1);

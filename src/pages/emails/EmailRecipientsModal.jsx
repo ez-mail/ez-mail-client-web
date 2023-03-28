@@ -39,7 +39,7 @@ const Nav = styled.nav`
 `;
 
 const EmailHeader = styled.span`
-  flex-grow: 3;
+  flex-grow: 2;
   font-size: 0.875rem;
   font-weight: 400;
 `;
