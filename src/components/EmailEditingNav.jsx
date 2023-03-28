@@ -79,17 +79,26 @@ export default function EmailEditingNav() {
   const handlePrevButtonClick = async () => {
     const newEmailTemplateData = { ...emailTemplateData };
 
-    const removedPropertiesEmailContents = removeProperties(
-      emailTemplateData.emailContents,
-    );
+    let updatedEmailData = {};
 
-    newEmailTemplateData.emailContents = removedPropertiesEmailContents;
+    if (emailTemplateData.emailContents.length > 0) {
+      const removedPropertiesEmailContents = removeProperties(
+        emailTemplateData.emailContents,
+      );
 
-    const updatedEmailData = {
-      emailTitle,
-      sender,
-      emailContent: JSON.stringify(newEmailTemplateData),
-    };
+      newEmailTemplateData.emailContents = removedPropertiesEmailContents;
+
+      updatedEmailData = {
+        emailTitle,
+        sender,
+        emailContent: JSON.stringify(newEmailTemplateData),
+      };
+    } else {
+      updatedEmailData = {
+        emailTitle,
+        sender,
+      };
+    }
 
     await fetchUpdateEmail(userId, param.email_id, updatedEmailData);
 
