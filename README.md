@@ -445,7 +445,9 @@ return (
 - cdn 추가
 - 전체적인 리팩토링 및 버그 수정
 - 테스트 코드 일부 작성
-- 팀 프로젝트 발표 준비 및 
+- 팀 프로젝트 발표 준비 및 발표
+- 리드미 작성
+- 배포
 </details>
 
 <br>
@@ -475,8 +477,8 @@ return (
 <br>
 
 # 🔗 Repository Link
-* [Backend server](https://github.com/ez-mail/ez-mail-server)
-* [Mail server](https://github.com/ez-mail/ez-mail-mail-server)
+* [Backend Server](https://github.com/ez-mail/ez-mail-server)
+* [Mail Server](https://github.com/ez-mail/ez-mail-mail-server)
 * [CDN](https://github.com/ez-mail/ez-mail-cdn)
 
 <br>
