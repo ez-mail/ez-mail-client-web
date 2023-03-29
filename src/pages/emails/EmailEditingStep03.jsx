@@ -19,6 +19,7 @@ import userIdAtom from '../../recoil/userId/atom';
 import Loading from '../../components/Loading';
 import Error from '../../components/Error';
 import emailTemplateAtom from '../../recoil/emailTemplate/atom';
+import draglogo from '../../assets/login-logo-mini.png';
 
 export default function EmailEditingStep03() {
   const userId = useRecoilValue(userIdAtom);
@@ -129,6 +130,7 @@ export default function EmailEditingStep03() {
     $dragItemRef.current = e.currentTarget;
     e.dataTransfer.effectAllowed = 'move';
     const img = new Image();
+    img.src = draglogo;
 
     setFocusedType(null);
 
