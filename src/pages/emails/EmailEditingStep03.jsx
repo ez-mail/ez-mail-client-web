@@ -32,6 +32,12 @@ export default function EmailEditingStep03() {
   const $dragOverItemIndexRef = useRef();
   const [focusedType, setFocusedType] = useState(null);
   const [focusedIndex, setFocusedIndex] = useState('');
+  const dragImageRef = useRef(null);
+
+  const img = new Image();
+
+  img.src = draglogo;
+  dragImageRef.current = img;
 
   const { data: senderData } = useQuery({
     queryKey: ['senderData', userId],
@@ -129,12 +135,10 @@ export default function EmailEditingStep03() {
     $dragItemIndexRef.current = index;
     $dragItemRef.current = e.currentTarget;
     e.dataTransfer.effectAllowed = 'move';
-    const img = new Image();
-    img.src = draglogo;
 
     setFocusedType(null);
 
-    e.dataTransfer.setDragImage(img, 0, 0);
+    e.dataTransfer.setDragImage(dragImageRef.current, 20, 20);
   };
 
   const handleDragEnter = (e, index) => {
