@@ -11,7 +11,7 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 <br>
 <br>
 
-# 📖 목차
+# 📖 Table of contents
 - [🙂 ez-mail](#-ez-mail)
 - [🔥 Motivation](#-motivation)
 - [🏋 Challenges](#-challenges)
