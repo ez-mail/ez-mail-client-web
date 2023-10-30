@@ -6,8 +6,8 @@ ez-mail은 쉽게 이메일 탬플릿을 작성하고, 구독자들에게 전달
 
 드래그 앤 드롭으로 직관적이고 빠르게 디자인 이메일 탬플릿을 만들고, 간편하게 구독자를 관리할 수 있습니다.
 
-[🎥 ez-mail 시연 영상](https://youtu.be/h--7z8hWbiI)
-[사용해보기](https://ez-mail.one)
+[🎥 ez-mail 시연 영상](https://youtu.be/h--7z8hWbiI)  
+[👉 사용해보기](https://ez-mail.one)
 
 <br>
 <br>
