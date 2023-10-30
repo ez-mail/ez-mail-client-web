@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 
@@ -13,6 +13,13 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
   const userId = useRecoilValue(userIdAtom);
+  const [isMobile, setIsMobile] = useState(
+    window.matchMedia('(max-width: 768px)').matches,
+  );
+
+  const handleMediaQueryChange = e => {
+    setIsMobile(e.matches);
+  };
 
   useEffect(() => {
     if (!userId && location.pathname !== '/') {
@@ -22,7 +29,19 @@ function App() {
     } else if (userId && location.pathname === '/') {
       navigate('/dashboard');
     }
+
+    const mediaQuery = window.matchMedia('(max-width: 768px');
+
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
   }, []);
+
+  if (isMobile) {
+    return (
+      <h2>
+        이 사이트는 모바일 환경을 지원하지 않습니다. 데스크탑으로 이용해주세요.
+      </h2>
+    );
+  }
 
   if (location.pathname !== '/') {
     return (
