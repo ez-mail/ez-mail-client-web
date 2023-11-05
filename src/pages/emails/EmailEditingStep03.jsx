@@ -176,7 +176,10 @@ export default function EmailEditingStep03() {
       $dragItemIndexRef.current - $dragOverItemIndexRef.current,
     );
 
-    if (e.dataTransfer.effectAllowed === 'move') {
+    if (
+      e.dataTransfer.effectAllowed === 'move' ||
+      !e.dataTransfer.types.length
+    ) {
       $dragItemRef.current.blur();
 
       if (
